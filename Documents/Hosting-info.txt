@@ -1,0 +1,39 @@
+Gói hosting: Free
+Tên miền: order-sys.tk
+Địa chỉ IP: 31.220.16.209
+
+--------------------------------------------
+
+Thông tin đăng nhập Control Panel
+
+Email Address: hieunc18@gmail.com
+Mật khẩu tài khoản:
+
+Control Panel URL: http://cpanel.hostinger.vn
+--------------------------------------------
+Thông tin server
+
+Tên Server: server64.hostinger.vn
+IP Server: 31.220.16.201
+--------------------------------------------
+DNS
+
+Nameserver 1: ns1.hostinger.vn 31.170.163.241
+Nameserver 2: ns2.hostinger.vn 31.220.23.1
+Nameserver 3: ns3.hostinger.vn 173.192.183.247
+Nameserver 4: ns4.hostinger.vn 31.170.164.249
+--------------------------------------------
+
+FTP
+
+Temporary FTP Hostname: 31.220.16.209
+Full FTP Hostname: ftp.order-sys.tk
+FTP Username: u102979894
+FTP Password: 2h53iF!;d[
+--------------------------------------------
+MAIL
+
+POP3 Host Address: mx1.hostinger.vn
+SMTP Host Address: mx1.hostinger.vn
+Username: Địa chỉ email bạn đang sử dụng
+Password: Giống với mật khẩu lúc khởi tạo.
