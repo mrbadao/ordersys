@@ -1,0 +1,12 @@
+01. Mục tiêu:
+    - Thiết lập được hệ thống có thể đưa vào ứng dụng thực tế.
+    - Sữ dụng thuận tiện.
+    - Tiết kiệm chi phí.
+    - Yêu cầu cho người sữ dụng không đòi hỏi các thao tác phức tạp.
+
+02. Mong đợi khách hàng:
+    - Dễ dàng sữ dụng và thuận tiện cho khách hàng.
+    - Không mất chi phí hoặc chi phí thấp và chấp nhận được.
+    - Hiệu quả sữ dụng phải cao hơn các phương thức có sẵn.
+    - Bảo mật là vấn đề cần quan tâm.
+
