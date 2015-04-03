@@ -23,7 +23,6 @@ class CategoryController extends Controller
 	}
 
     public function actionSearch(){
-        var_dump('adad'); die;
         $search = isset($this->_post_data['search']) ? $this->_post_data['search'] : null;
 
         $_result = array();
