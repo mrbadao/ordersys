@@ -162,4 +162,12 @@ class Helpers{
         return (isset($codes[$status])) ? $codes[$status] : '';
     }
 
+    public static function _db_fetchDataArray($data, $arr_name){
+        $_arr_data = array();
+
+        foreach($data as $item){
+            $_arr_data[$arr_name][]=$item->attributes;
+        }
+        return $_arr_data;
+    }
 }
