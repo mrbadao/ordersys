@@ -23,6 +23,7 @@ class CategoryController extends Controller
 	}
 
     public function actionSearch(){
+        var_dump('adad'); die;
         $search = isset($this->_post_data['search']) ? $this->_post_data['search'] : null;
 
         $_result = array();
@@ -57,6 +58,7 @@ class CategoryController extends Controller
         }
 
         $_data_count = ContentCategories::model()->count($c);
+
         $_data = $_data_count > 0 ? ContentCategories::model()->findAll($c) : null;
 
         if ($_data == null) {
