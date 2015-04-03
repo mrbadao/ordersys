@@ -7,7 +7,7 @@ class Controller extends CController
 {
     public $_post_data;
 
-    protected function beforeAction(){
+    public function beforeAction($action){
         $this->_post_data = Helpers::getJsonData();
     }
 }
