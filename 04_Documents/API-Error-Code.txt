@@ -1,0 +1,8 @@
+
+"error" => array(
+                    "error_code" => "1000",
+                    "error_message" => "No json received."
+                )
+
+1000 - No json received.
+1002 - Secret key is invalid.

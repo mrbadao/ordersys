@@ -7,7 +7,7 @@ Tên miền: order-sys.tk
 Thông tin đăng nhập Control Panel
 
 Email Address: hieunc18@gmail.com
-Mật khẩu tài khoản:
+Mật khẩu tài khoản: uLasaL
 
 Control Panel URL: http://cpanel.hostinger.vn
 --------------------------------------------
@@ -37,3 +37,11 @@ POP3 Host Address: mx1.hostinger.vn
 SMTP Host Address: mx1.hostinger.vn
 Username: Địa chỉ email bạn đang sử dụng
 Password: Giống với mật khẩu lúc khởi tạo.
+
+--------------------------------------------
+MYSQL
+
+url: mysql.hostinger.vn
+db_name: u102979894_order
+user: u102979894_admin
+pwd: FVWVtCBDKkXeft8Dyv
