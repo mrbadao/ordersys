@@ -2,6 +2,10 @@
 
 class CategoryController extends Controller
 {
+    public  function actionIndex(){
+        $this->forward("search");
+    }
+
     public function actionSearch(){
         $search = isset($this->_post_data['search']) ? $this->_post_data['search'] : null;
 
