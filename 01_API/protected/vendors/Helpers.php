@@ -28,6 +28,12 @@ class Helpers{
                 )
             )));
 
+        var_dump($data);
+
+        if($data['secret_key'] != self::SECRET_KEY){
+            var_dump('addad');
+        }
+        die;
         if (empty($data['secret_key']) || $data['secret_key'] != self::SECRET_KEY) {
             self::_sendResponse(200, json_encode(array(
                 "error" => array(

@@ -7,6 +7,7 @@ class CategoryController extends Controller
     }
 
     public function actionSearch(){
+        $this->_post_data = Helpers::getJsonData();
         $search = isset($this->_post_data['search']) ? $this->_post_data['search'] : null;
 
         $_result = array();
