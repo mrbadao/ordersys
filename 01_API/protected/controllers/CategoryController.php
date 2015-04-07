@@ -6,7 +6,7 @@ class CategoryController extends Controller
         $search = isset($this->_post_data['search']) ? $this->_post_data['search'] : null;
 
         $_result = array();
-        $_result['total'] =0;
+        $_result['count'] =0;
         $_result['categories'] = array();
 
         $c = new CDbCriteria();

@@ -168,6 +168,6 @@ class Helpers{
         foreach($data as $item){
             $_arr_data[$arr_name][]=$item->attributes;
         }
-        return $_arr_data;
+        return $_arr_data[$arr_name];
     }
 }
