@@ -43,5 +43,5 @@ MYSQL
 
 url: mysql.hostinger.vn
 db_name: u102979894_order
-user: u102979894_admin
-pwd: FVWVtCBDKkXeft8Dyv
+Username: u102979894_admin
+Password: FVWVtCBDKkXeft8Dyv
