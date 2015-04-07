@@ -20,7 +20,7 @@ class Helpers{
         $jsonData = file_get_contents("php://input");
         $data = json_decode($jsonData, true);
 
-        if (empty($data))
+        if (empty($data) || $data == null || $data ='')
             self::_sendResponse(200, json_encode(array(
                 "error" => array(
                     "error_code" => "1000",

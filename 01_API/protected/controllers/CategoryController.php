@@ -2,14 +2,11 @@
 
 class CategoryController extends Controller
 {
-
     public  function actionIndex(){
         $this->forward("search");
     }
 
     public function actionSearch(){
-        $this->_post_data = Helpers::getJsonData();
-        die;
         $search = isset($this->_post_data['search']) ? $this->_post_data['search'] : null;
 
         $_result = array();
