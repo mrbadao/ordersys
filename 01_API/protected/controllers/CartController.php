@@ -24,13 +24,13 @@ class CartController extends Controller
                     "error_message" => "No Item to add.",
                 ))));
 
-            Yii::log('1004 - No Item to add.', CLogger::LEVEL_INFO, 'system.application');
+            Yii::log('1004 - No Item to add.', CLogger::LEVEL_ERROR, 'exception.CHttpException.404');
         }
 
         $cartItems = $this->_post_data['cartItems'];
 
         foreach($cartItems as $item){
-            Yii::log("Item: ".$item['id'] , CLogger::LEVEL_INFO, 'system.application');
+            Yii::log("Item: ".$item['id'] , CLogger::LEVEL_ERROR, 'exception.CHttpException.404');
         }
     }
 }
