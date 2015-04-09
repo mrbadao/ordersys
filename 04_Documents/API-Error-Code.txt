@@ -7,3 +7,4 @@
 1000 - No json received.
 1002 - Secret key is invalid.
 1003 - No data.
+1004 - No Item to add.

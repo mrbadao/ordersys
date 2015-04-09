@@ -40,6 +40,13 @@ return array(
 			'allowAutoLogin'=>true,
 		),
 
+        'session' => array (
+            'autoStart' => true,
+            'class' => 'system.web.CDbHttpSession',
+            'connectionID' => 'db',
+            'sessionTableName' => 'orsersys_sessions',
+        ),
+
 		// uncomment the following to enable URLs in path-format
 
 		'urlManager'=>array(
@@ -65,7 +72,8 @@ return array(
 			'routes'=>array(
 				array(
 					'class'=>'CFileLogRoute',
-					'levels'=>'error, warning',
+					'levels'=>'error, warning, info',
+                    'categories'=>'system.*',
 				),
 				// uncomment the following to show log messages on web pages
 				/*
