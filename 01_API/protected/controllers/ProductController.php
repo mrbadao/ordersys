@@ -12,7 +12,7 @@ class ProductController extends Controller
 
         $_result = array();
         $_result['count'] =0;
-        $_result['categories'] = array();
+        $_result['products'] = array();
 
         $c = new CDbCriteria();
         $c->order = 'id DESC';

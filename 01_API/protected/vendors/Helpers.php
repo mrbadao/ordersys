@@ -170,4 +170,8 @@ class Helpers{
         }
         return $_arr_data[$arr_name];
     }
+
+    public static function getProduct($id){
+        return ContentProduct::model()->findByPk($id);
+    }
 }

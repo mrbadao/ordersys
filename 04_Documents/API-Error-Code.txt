@@ -8,3 +8,5 @@
 1002 - Secret key is invalid.
 1003 - No data.
 1004 - No Item to add.
+1005 - Item is added successly to cart.
+1006 - No items found.
