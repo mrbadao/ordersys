@@ -103,6 +103,8 @@ class CartController extends Controller
                         $existsItem['qty'] += $item['qty'];
                         $_result[] = $existsItem;
                         $isNewCartItem = false;
+                    }else{
+                        $_result[] = $existsItem;
                     }
                 }
             }
