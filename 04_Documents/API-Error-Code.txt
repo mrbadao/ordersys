@@ -10,3 +10,5 @@
 1004 - No Item to add.
 1005 - Item is added successly to cart.
 1006 - No items found.
+1007 - Item is edited successly.
+1008 - Cart has been destroied.
