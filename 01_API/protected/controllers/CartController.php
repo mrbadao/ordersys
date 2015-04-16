@@ -199,9 +199,9 @@ class CartController extends Controller
         }
         else{
             Helpers::_sendResponse(200, json_encode(array(
-                'status' => array(
-                    "status_code" => "1006",
-                    "status_message" => "No items found.",
+                'error' => array(
+                    "error_code" => "1006",
+                    "error_message" => "No items found.",
                 ))));
         }
     }
