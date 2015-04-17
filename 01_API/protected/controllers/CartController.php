@@ -189,6 +189,7 @@ class CartController extends Controller
                     'status' => array(
                         "status_code" => "1009",
                         "status_message" => "Cart has been checkout.",
+                        "order_id" => $newOrder->name,
                     ))));
             }
             Helpers::_sendResponse(200, json_encode(array(
