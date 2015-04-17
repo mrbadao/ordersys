@@ -165,7 +165,7 @@ class CartController extends Controller
 
             $newOrder = new ContentOrder();
             $newOrder->name = self::ORDER_NAME_PREFIX. date('HisdmY');
-            $newOrder->order_phone = '01697515475';
+            $newOrder->order_phone = $this->_post_data['phone'];
             $newOrder->coordinate_long = '-74.00594130000002';
             $newOrder->coordinate_lat = '40.7127837';
             $newOrder->status = '0';
