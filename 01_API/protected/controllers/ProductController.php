@@ -59,4 +59,39 @@ class ProductController extends Controller
 
         Helpers::_sendResponse(200, json_encode($_result));
     }
+
+    public function actionGetHot(){
+        $this->_post_data = Helpers::getJsonData();
+        $nodata = true;
+
+        $_result = array();
+        $_result['products'] = array();
+
+        $query =' SELECT `order_relation`.`product_id` AS `id` , `content_product`.`name` , `content_product`.`thumbnail` , `content_product`.`description` , `content_product`.`price` , `content_product`.`category_id` , `content_product`.`created` , `content_product`.`modified`'.
+                ' FROM `order_relation`'.
+                ' JOIN `content_product` ON `content_product`.`id` = `order_relation`.`product_id`'.
+                ' WHERE 1'.
+                ' GROUP BY `product_id`'.
+                ' ORDER BY Count( * ) DESC'.
+                ' LIMIT 0, 5;';
+
+        $_result['products'] =  Yii::app()->db->createCommand($query)->queryAll();
+
+        $_result['count'] = count($_result['products']);
+
+
+        if($_result['count'] > 0 ){
+            $nodata = false;
+        }
+
+        if ($nodata) {
+            Helpers::_sendResponse(200, json_encode(array(
+                'error' => array(
+                    "error_code" => "1003",
+                    "error_message" => "No data.",
+                ))));
+        }
+
+        Helpers::_sendResponse(200, json_encode($_result));
+    }
 }
