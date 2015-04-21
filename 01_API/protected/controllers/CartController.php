@@ -166,8 +166,8 @@ class CartController extends Controller
         if($this->_post_data['order_phone'] && $this->_post_data['email']){
             $c = new CDbCriteria();
             $c->order = 'id DESC';
-            $c->addCondition('order_phone = "'.$this->_post_data['phone'],'"', 'AND');
-            $c->addCondition('email = "'.$this->_post_data['email'],'"', 'AND');
+            $c->addCondition('order_phone = "'.$this->_post_data['phone'].'"', 'AND');
+            $c->addCondition('email = "'.$this->_post_data['email'].'"', 'AND');
 
             $_data_count = ContentOrder::model()->count($c);
 
