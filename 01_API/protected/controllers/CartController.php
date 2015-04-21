@@ -214,7 +214,7 @@ class CartController extends Controller
             $newOrder->name = self::ORDER_NAME_PREFIX. date('HisdmY');
             $newOrder->order_phone = $this->_post_data['phone'];
             $newOrder->email = $this->_post_data['email'];
-            $newOrder->order_name = $this->_post_data['name'];
+            $newOrder->customer_name = $this->_post_data['name'];
             $newOrder->coordinate_long = '-74.00594130000002';
             $newOrder->coordinate_lat = '40.7127837';
             $newOrder->status = '0';
