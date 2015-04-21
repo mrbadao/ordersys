@@ -163,7 +163,7 @@ class CartController extends Controller
             $order = ContentOrder::model()->findByAttributes(array('name' => $this->_post_data['name']));
             if($order){
                 Helpers::_sendResponse(200, json_encode(array(
-                    'status' => $order)));
+                    'order' => $order->attributes)));
             }
         }
         Helpers::_sendResponse(200, json_encode(array(
