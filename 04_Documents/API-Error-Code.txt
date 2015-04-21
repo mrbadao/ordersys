@@ -14,3 +14,4 @@
 1008 - Cart has been destroied.
 1009 - Cart has been checkout.
 1010 - Validate failed.
+1011 - Order not found.

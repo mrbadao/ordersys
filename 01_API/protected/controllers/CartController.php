@@ -156,6 +156,23 @@ class CartController extends Controller
         }
     }
 
+    public function actionGetOrder(){
+        $this->_post_data = Helpers::getJsonData();
+
+        if($this->_post_data['name']){
+            $order = ContentOrder::model()->findByAttributes(array('name' => $this->_post_data['name']));
+            if($order){
+                Helpers::_sendResponse(200, json_encode(array(
+                    'status' => $order)));
+            }
+        }
+        Helpers::_sendResponse(200, json_encode(array(
+            'error' => array(
+                "error_code" => "1001",
+                "error_message" => "Order not found.",
+            ))));
+    }
+
     public function actionCheckout(){
         $this->_post_data = Helpers::getJsonData();
         $session = Yii::app()->session;
