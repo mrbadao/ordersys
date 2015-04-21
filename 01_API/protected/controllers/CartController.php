@@ -166,6 +166,15 @@ class CartController extends Controller
         if($this->_post_data['phone'] && $this->_post_data['email']){
             $c = new CDbCriteria();
             $c->order = 'id DESC';
+
+            if($this->_post_data['limit'] && is_numeric($this->_post_data['limit'])){
+                $c->limit = $this->_post_data['limit'];
+            }
+
+            if($this->_post_data['offset'] && is_numeric($this->_post_data['offset'])){
+                $c->offset = $this->_post_data['offset'];
+            }
+
             $c->addCondition('order_phone = "'.$this->_post_data['phone'].'"', 'AND');
             $c->addCondition('email = "'.$this->_post_data['email'].'"', 'AND');
 
