@@ -241,6 +241,7 @@ class CartController extends Controller
                         "order_id" => $newOrder->name,
                     ))));
             }
+
             Helpers::_sendResponse(200, json_encode(array(
                 'error' => array(
                     "error_code" => "1010",

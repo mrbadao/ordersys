@@ -34,7 +34,7 @@ class ContentOrder extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, customer_name, order_phone, email, coordinate_lat, coordinate_long, completed', 'required'),
+			array('name, customer_name, order_phone, email, coordinate_lat, coordinate_long', 'required'),
 //			array('status, delivery_id', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>128),
 			array('customer_name, email', 'length', 'max'=>100),
