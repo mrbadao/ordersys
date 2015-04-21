@@ -163,7 +163,7 @@ class CartController extends Controller
         $_result['count'] =0;
         $_result['orders'] = array();
 
-        if($this->_post_data['order_phone'] && $this->_post_data['email']){
+        if($this->_post_data['phone'] && $this->_post_data['email']){
             $c = new CDbCriteria();
             $c->order = 'id DESC';
             $c->addCondition('order_phone = "'.$this->_post_data['phone'].'"', 'AND');
