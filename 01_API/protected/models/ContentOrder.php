@@ -6,10 +6,13 @@
  * The followings are the available columns in table 'content_order':
  * @property integer $id
  * @property string $name
+ * @property string $customer_name
  * @property string $order_phone
+ * @property string $email
  * @property string $coordinate_lat
  * @property string $coordinate_long
  * @property integer $status
+ * @property integer $delivery_id
  * @property string $created
  * @property string $completed
  */
@@ -31,15 +34,16 @@ class ContentOrder extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, order_phone, coordinate_lat, coordinate_long, created', 'required'),
-//			array('status', 'numerical', 'integerOnly'=>true),
-			array('status', 'safe'),
+			array('name, customer_name, order_phone, email, coordinate_lat, coordinate_long, completed', 'required'),
+//			array('status, delivery_id', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>128),
+			array('customer_name, email', 'length', 'max'=>100),
 			array('order_phone', 'length', 'max'=>14),
 			array('coordinate_lat, coordinate_long', 'length', 'max'=>50),
+			array('created, status, delivery_id', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, order_phone, coordinate_lat, coordinate_long, status, created, completed', 'safe', 'on'=>'search'),
+			array('id, name, customer_name, order_phone, email, coordinate_lat, coordinate_long, status, delivery_id, created, completed', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,10 +66,13 @@ class ContentOrder extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => 'Name',
+			'customer_name' => 'Customer Name',
 			'order_phone' => 'Order Phone',
+			'email' => 'Email',
 			'coordinate_lat' => 'Coordinate Lat',
 			'coordinate_long' => 'Coordinate Long',
 			'status' => 'Status',
+			'delivery_id' => 'Delivery',
 			'created' => 'Created',
 			'completed' => 'Completed',
 		);
@@ -91,10 +98,13 @@ class ContentOrder extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
+		$criteria->compare('customer_name',$this->customer_name,true);
 		$criteria->compare('order_phone',$this->order_phone,true);
+		$criteria->compare('email',$this->email,true);
 		$criteria->compare('coordinate_lat',$this->coordinate_lat,true);
 		$criteria->compare('coordinate_long',$this->coordinate_long,true);
 		$criteria->compare('status',$this->status);
+		$criteria->compare('delivery_id',$this->delivery_id);
 		$criteria->compare('created',$this->created,true);
 		$criteria->compare('completed',$this->completed,true);
 

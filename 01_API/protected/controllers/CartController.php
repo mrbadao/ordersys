@@ -159,13 +159,34 @@ class CartController extends Controller
     public function actionGetOrder(){
         $this->_post_data = Helpers::getJsonData();
 
-        if($this->_post_data['name']){
-            $order = ContentOrder::model()->findByAttributes(array('name' => $this->_post_data['name']));
-            if($order){
+        $_result = array();
+        $_result['count'] =0;
+        $_result['orders'] = array();
+
+        if($this->_post_data['order_phone'] && $this->_post_data['email']){
+            $c = new CDbCriteria();
+            $c->order = 'id DESC';
+            $c->addCondition('order_phoner = "'.$this->_post_data['phone'],'"', 'AND');
+            $c->addCondition('email = "'.$this->_post_data['email'],'"', 'AND');
+
+            $_data_count = ContentOrder::model()->count($c);
+
+            $_data = $_data_count > 0 ? ContentOrder::model()->findAll($c) : null;
+
+            if ($_data == null) {
                 Helpers::_sendResponse(200, json_encode(array(
-                    'order' => $order->attributes)));
+                    'error' => array(
+                        "error_code" => "1003",
+                        "error_message" => "No data.",
+                    ))));
             }
+
+            $_result['count'] = $_data_count;
+            $_result['orders'] = Helpers::_db_fetchDataArray($_data, 'orders');
+
+            Helpers::_sendResponse(200, json_encode($_result));
         }
+
         Helpers::_sendResponse(200, json_encode(array(
             'error' => array(
                 "error_code" => "1011",
@@ -183,10 +204,12 @@ class CartController extends Controller
             $newOrder = new ContentOrder();
             $newOrder->name = self::ORDER_NAME_PREFIX. date('HisdmY');
             $newOrder->order_phone = $this->_post_data['phone'];
+            $newOrder->email = $this->_post_data['email'];
+            $newOrder->order_name = $this->_post_data['name'];
             $newOrder->coordinate_long = '-74.00594130000002';
             $newOrder->coordinate_lat = '40.7127837';
             $newOrder->status = '0';
-            $newOrder->created = date('H:i:s d-m-Y');
+            $newOrder->created = date("Y-m-d H:i:s");
 
             if($newOrder->validate()){
                 $newOrder->save(false);
