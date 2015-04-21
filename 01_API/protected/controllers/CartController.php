@@ -168,7 +168,7 @@ class CartController extends Controller
         }
         Helpers::_sendResponse(200, json_encode(array(
             'error' => array(
-                "error_code" => "1001",
+                "error_code" => "1011",
                 "error_message" => "Order not found.",
             ))));
     }
