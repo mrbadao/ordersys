@@ -7,6 +7,7 @@
  */
 
 class OrderController extends Controller{
+
     public function actionGetOrderDetail(){
         $this->_post_data = Helpers::getJsonData();
 
@@ -102,4 +103,43 @@ class OrderController extends Controller{
             ))));
     }
 
+    public function actionCancelOrder(){
+        $this->_post_data = Helpers::getJsonData();
+
+        $id = isset($this->_post_data['id']) ? $this->_post_data['id'] : null;
+
+        if($id){
+            $order = ContentOrder::model()->findByPk($id);
+
+            if($order && $order->status == "0"){
+                $c = new CDbCriteria();
+                $c->addCondition(' order_id = '.$id, 'AND');
+                $c->order = 'id DESC';
+
+                OrderRelation::model()->deleteAll($c);
+
+                ContentOrder::model()->deleteByPk($id);
+
+                Helpers::_sendResponse(200, json_encode(array(
+                    'status' => array(
+                        "status_code" => "1012",
+                        "status_message" => "Order has been deleted.",
+                        "id" => $id,
+                    ))));
+            }
+
+            Helpers::_sendResponse(200, json_encode(array(
+                'error' => array(
+                    "error_code" => "1013",
+                    "error_message" => "Order can not be deleted.",
+                ))));
+
+        }
+        Helpers::_sendResponse(200, json_encode(array(
+            'error' => array(
+                "error_code" => "1011",
+                "error_message" => "Order not found.",
+            ))));
+
+    }
 }

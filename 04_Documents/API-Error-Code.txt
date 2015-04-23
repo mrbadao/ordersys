@@ -15,3 +15,5 @@
 1009 - Cart has been checkout.
 1010 - Validate failed.
 1011 - Order not found.
+1012 - Order has been deleted.
+1013 - Order can not be deleted.
