@@ -156,6 +156,54 @@ class CartController extends Controller
         }
     }
 
+    public function actionGetOrderDetail(){
+        $this->_post_data = Helpers::getJsonData();
+
+        $_result = array();
+        $_result['count'] =0;
+        $_result['orders'] = array();
+
+        $id = isset($this->_post_data['id']) ? $this->_post_data['id'] : null;
+
+        if($id){
+            $order = ContentOrder::model()->findByPk($id);
+            if($order){
+                $_result = array();
+                $_result['count'] =0;
+                $_result['order'] = array();
+
+                $c = new CDbCriteria();
+                $c->addCondition(' order_id = '.$id, 'AND');
+                $c->order = 'id DESC';
+
+                $_result['count'] = OrderRelation::model()->count($c);
+
+                if($_result['count'] > 0){
+                    $orderDetail = OrderRelation::model()->findAll($c);
+
+                    foreach($orderDetail as $item){
+                        $product = Helpers::getProduct($item->product_id);
+                        if($product){
+                            $_OrderItem['id'] = $product->id;
+                            $_OrderItem['name'] = $product->name;
+                            $_OrderItem['price'] = $item->price;
+                            $_OrderItem['qty'] = $item->qty;
+                            $_result['order'][] = $_OrderItem;
+                        }
+                    }
+
+                    Helpers::_sendResponse(200, json_encode($_result));
+                }
+            }
+        }
+        Helpers::_sendResponse(200, json_encode(array(
+            'error' => array(
+                "error_code" => "1011",
+                "error_message" => "Order not found.",
+            ))));
+
+    }
+
     public function actionGetOrder(){
         $this->_post_data = Helpers::getJsonData();
 
