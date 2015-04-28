@@ -9,7 +9,7 @@
 class DeliveryController extends Controller{
 
     public function actionIndex(){
-
+        $this->forward('login');
     }
 
     public function actionLogin(){
@@ -43,5 +43,17 @@ class DeliveryController extends Controller{
                 "error_code" => "1014",
                 "error_message" => "Unvalid usernam or password.",
             ))));
+    }
+
+    public function getDeliveryOrders(){
+        $this->_post_data = Helpers::getJsonData();
+
+        if(isset($this->_post_data['token']) && isset($this->_post_data['staff_id'])){
+            $token = DeliveryToken::model()->findByAttributes(array('token' => $this->_post_data['token'], 'staff_id' => $this->_post_data['staff_id']));
+
+            if($token){
+                $query = "SELECT * FROM ORDER";
+            }
+        }
     }
 }
