@@ -190,7 +190,7 @@ class Helpers{
 
     public static function generalDeliveryToken($staff_id){
 
-        $DeliveryToken = DeliveryToken();
+        $DeliveryToken = new DeliveryToken();
 
         $DeliveryToken->token = self::randString(10);
         $DeliveryToken->staff_id = $staff_id;
