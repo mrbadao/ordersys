@@ -17,3 +17,4 @@
 1011 - Order not found.
 1012 - Order has been deleted.
 1013 - Order can not be deleted.
+1014 - Unvalid usernam or password.
