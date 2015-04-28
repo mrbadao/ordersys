@@ -174,4 +174,33 @@ class Helpers{
     public static function getProduct($id){
         return ContentProduct::model()->findByPk($id);
     }
+
+    public static function randString($length)
+    {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        $str = "";
+
+        $size = strlen($chars);
+        for ($i = 0; $i < $length; $i++) {
+            $str .= $chars[rand(0, $size - 1)];
+        }
+
+        return $str;
+    }
+
+    public static function generalDeliveryToken($staff_id){
+
+        $DeliveryToken = DeliveryToken();
+
+        $DeliveryToken->token = self::randString(10);
+        $DeliveryToken->staff_id = $staff_id;
+        $DeliveryToken->created = date("Y-m-d H:i:s");
+        $DeliveryToken->modified = date("Y-m-d H:i:s");
+
+        if($DeliveryToken->validate()){
+            $DeliveryToken->save(false);
+            return $DeliveryToken->token;
+        }
+        return null;
+    }
 }
