@@ -27,7 +27,7 @@ class DeliveryController extends Controller{
                     Helpers::_sendResponse('200', json_encode(array(
                         'token' => $token,
                         'staff' => $DeliveryStaff
-                )));
+                    )));
                 }
 
                 Helpers::_sendResponse(200, json_encode(array(
