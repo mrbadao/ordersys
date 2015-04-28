@@ -22,6 +22,8 @@ class DeliveryController extends Controller{
                 $token = Helpers::generalDeliveryToken($DeliveryStaff->id);
 
                 if($token != null){
+                    DeliveryToken::model()->deleteAllByAttributes(array('staff_id' => $DeliveryStaff->id));
+
                     $DeliveryStaff = $DeliveryStaff->getAttributes();
                     Helpers::_sendResponse('200', json_encode(array(
                         'token' => $token,
