@@ -192,7 +192,7 @@ class Helpers{
 
         $DeliveryToken = new DeliveryToken();
 
-        $DeliveryToken->token = self::randString(10);
+        $DeliveryToken->token = md5(self::randString(10));
         $DeliveryToken->staff_id = $staff_id;
         $DeliveryToken->created = date("Y-m-d H:i:s");
         $DeliveryToken->modified = date("Y-m-d H:i:s");
