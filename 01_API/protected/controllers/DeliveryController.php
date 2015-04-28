@@ -19,11 +19,10 @@ class DeliveryController extends Controller{
             $DeliveryStaff = DeliveryStaff::model()->findByAttributes(array('login_id' => $this->_post_data['login_id'], 'pasword' => md5($this->_post_data['pasword'])));
 
             if($DeliveryStaff){
+                DeliveryToken::model()->deleteAllByAttributes(array('staff_id' => $DeliveryStaff->id));
                 $token = Helpers::generalDeliveryToken($DeliveryStaff->id);
 
                 if($token != null){
-                    DeliveryToken::model()->deleteAllByAttributes(array('staff_id' => $DeliveryStaff->id));
-
                     $DeliveryStaff = $DeliveryStaff->getAttributes();
                     Helpers::_sendResponse('200', json_encode(array(
                         'token' => $token,
