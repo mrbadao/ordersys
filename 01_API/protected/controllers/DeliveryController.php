@@ -45,7 +45,7 @@ class DeliveryController extends Controller{
             ))));
     }
 
-    public function getDeliveryOrders(){
+    public function actionGetDeliveryOrders(){
         $this->_post_data = Helpers::getJsonData();
 
         if(isset($this->_post_data['token']) && isset($this->_post_data['staff_id'])){
