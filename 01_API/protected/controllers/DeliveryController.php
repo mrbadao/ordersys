@@ -15,7 +15,7 @@ class DeliveryController extends Controller{
     public function actionLogin(){
         $this->_post_data = Helpers::getJsonData();
 
-        if(isset($this->_post_data['login_id']) && !isset($this->_post_data['password'])){
+        if(isset($this->_post_data['login_id']) && isset($this->_post_data['password'])){
             $DeliveryStaff = DeliveryStaff::model()->findByAttributes(array('login_id' => $this->_post_data['login_id'], 'pasword' => md5($this->_post_data['password'])));
 
             if($DeliveryStaff){
