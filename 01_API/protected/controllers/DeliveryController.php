@@ -58,7 +58,7 @@ class DeliveryController extends Controller{
 
                 $c = new CDbCriteria();
                 $c->order = "id ASC";
-                $c->addCondition('staff_id = '.$this->_post_data['delivery_id'], 'AND');
+                $c->addCondition('delivery_id = '.$this->_post_data['staff_id'], 'AND');
 
                 $_result['count'] = ContentOrder::model()->count($c);
 
