@@ -45,6 +45,34 @@ class DeliveryController extends Controller{
             ))));
     }
 
+    public function actionCheckToken()
+    {
+        $this->_post_data = Helpers::getJsonData();
+        if (isset($this->_post_data['token']) && isset($this->_post_data['staff_id'])) {
+            $token = DeliveryToken::model()->findByAttributes(array('token' => $this->_post_data['token'], 'staff_id' => $this->_post_data['staff_id']));
+
+            if($token) {
+                Helpers::_sendResponse(200, json_encode(array(
+                    'status' => array(
+                        "status_code" => "1017",
+                        "status_message" => "Token valid."
+                    ))));
+            }
+
+            Helpers::_sendResponse(200, json_encode(array(
+                'error' => array(
+                    "error_code" => "1015",
+                    "error_message" => "Invalid Token.",
+                ))));
+        }
+
+        Helpers::_sendResponse(200, json_encode(array(
+            'error' => array(
+                "error_code" => "1015",
+                "error_message" => "Invalid Token.",
+            ))));
+    }
+
     public function actionGetDeliveryOrders(){
         $this->_post_data = Helpers::getJsonData();
 
