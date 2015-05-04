@@ -58,12 +58,6 @@ class DeliveryController extends Controller{
                         "status_message" => "Token valid."
                     ))));
             }
-
-            Helpers::_sendResponse(200, json_encode(array(
-                'error' => array(
-                    "error_code" => "1015",
-                    "error_message" => "Invalid Token.",
-                ))));
         }
 
         Helpers::_sendResponse(200, json_encode(array(
@@ -119,13 +113,14 @@ class DeliveryController extends Controller{
                         }
                     }
                 }
+                Helpers::_sendResponse(200, json_encode(array(
+                    'error' => array(
+                        "error_code" => "1011",
+                        "error_message" => "Order not found.",
+                    ))));
             }
-            Helpers::_sendResponse(200, json_encode(array(
-                'error' => array(
-                    "error_code" => "1015",
-                    "error_message" => "Invalid Token.",
-                ))));
         }
+
         Helpers::_sendResponse(200, json_encode(array(
             'error' => array(
                 "error_code" => "1015",
@@ -167,11 +162,6 @@ class DeliveryController extends Controller{
                         "error_message" => "Order not found.",
                     ))));
             }
-            Helpers::_sendResponse(200, json_encode(array(
-                'error' => array(
-                    "error_code" => "1015",
-                    "error_message" => "Invalid Token.",
-                ))));
         }
 
         Helpers::_sendResponse(200, json_encode(array(
@@ -207,11 +197,6 @@ class DeliveryController extends Controller{
                         "error_message" => "Order not found.",
                     ))));
             }
-            Helpers::_sendResponse(200, json_encode(array(
-                'error' => array(
-                    "error_code" => "1015",
-                    "error_message" => "Invalid Token.",
-                ))));
         }
 
         Helpers::_sendResponse(200, json_encode(array(
