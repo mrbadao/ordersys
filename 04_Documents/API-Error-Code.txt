@@ -19,3 +19,4 @@
 1013 - Order can not be deleted.
 1014 - Unvalid usernam or password.
 1015 - Invalid Token.
+1016 - Completed Order.

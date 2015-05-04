@@ -59,6 +59,7 @@ class DeliveryController extends Controller{
                 $c = new CDbCriteria();
                 $c->order = "id ASC";
                 $c->addCondition('delivery_id = '.$this->_post_data['staff_id'], 'AND');
+                $c->addCondition('status = 1', 'AND');
 
                 $_result['count'] = ContentOrder::model()->count($c);
 
@@ -70,6 +71,46 @@ class DeliveryController extends Controller{
                 if($_result['orders']){
                     $_result['orders'] = Helpers::_db_fetchDataArray($_result['orders'],'orders');
                     Helpers::_sendResponse(200, json_encode($_result));
+                }
+
+                Helpers::_sendResponse(200, json_encode(array(
+                    'error' => array(
+                        "error_code" => "1011",
+                        "error_message" => "Order not found.",
+                    ))));
+            }
+            Helpers::_sendResponse(200, json_encode(array(
+                'error' => array(
+                    "error_code" => "1015",
+                    "error_message" => "Invalid Token.",
+                ))));
+        }
+
+        Helpers::_sendResponse(200, json_encode(array(
+            'error' => array(
+                "error_code" => "1015",
+                "error_message" => "Invalid Token.",
+            ))));
+    }
+
+    public function actionCompleteDeliveryOrders(){
+        $this->_post_data = Helpers::getJsonData();
+
+        if(isset($this->_post_data['token']) && isset($this->_post_data['staff_id']) && isset($this->_post_data['order_id'])){
+            $token = DeliveryToken::model()->findByAttributes(array('token' => $this->_post_data['token'], 'staff_id' => $this->_post_data['staff_id']));
+
+            if($token){
+                $order = ContentOrder::model()->findByPk($this->_post_data['order_id']);
+
+                if($order){
+                    $order->status = "2";
+                    $order->save(false);
+
+                    Helpers::_sendResponse(200, json_encode(array(
+                        'status' => array(
+                            "status_code" => "1016",
+                            "status_message" => "Completed Order."
+                        ))));
                 }
 
                 Helpers::_sendResponse(200, json_encode(array(
