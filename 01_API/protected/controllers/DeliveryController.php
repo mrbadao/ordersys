@@ -52,7 +52,12 @@ class DeliveryController extends Controller{
             $token = DeliveryToken::model()->findByAttributes(array('token' => $this->_post_data['token'], 'staff_id' => $this->_post_data['staff_id']));
 
             if($token){
-                $query = "SELECT * FROM ORDER";
+                $c = new CDbCriteria();
+                $c->order = 'id ASC';
+                $c->limit = isset($this->_post_data['limit']) && is_numeric($this->_post_data['limit']) ? $this->_post_data['limit'] : $c->limit;
+                $c->offset = isset($this->_post_data['offset']) && is_numeric($this->_post_data['offset']) ? $this->_post_data['offset'] : $c->offset;
+                $c->addCondition('delivery_id = '.$this->_post_data['staff_id'], 'AND');
+
             }
         }
     }
