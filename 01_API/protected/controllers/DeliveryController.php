@@ -96,6 +96,7 @@ class DeliveryController extends Controller{
 
                         $c = new CDbCriteria();
                         $c->addCondition(' order_id = ' . $id, 'AND');
+                        $c->addCondition(' delivery_id = ' . $this->_post_data['staff_id'], 'AND');
                         $c->order = 'id DESC';
 
                         $_result['count'] = OrderRelation::model()->count($c);
@@ -118,11 +119,6 @@ class DeliveryController extends Controller{
                         }
                     }
                 }
-                Helpers::_sendResponse(200, json_encode(array(
-                    'error' => array(
-                        "error_code" => "1011",
-                        "error_message" => "Order not found.",
-                    ))));
             }
             Helpers::_sendResponse(200, json_encode(array(
                 'error' => array(
