@@ -81,7 +81,7 @@ class DeliveryController extends Controller{
                 $id = isset($this->_post_data['order_id']) ? $this->_post_data['order_id'] : null;
 
                 if ($id) {
-                    $order = ContentOrder::model()->findByPk($id);
+                    $order = ContentOrder::model()->findByAttributes(array('id' => $id, 'delivery_id' => $this->_post_data['staff_id']));
 
                     if ($order) {
                         $_result = array();
@@ -90,7 +90,6 @@ class DeliveryController extends Controller{
 
                         $c = new CDbCriteria();
                         $c->addCondition(' order_id = ' . $id, 'AND');
-                        $c->addCondition(' delivery_id = ' . $this->_post_data['staff_id'], 'AND');
                         $c->order = 'id DESC';
 
                         $_result['count'] = OrderRelation::model()->count($c);
