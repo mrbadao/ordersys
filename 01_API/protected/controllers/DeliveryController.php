@@ -186,6 +186,7 @@ class DeliveryController extends Controller{
 
                 if($order){
                     $order->status = "2";
+                    $order->completed = date("Y-m-d H:i:s");
                     $order->save(false);
 
                     Helpers::_sendResponse(200, json_encode(array(
