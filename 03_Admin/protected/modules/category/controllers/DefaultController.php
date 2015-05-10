@@ -115,6 +115,7 @@ class DefaultController extends Controller
 		$pages = new CPagination($count);
 		$pages->pageSize = $c->limit;
 		$pages->applyLimit($c);
+//		var_dump($items); die;
 		$this->render('index',compact('items','count','pages','search','nodata'));
 	}
 
