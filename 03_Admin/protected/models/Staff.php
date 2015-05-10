@@ -6,7 +6,7 @@
  * The followings are the available columns in table 'staff':
  * @property integer $id
  * @property string $login_id
- * @property string $pasword
+ * @property string $password
  * @property string $phone
  * @property string $email
  * @property string $address
@@ -31,15 +31,15 @@ class Staff extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('login_id, pasword, phone, email, address', 'required'),
+			array('login_id, password, phone, email, address', 'required'),
 			array('login_id', 'length', 'max'=>20),
-			array('pasword, address', 'length', 'max'=>128),
+			array('password, address', 'length', 'max'=>128),
 			array('phone', 'length', 'max'=>15),
 			array('email', 'length', 'max'=>60),
 			array('created, modified', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, login_id, pasword, phone, email, address, created, modified', 'safe', 'on'=>'search'),
+			array('id, login_id, password, phone, email, address, created, modified', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,7 +62,7 @@ class Staff extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'login_id' => 'Login',
-			'pasword' => 'Pasword',
+			'password' => 'Password',
 			'phone' => 'Phone',
 			'email' => 'Email',
 			'address' => 'Address',
@@ -91,7 +91,7 @@ class Staff extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('login_id',$this->login_id,true);
-		$criteria->compare('pasword',$this->pasword,true);
+		$criteria->compare('password',$this->password,true);
 		$criteria->compare('phone',$this->phone,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('address',$this->address,true);
