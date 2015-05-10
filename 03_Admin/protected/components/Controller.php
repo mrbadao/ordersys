@@ -5,40 +5,53 @@
  */
 class Controller extends CController
 {
-	public $metaTags = '';
-	public $metaDescription = '';
-	public $title = '';
+	public $userName;
+	public $viewPath;
 	/**
 	 * @var string the default layout for the controller view. Defaults to '//layouts/column1',
 	 * meaning using a single column layout. See 'protected/views/layouts/column1.php'.
 	 */
-//	public $layout='//layouts/column1';
+//	public $layout='main';
+	public $title='';
+
+	public function init()
+	{
+		$this->userName = Yii::app()->user->getName();
+		$this->setTitle(Yii::app()->params['appName']);
+		$m = $this->getModule();
+		$this->viewPath = (isset($m))?$m->getViewPath():Yii::app()->getViewPath();
+	}
+
+	public function render($view,$data=null,$return=false)
+	{
+		if($this->beforeRender($view))
+		{
+			$output=$this->renderPartial($view,$data,true);
+			if(($layoutFile=$this->getLayoutFile($this->layout))!==false)
+				if(!is_array($data))
+				{
+					$output=$this->renderFile($layoutFile,array('content'=>$output),true);
+				}
+				else
+				{
+					$output=$this->renderFile($layoutFile,array_merge(array('content'=>$output),$data),true);
+				}
+
+			$this->afterRender($view,$output);
+
+			$output=$this->processOutput($output);
+
+			if($return)
+				return $output;
+			else
+				echo $output;
+		}
+	}
+
 	/**
 	 * @var array context menu items. This property will be assigned to {@link CMenu::items}.
 	 */
 	public $menu=array();
-
-	public function init()
-	{
-		$this->setTitle('Sài Gòn ET');
-
-//		$setting = Setting::model()->findByPk(1);
-//		if($setting){
-//			$this->metaDescription = $setting->meta_description;
-//			$this->metaTags = $setting->meta_tag;
-//		}
-
-		$this->menu['items'] = array(
-			array('label'=>'Trang chủ', 'url'=>'/site', 'id' =>'/content/index'),
-			array('label'=>'Giới thiệu', 'url'=>'/site/content/about', 'id' =>'/content/about'),
-			array('label'=>'Giải pháp & Tài liệu', 'url'=> '/site/giai-phap-va-tai-lieu', 'id' => 'solution'),
-			array('label'=>'Dịch vụ', 'url'=> '/site/dich-vu', 'id' => 'services'),
-			array('label'=>'Công trình & Dự án', 'url'=> '/site/cong-trinh-du-an', 'id' => 'project'),
-			array('label'=>'Tin tức & Sự kiện', 'url'=> '/site/tin-tuc-su-kien', 'id' =>'news'),
-			array('label'=>'Liên hệ', 'url'=> '/site/content/contact', 'id' => '/content/contact'),
-		);
-	}
-
 	/**
 	 * @var array the breadcrumbs of the current page. The value of this property will
 	 * be assigned to {@link CBreadcrumbs::links}. Please refer to {@link CBreadcrumbs::links}

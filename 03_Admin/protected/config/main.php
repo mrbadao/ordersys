@@ -30,6 +30,8 @@ return array(
 			'ipFilters'=>array('127.0.0.1', '118.69.13.44','::1'),
 		),
 
+		'category',
+
 	),
 
 	// application components

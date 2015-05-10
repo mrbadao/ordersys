@@ -63,7 +63,7 @@ class SiteController extends Controller
 		if (Yii::app()->user->IsGuest) {
 			$this->redirect('site/login');
 		}
-		$this->setTitle('CMS Saigonet');
+		$this->setTitle('CMS Order Sys');
 		$this->render('index');
 	}
 
