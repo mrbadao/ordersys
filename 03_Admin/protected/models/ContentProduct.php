@@ -37,7 +37,7 @@ class ContentProduct extends CActiveRecord
 			array('category_id, del_flg', 'numerical', 'integerOnly'=>true),
 			array('name, thumbnail', 'length', 'max'=>128),
 			array('price', 'length', 'max'=>50),
-			array('description, created, modified', 'safe'),
+			array('description, del_flg, created, modified', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, name, thumbnail, description, price, category_id, del_flg, created, modified', 'safe', 'on'=>'search'),

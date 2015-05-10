@@ -70,7 +70,7 @@ class DefaultController extends Controller
 		$this->title='View Product | CMS Saigonet';
 
 		$msg = isset($_GET['msg']) ? true : false;
-		$this->render('view',compact('msg','contentProduct', 'tags'));
+		$this->render('view',compact('msg','contentProduct'));
 	}
 
 	public function actionSearch(){
