@@ -16,6 +16,7 @@
  */
 class ContentProduct extends CActiveRecord
 {
+	public $cat_name = '';
 	/**
 	 * @return string the associated database table name
 	 */
@@ -114,5 +115,13 @@ class ContentProduct extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	public function afterSave(){
+		$this->cat_name = ContentCategories::model()->findByPk($this->category_id)->name;
+	}
+
+	public function afterFind(){
+		$this->cat_name = ContentCategories::model()->findByPk($this->category_id)->name;
 	}
 }
