@@ -33,7 +33,7 @@ class ContentProduct extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, category_id', 'required'),
+			array('name, category_id, thumbnail', 'required'),
 			array('category_id, del_flg', 'numerical', 'integerOnly'=>true),
 			array('name, thumbnail', 'length', 'max'=>128),
 			array('price', 'length', 'max'=>50),
