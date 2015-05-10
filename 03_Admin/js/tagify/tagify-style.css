@@ -1,0 +1,9 @@
+/* Tagify styles 
+Author: Alicia Liu
+*/
+.tagify-container { display: inline-block; float:left;width: 300px; min-height: 27px; border: 1px solid #7f9db9; background-color: #FFF; border-radius: 2px; overflow: auto; }
+.tagify-container > span { display: inline-block; padding: 2px 5px; margin: 3px; border-radius: 2px; border: 1px solid #9daccc; background-color: #e2e6f0; color: #888; }
+.tagify-container > span > a { margin-left:5px;padding: 0 3px; line-height:100%;height:auto; color: #9facd0; text-decoration: none; font-weight: bold; }
+.tagify-container > span > a:hover{color:#fff;background:#5d7dae;}
+.tagify-container > input { border: 0 none; width: 100px; }
+.tagify-container > input:focus { outline: none; }

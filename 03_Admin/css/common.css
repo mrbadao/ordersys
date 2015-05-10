@@ -1,0 +1,17 @@
+@charset "utf-8";
+@import url(reset.css);/*ブラウザ間の差異をリセット*/
+@import url(layout.css);/*サイト内の各表示の配置の構成を定義*/
+@import url(decoration.css);/*タイトル、ボタン、アイコンなどの各装飾部分を定義*/
+@import url(form.css);/*form関連のタグに指定するスタイルを定義*/
+body { text-align: left; font: 13px/1.2 "ＭＳ Ｐゴシック", "MS P Gothic", "メイリオ", Meiryo, Arial, Osaka, sans-serif;  *font-size:small;/*IE7*/
+ *font:x-small;/*IE6*/
+word-break: break-all; }
+a:link { color: #1d3994; text-decoration: none; }
+a:visited { color: #810081; text-decoration: none; }
+a:hover { color: #1d3994; text-decoration: underline; }
+a:active { color: #941d55; text-decoration: underline; }
+.guideBox a:link { color: #1d3994; text-decoration: underline; }
+.guideBox a:visited { color: #810081; text-decoration: underline; }
+.guideBox a:hover { color: #1d3994; text-decoration: none; }
+.guideBox a:active { color: #941d55; text-decoration: none; }
+strong { font-weight: bold; }

@@ -1,0 +1,4 @@
+.pageList_link { margin-top: 5px; float: left; clear: both; }
+.pageList_link ul,li { display: inline; }
+.pageList_link li { margin-right: 5px; }
+.pageList_link strong, .pageList_link a { margin: 0px 4px 0px 0px; }

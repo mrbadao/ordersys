@@ -1,0 +1,20 @@
+@charset "UTF-8";
+.ms2side__div { clear: left; width: 100%; padding: 1px; float: left; background : url('') repeat-x; /* HACK FOR CHROME */ }
+.ms2side__select { float: left; }
+.ms2side__header { color: #000088; background-color: #EEEEFF; margin-left: 3px; width: 220px; height: 20px; }
+.ms2side__options, .ms2side__updown { float: left; font-size: 10pt; margin: 0; padding: 0 8px; width: 60px; color: black; text-align: center; overflow: hidden; }
+.ms2side__updown { font-size: 9pt; }
+.ms2side__options p, .ms2side__updown p { margin: 2px 0; padding: 5px; border: 1px solid #858585; border-radius:5px; color: #3f3f3f; background: -moz-linear-gradient(top, #fdfdfd, #fdfdfd 3%, #f6f6f6 4%,#dcdcdc);background: -webkit-gradient(linear,left top,left bottom, from(#fdfdfd), color-stop(3%,#fdfdfd), color-stop(4%,#f6f6f6),to(#dcdcdc)); cursor: pointer; font-size: 11px !important; }
+.ms2side__options p.ms2side_hover, .ms2side__updown p.ms2side_hover { background: -moz-linear-gradient(top, #fdfdfd, #fdfdfd 3%, #fefefe 4%,#efefef);background: -webkit-gradient(linear,left top,left bottom, from(#fdfdfd), color-stop(3%,#fdfdfd), color-stop(4%,#f6f6f6),to(#dcdcdc)); border-color: #2ba6e0;background: -webkit-gradient(linear,left top,left bottom, from(#fdfdfd), color-stop(3%,#fdfdfd), color-stop(4%,#f6f6f6),to(#dcdcdc)); cursor: pointer; }
+.ms2side__options p.ms2side__hide, .ms2side__updown p.ms2side__hide { cursor: default; color: gray; border: 1px solid gray; background: -moz-linear-gradient(top, #efefef, #efefef 3%, #ccc 4%,#aaa);background: -webkit-gradient(linear,left top,left bottom, from(#efefef), color-stop(3%,#efefef), color-stop(4%,#ccc),to(#aaa)); }
+.ms2side__div select { border: 1px solid #7f9db9; width: 220px; float: left; }
+/* INPUT FOR SEARCH */
+.ms2side__header input { width: 80px; height: 12px; }
+.ms2side__header input.wait { width: 80px; height: 12px; background: #FFFFFF url(../img/loading.gif) no-repeat center right; }
+.ms2side__header input.small { width: 50px; height: 12px; }
+/* INPUT FOR SELECT SEARCH */
+.ms2side__header select { width: 100px; font-size: 11px; height: 18px; float: none; }
+.ms2side__header select.small { width: 70px; }
+/* REMOVE FILTER OPTION FOR SEARCH */
+.ms2side__header a { font-size: 10pt; padding: 0 8px; width: 16px; height: 16px; color: black; text-align: center; text-decoration: none; border: 1px solid gray; background: #FFFFFF url(../img/close.gif) no-repeat center center; margin: 0 0 0 3px; }
+.ms2side__header a:hover { background-color: #F0F0FF; border-color: gray; }

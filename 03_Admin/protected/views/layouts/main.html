@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<meta http-equiv="Content-Style-Type" content="text/css"/>
+<meta http-equiv="Content-Script-Type" content="text/javascript"/>
+<meta name="robots" content="noindex,nofollow,noarchive"/>
+<title>${this/title}</title>
+<link rel="stylesheet" href="/admin/css/style.css" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="/admin/js/jquery-ui/jquery-ui-1.9.2.custom.min.css"/>
+<link rel="stylesheet" type="text/css" href="/admin/js/tagify/tagify-style.css" />
+<script type="text/javascript" src="/admin/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="/admin/js/jquery-ui/jquery-ui-1.9.2.custom.min.js"></script>
+<script type="text/javascript" src="/admin/js/public.js"></script>
+<script type="text/javascript" src="/admin/js/jsTree/jquery.jstree.js"></script>
+<script type="text/javascript" src="/admin/js/seltab.js"></script>
+<script type="text/javascript" src="/admin/js/plugins/vietnamesefilter.js"></script>
+<!--[if lt IE 9]>
+<script src="/admin/js/html5shiv.js"></script>
+<script src=/admin/js/ie9.js"></script>
+<![endif]-->
+</head>
+<body>
+<div id="wrap">
+ <header>
+ <nav>
+  <ul>
+   <li><strong>Đang đăng nhập với tài khoản ${this/userName}</strong></li>
+   <li><a href="/admin/site/logout" class="btnSmall themeSub">Logout</a></li>
+   <!--<li><a href="/site/adminlogin" class="btnSmall themeSub">管理者設定</a></li>-->
+  </ul>
+ </nav>
+ <h1><a href="#"><img src="/admin/img/logo.png" alt="パーゴルフ"/></a></h1>
+ </header>
+ <nav id="topicPath" metal:use-macro="${this/viewPath}/${this/id}/breadcrumb.html/${this/action/id}">
+  <ul>
+   <li class="top"><a href="#">トップ</a></li>
+   <li><a href="article-list.html">記事一覧</a></li>
+   <li><a href="article-detail.html">記事詳細</a></li>
+   <li>記事編集</li>
+  </ul>
+ </nav>
+ <div id="contents">
+  <nav id="side" tal:content="structure php:this.widget('application.widgets.Menu',array(),true)">
+   <section>
+    <h2>記事管理</h2>
+    <ul>
+     <li><a href="article-list.html" class="stay">一覧</a></li>
+     <li><a href="article-select.html">新規登録</a></li>
+    </ul>
+   </section>
+   <section>
+    <h2>会員管理</h2>
+    <ul>
+     <li><a href="#">一覧</a></li>
+     <li><a href="#">新規登録</a></li>
+    </ul>
+   </section>
+  </nav>
+  <div id="main" tal:content="structure content"/>
+ </div>
+  <footer>COPYRIGHT &copy; 2015 SaigonET Inc. All Rights Reserved.</footer>
+  <p id="page-top"><a href="#wrap">▲PAGE TOP</a></p>
+</div>
+<!--[if IE 9]><script src="/admin/js/PIE_IE9.js"></script><![endif]-->
+<!--[if lt IE 9]><script src="/admin/js/PIE_IE678.js"></script><![endif]-->
+</body>
+</html>
