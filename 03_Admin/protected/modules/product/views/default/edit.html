@@ -50,15 +50,12 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>Tags</th>
+                        <th>Tình trạng</th>
                         <td>
-                            <input type="text" name="tags[name]" maxlength="100" value="${tags}"  class="txtbox title txt_en" style="width:300px;"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Sort index</th>
-                        <td>
-                            <input type="text" name="product[sort_idx]" maxlength="100" value="${contentProduct/sort_idx}"  class="txtbox title txt_en" style="width:60px;"/>
+                            <select name="product[del_flg]">
+                                <option value="0" tal:attributes="selected php: product[del_flg] == 0 ? 'selected' : ''">Đang bán</option>
+                                <option value="1" tal:attributes="selected php: product[del_flg] == 1 ? 'selected' : ''">Ngừng bán</option>
+                            </select>
                         </td>
                     </tr>
                 </table>
@@ -67,82 +64,24 @@
             <div class="mBoxitem_table">
                 <table cellpadding="0" cellspacing="0" border="0" class="tableTate">
                     <tr>
-                        <th>Image 1&nbsp;<span class="txtWarning">*</span></th>
+                        <th>Thumbnail&nbsp;<span class="txtWarning">*</span></th>
                         <td>
                             <div>
-                                <tal:block tal:content="structure php:CHtml::error(contentProduct,'thumbnail_1')"/>
+                                <tal:block tal:content="structure php:CHtml::error(contentProduct,'thumbnail')"/>
                                 <input type="file" name="silde1"/>
                             </div>
                             <div>
-                                <img src="${contentProduct/thumbnail_1|''}" tal:condition="php:contentProduct['thumbnail_1'] !=null" style="width: 400px; margin-top: 20px;"/>
+                                <img src="${contentProduct/thumbnail|''}" tal:condition="php:contentProduct['thumbnail'] !=null" style="width: 400px; margin-top: 20px;"/>
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <th>Image 2&nbsp;<span class="txtWarning">*</span></th>
-                        <td>
-                            <div>
-                                <tal:block tal:content="structure php:CHtml::error(contentProduct,'thumbnail_2')"/>
-                                <input type="file" name="silde2"/>
-                            </div>
-                            <div>
-                                <img src="${contentProduct/thumbnail_2|''}" tal:condition="php:contentProduct['thumbnail_2'] !=null" style="width: 400px; margin-top: 20px;"/>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Image 3&nbsp;<span class="txtWarning">*</span></th>
-                        <td>
-                            <div>
-                                <tal:block tal:content="structure php:CHtml::error(contentProduct,'thumbnail_3')"/>
-                                <input type="file" name="silde3"/>
-                            </div>
-                            <div>
-                                <img src="${contentProduct/thumbnail_3|''}" tal:condition="php:contentProduct['thumbnail_3'] !=null" style="width: 400px; margin-top: 20px;"/>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
 
-            <div class="mBoxitem_table">
-                <table cellpadding="0" cellspacing="0" border="0" class="tableTate">
                     <tr>
-                        <th>Đặc tính</th>
+                        <th>Miêu tả</th>
                         <td>
-                            <textarea name="product[product_properties]" class="txt_bigbox ckeditor txt_en">
-                                ${contentProduct/product_properties|''}
+                            <textarea name="product[description]" class="txt_bigbox ckeditor txt_en">
+                                ${contentProduct/description|''}
                             </textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Thông tin kỹ thuật</th>
-                        <td>
-                            <textarea name="product[product_tech_info]" class="txt_bigbox ckeditor txt_en">
-                                ${contentProduct/product_tech_info|''}
-                            </textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Phụ kiện</th>
-                        <td>
-                            <textarea name="product[product_bonus]" class="txt_bigbox ckeditor txt_en">
-                                ${contentProduct/product_bonus|''}
-                            </textarea>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="mBoxitem_table">
-                <table cellpadding="0" cellspacing="0" border="0" class="tableTate">
-                    <tr>
-                        <th>Sản phẩm bán chạy</th>
-                        <td>
-                            <select name="product[is_popular]">
-                                <option tal:attributes="selected php:contentProduct['is_popular'] == '0' ? 'selected' :'' " value="0">Không</option>
-                                <option tal:attributes="selected php:contentProduct['is_popular'] == '1' ? 'selected' :'' " value="1">Có</option>
-                            </select>
                         </td>
                     </tr>
                 </table>
