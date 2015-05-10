@@ -19,7 +19,7 @@ class UserIdentity extends CUserIdentity
 	public function authenticate()
 	{
 		$c = new CDbCriteria();
-		$c->condition = 'loginid=:loginid';
+		$c->condition = 'login_id=:loginid';
 		$c->params = array(':loginid' => $this->username);
 		$staff = Staff::model()->find($c);
 
@@ -31,7 +31,7 @@ class UserIdentity extends CUserIdentity
 			}else
 			{
 				$this->_id = $staff->id;
-				$this->username = $staff->name;
+				$this->username = $staff->login_id;
 				$this->errorCode = self::ERROR_NONE;
 			}
 
