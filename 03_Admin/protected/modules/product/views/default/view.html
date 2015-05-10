@@ -1,0 +1,84 @@
+<h1>Chi tiết sản phẩm</h1>
+<article>
+    <p>
+        Đây là thông tin chi tiết của sản phẩm. Nếu bạn muốn chỉnh sửa các nội dung, vui lòng bấm vào nút [Edit]. <br />
+        Xin bấm vào nút [Delete] nếu bạn muốn xóa.
+    </p>
+</article>
+<div class="messageBox">
+    <p class="txtWarning">
+        <strong tal:condition="msg">Thao tác hoàn thành</strong>
+    </p>
+</div>
+
+<div class="columnContainer">
+
+    <div class="tabBox">
+        <form action="edit" method="get" name="article">
+            <input type="hidden" name="id" value="${contentProduct/id}"/>
+            <div class="mBoxitem_table">
+                <table cellpadding="0" cellspacing="0" border="0" class="tableTate">
+                    <tr>
+                        <th>Tên sản phẩm</th>
+                        <td tal:content="contentProduct/name|''"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Category</th>
+                        <td tal:content="contentProduct/cat_name|''"></td>
+                    </tr>sort_idx
+
+                    <tr>
+                        <th>Tags</th>
+                        <td tal:content="tags|''"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Sort index</th>
+                        <td tal:content="contentProduct/sort_idx|''"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Sản phẩm bán chạy</th>
+                        <td>
+                            <tal:block tal:condition="php:contentProduct['is_popular'] == 1">Có</tal:block>
+                            <tal:block tal:condition="php:contentProduct['is_popular'] == 0">Không</tal:block>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="mBoxitem_table">
+                <table cellpadding="0" cellspacing="0" border="0" class="tableTate">
+                    <tr>
+                        <th>Image 1</th>
+                        <td>
+                            <img src="${contentProduct/thumbnail_1|''}" tal:condition="php:contentProduct['thumbnail_1'] !=null" style="width: 400px; margin-top: 20px;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Image 2</th>
+                        <td>
+                            <img src="${contentProduct/thumbnail_2|''}" tal:condition="php:contentProduct['thumbnail_2'] !=null" style="width: 400px; margin-top: 20px;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Image 3</th>
+                        <td>
+                            <img src="${contentProduct/thumbnail_3|''}" tal:condition="php:contentProduct['thumbnail_3'] !=null" style="width: 400px; margin-top: 20px;"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="BtnArea">
+    <div class="BtnAreaitem">
+        <input class="btnMiddle themeNormal" type="submit" title="Delete" value="Delete" onclick="location.href='/admin/product/delete?id=${contentProduct/id}';"/>
+    </div>
+    <div class="BtnAreaitem">
+        <input class="btnMiddle themeNormal" type="submit" title="Edit" value="Edit" onclick="location.href='/admin/product/edit?id=${contentProduct/id}';" />
+    </div>
+</div>

@@ -32,6 +32,7 @@ return array(
 		),
 
 		'category',
+		'product',
 
 	),
 
