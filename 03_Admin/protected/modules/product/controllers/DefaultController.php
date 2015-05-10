@@ -113,7 +113,7 @@ class DefaultController extends Controller
 						$c->compare($k, $v, true,'AND');
 						break;
 					case 'category_id':
-						$c->compare($k, $v, true,'AND');
+						$c->compare($k, $v, false,'AND');
 						break;
 					case 'del_flg':
 						if($v != '')
