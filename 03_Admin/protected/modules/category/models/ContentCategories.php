@@ -29,10 +29,8 @@ class ContentCategories extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, abbr_cd', 'required'),
-			array('id', 'numerical', 'integerOnly'=>true),
-			array('name, abbr_cd', 'length', 'max'=>70),
-			array('name, abbr_cd', 'unique'),
-			array('name, abbr_cd, created, modified', 'safe'),
+			array('name, abbr_cd', 'length', 'max'=>128),
+			array('created, modified', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, name, abbr_cd, created, modified', 'safe', 'on'=>'search'),
@@ -57,7 +55,7 @@ class ContentCategories extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Tên',
+			'name' => 'Tên category',
 			'abbr_cd' => 'Domain',
 			'created' => 'Created',
 			'modified' => 'Modified',
