@@ -5,9 +5,9 @@ return array(
 //	'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 	// uncomment the following lines to use a MySQL database
 
-	'connectionString' => 'mysql:host=localhost;dbname=u102979894_order',
+	'connectionString' => 'mysql:host=mysql.hostinger.vn;dbname=u102979894_order',
 	'emulatePrepare' => true,
-	'username' => 'root',
-	'password' => '123456',
+	'username' => 'u102979894_admin',
+	'password' => 'FVWVtCBDKkXeft8Dyv',
 	'charset' => 'utf8',
 );

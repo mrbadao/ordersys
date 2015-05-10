@@ -27,39 +27,39 @@
   <ul>
    <li><strong>Đang đăng nhập với tài khoản ${this/userName}</strong></li>
    <li><a href="/admin/site/logout" class="btnSmall themeSub">Logout</a></li>
-   <!--<li><a href="/site/adminlogin" class="btnSmall themeSub">管理者設定</a></li>-->
+   <!--<li><a href="/site/adminlogin" class="btnSmall themeSub"></a></li>-->
   </ul>
  </nav>
- <h1><a href="#"><img src="/admin/img/logo.png" alt="パーゴルフ"/></a></h1>
+ <h1><a href="#"><img src="/admin/img/logo.png" alt="logo"/></a></h1>
  </header>
  <nav id="topicPath" metal:use-macro="${this/viewPath}/${this/id}/breadcrumb.html/${this/action/id}">
   <ul>
-   <li class="top"><a href="#">トップ</a></li>
-   <li><a href="article-list.html">記事一覧</a></li>
-   <li><a href="article-detail.html">記事詳細</a></li>
-   <li>記事編集</li>
+   <li class="top"><a href="#"></a></li>
+   <li><a href="article-list.html"></a></li>
+   <li><a href="article-detail.html"></a></li>
+   <li></li>
   </ul>
  </nav>
  <div id="contents">
   <nav id="side" tal:content="structure php:this.widget('application.widgets.Menu',array(),true)">
    <section>
-    <h2>記事管理</h2>
+    <h2></h2>
     <ul>
-     <li><a href="article-list.html" class="stay">一覧</a></li>
-     <li><a href="article-select.html">新規登録</a></li>
+     <li><a href="article-list.html" class="stay"></a></li>
+     <li><a href="article-select.html"></a></li>
     </ul>
    </section>
    <section>
-    <h2>会員管理</h2>
+    <h2></h2>
     <ul>
-     <li><a href="#">一覧</a></li>
-     <li><a href="#">新規登録</a></li>
+     <li><a href="#"></a></li>
+     <li><a href="#"></a></li>
     </ul>
    </section>
   </nav>
   <div id="main" tal:content="structure content"/>
  </div>
-  <footer>COPYRIGHT &copy; 2015 SaigonET Inc. All Rights Reserved.</footer>
+  <footer>COPYRIGHT &copy; 2015 Owl Food Inc. All Rights Reserved.</footer>
   <p id="page-top"><a href="#wrap">▲PAGE TOP</a></p>
 </div>
 <!--[if IE 9]><script src="/admin/js/PIE_IE9.js"></script><![endif]-->
