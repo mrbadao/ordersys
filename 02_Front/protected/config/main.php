@@ -74,10 +74,12 @@ return array(
 			'showScriptName'=>false,
 			'rules'=>array(
 				'content/<action:\w+>'=> 'content/<action>',
+
                 array(
                     'class' => 'application.components.CategoryUrlRule',
                     'connectionID' => 'db',
                 ),
+                '<module:\w+>/<action:\w+>'=>'<module>/default/<action>',
 			),
 		),
 
