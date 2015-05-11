@@ -1,0 +1,53 @@
+<h1>Chi tiết category</h1>
+<article>
+    <p>
+        Đây là thông tin chi tiết của category. Nếu bạn muốn chỉnh sửa các nội dung, vui lòng bấm vào nút [Edit]. <br />
+        Xin bấm vào nút [Delete] nếu bạn muốn xóa.
+    </p>
+</article>
+<div class="messageBox">
+    <p class="txtWarning">
+        <strong tal:condition="msg">Thao tác hoàn thành</strong>
+    </p>
+</div>
+
+<div class="columnContainer">
+
+    <div class="tabBox">
+        <form action="edit" method="get" name="article">
+            <input type="hidden" name="id" value="${contentCat/id}"/>
+            <div class="mBoxitem_table">
+                <table cellpadding="0" cellspacing="0" border="0" class="tableTate">
+                    <tr>
+                        <th>Tên</th>
+                        <td tal:content="contentCat/name|''" id="title"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Domain</th>
+                        <td tal:content="contentCat/abbr_cd|''"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Ngày tạo</th>
+                        <td tal:content="contentCat/created|''"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Ngày sữa</th>
+                        <td tal:content="contentCat/modified|''"></td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="BtnArea">
+    <div class="BtnAreaitem">
+        <input class="btnMiddle themeNormal" type="submit" title="Delete" value="Delete" onclick="location.href='/admin/category/delete?id=${contentCat/id}';"/>
+    </div>
+    <div class="BtnAreaitem">
+        <input class="btnMiddle themeNormal" type="submit" title="Edit" value="Edit" onclick="location.href='/admin/category/edit?id=${contentCat/id}';" />
+    </div>
+</div>

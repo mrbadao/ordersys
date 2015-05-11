@@ -7,7 +7,9 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'My Web Application',
+	'name'=>'CMS Order Sys',
+	'language' => 'vi',
+    'defaultController' =>'Content',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -16,6 +18,8 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		'application.vendors.*',
+		'application.widgets.*',
 	),
 
 	'modules'=>array(
@@ -23,10 +27,13 @@ return array(
 
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
-			'password'=>'123',
+			'password'=>'1',
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
-			'ipFilters'=>array('127.0.0.1','::1', '113.161.74.112', '42.117.64.176'),
+			'ipFilters'=>array('127.0.0.1', '118.69.13.44','::1'),
 		),
+
+		'category',
+		'product',
 
 	),
 
@@ -36,6 +43,18 @@ return array(
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
+		),
+
+		'viewRenderer'=>array(
+			'class'=>'ext.PHPTALViewRenderer',
+			'fileExtension' => '.html',
+		),
+
+		'session' => array (
+			'autoStart' => true,
+			'class' => 'system.web.CDbHttpSession',
+			'connectionID' => 'db',
+			'sessionTableName' => 'orsersys_sessions',
 		),
 
 		// uncomment the following to enable URLs in path-format
@@ -49,6 +68,20 @@ return array(
 			),
 		),
 		*/
+
+		'urlManager'=>array(
+			'urlFormat'=>'path',
+			'showScriptName'=>false,
+			'rules'=>array(
+				'site/<action:\w+>'=> 'site/<action>',
+				'gii'=>'gii',
+				'gii/<controller:\w+>'=>'gii/<controller>',
+				'gii/<controller:\w+>/<action:\w+>'=>'gii/<controller>/<action>',
+				'gii/<action:\w+>'=> 'gii/<action>',
+				'<module:\w+>/<action:\w+>'=>'<module>/default/<action>',
+				'<module:\w+>/<controller:\w+>/<action:\w+>'=>'<module>/<controller>/<action>',
+			),
+		),
 
 		// database settings are configured in database.php
 		'db'=>require(dirname(__FILE__).'/database.php'),
