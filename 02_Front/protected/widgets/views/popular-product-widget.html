@@ -1,0 +1,34 @@
+<ul class="row clearfix rr list-display product" tal:condition="items">
+    <li class="span9" tal:repeat="item items">
+        <div class="row">
+            <div class="span4 photo-wrapper">
+                <a href="5-product-details.html">
+                    <img src="${item/thumbnail}" alt="${item/name}"/>
+                </a>
+            </div>
+            <div class="span5 info clearfix">
+                <h1>${item/name}</h1>
+                <p>
+                    Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc.
+                    Vestibulum ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia Curae;
+                    Aenean eleifend laoreet congue.
+                </p>
+                <hr/>
+                <div class="row price-wrapper">
+                    <div class="span2 clearfix">
+                        <a href="7-cart.html" class="add-to-cart">
+                            <span class="icon ir">giỏ</span>
+                            <span class="text">Thêm vào giỏ</span>
+                        </a>
+                    </div>
+                    <div class="span2">
+                        <span class="price">
+                          <span class="value">${item/price}</span><span class="currency"> đ</span>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </li>
+</ul>

@@ -15,125 +15,17 @@
         </aside>
 
         <div class="span9">
-
             <div class="featured clearfix hidden-phone">
-
                 <img src="img/top-banner.jpg" style="width:100%;" alt=""/>
-
             </div>
 
             <div class="products-view-nav row" style="margin-left:0px;">
                 <h5 style="margin: 3px;">Category</h5>
-
                 <hr style="margin: 0.4em 0px;"/>
-
-
             </div>
 
-            <ul class="row clearfix rr list-display product">
-                <li class="span9">
-                    <div class="row">
-                        <div class="span4 photo-wrapper">
-                            <a href="5-product-details.html">
-                                <img src="img/ph/bun-thang.jpg" alt=""/>
-                            </a>
-                        </div>
-                        <div class="span5 info clearfix">
-                            <h1>Men glass mode 2012</h1>
-
-                            <p>
-                                Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc.
-                                Vestibulum ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia Curae;
-                                Aenean eleifend laoreet congue.
-                            </p>
-                            <hr/>
-                            <div class="row price-wrapper">
-                                <div class="span2 clearfix">
-                                    <a href="7-cart.html" class="add-to-cart">
-                                        <span class="icon ir">Cart</span>
-                                        <span class="text">Add to cart</span>
-                                    </a>
-                                </div>
-                                <div class="span2">
-                        <span class="price">
-                          <span class="value">320.000</span><span class="currency"> đ</span>
-                        </span>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </li>
-
-                <li class="span9">
-                    <div class="row">
-                        <div class="span4 photo-wrapper">
-                            <a href="5-product-details.html">
-                                <img src="img/ph/bun-thang.jpg" alt=""/>
-                            </a>
-                        </div>
-                        <div class="span5 info clearfix">
-                            <h1>Men glass mode 2012</h1>
-
-                            <p>
-                                Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc.
-                                Vestibulum ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia Curae;
-                                Aenean eleifend laoreet congue.
-                            </p>
-                            <hr/>
-                            <div class="row price-wrapper">
-                                <div class="span2 clearfix">
-                                    <a href="7-cart.html" class="add-to-cart">
-                                        <span class="icon ir">Cart</span>
-                                        <span class="text">Add to cart</span>
-                                    </a>
-                                </div>
-                                <div class="span2">
-                        <span class="price">
-                          <span class="value">320.000</span><span class="currency"> đ</span>
-                        </span>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </li>
-
-                <li class="span9">
-                    <div class="row">
-                        <div class="span4 photo-wrapper">
-                            <a href="5-product-details.html">
-                                <img src="img/ph/bun-thang.jpg" alt=""/>
-                            </a>
-                        </div>
-                        <div class="span5 info clearfix">
-                            <h1>Men glass mode 2012</h1>
-
-                            <p>
-                                Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc.
-                                Vestibulum ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia Curae;
-                                Aenean eleifend laoreet congue.
-                            </p>
-                            <hr/>
-                            <div class="row price-wrapper">
-                                <div class="span2 clearfix">
-                                    <a href="7-cart.html" class="add-to-cart">
-                                        <span class="icon ir">Cart</span>
-                                        <span class="text">Add to cart</span>
-                                    </a>
-                                </div>
-                                <div class="span2">
-                        <span class="price">
-                          <span class="value">320.000</span><span class="currency"> đ</span>
-                        </span>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </li>
-
-            </ul>
+            <!--PopularProduct-->
+            <tal:block tal:content="structure php:this.widget('application.widgets.PopularProductWidget',array(),true)"/>
 
         </div>
 
