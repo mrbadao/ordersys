@@ -35,8 +35,6 @@ class CategoryUrlRule extends CBaseUrlRule
     {
         $path = explode('/', Helpers::removeSQLInjectionChar(strtolower(trim($pathInfo, '/'))));
 
-        var_dump($path);die;
-
         if (count($path) < 2) return false;
 
         if ($path[0] != 'danh-muc-san-pham') return false;
