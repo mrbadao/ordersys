@@ -13,15 +13,19 @@ class CategoryUrlRule extends CBaseUrlRule
     public function createUrl($manager, $route, $params, $ampersand)
     {
         if ($route == 'category/default/index') {
+
             $id = isset($params['id']) ? $params['id'] : null;
             $page = isset($params['page']) ? $params['page'] : null;
+
             if (!$id) return false;
-            $cat_name = ContentCategories::model()->findByPk($id)->name;
+            $cat_abbr_cd = ContentCategories::model()->findByPk($id)->abbr_cd;
+
             if (!$page) {
-                $url = 'san-pham/' . Helpers::genUrlfromName(null, $cat_name) . '/';
+                $url = 'danh-muc-san-pham/' . $cat_abbr_cd . '/';
             } else {
-                $url = 'san-pham/' . Helpers::genUrlfromName(null, $cat_name, $page) . '/';
+                $url = 'danh-muc-san-pham/' . $cat_abbr_cd . '/trang-'.$page;
             }
+
             return $url;
         }
         return false;
@@ -30,7 +34,6 @@ class CategoryUrlRule extends CBaseUrlRule
     public function parseUrl($manager, $request, $pathInfo, $rawPathInfo)
     {
         $path = explode('/', Helpers::removeSQLInjectionChar(strtolower(trim($pathInfo, '/'))));
-        var_dump($path);die;
 
         if (count($path) < 2) return false;
 
@@ -44,26 +47,20 @@ class CategoryUrlRule extends CBaseUrlRule
         if($catId == null) return false;
 
         if (!isset($path[2])){
-            return 'category/default/index';
+            return 'category/default/index/id/'.$catId->id;
         }
 
-        $page = substr(strrchr($path[2], '-'), 1, strlen(strrchr($path[1], '-')));
+        if(strpos($path[2],"trang")==0){
+            $page = substr(strrchr($path[2], '-'), 1, strlen(strrchr($path[2], '-')));
+            return 'news/default/index/id/'.$catId->id.'page/'.$page;
+        }else{
+            $producId = Helpers::getIDFromStr($path[2]);
+            $product = ContentProduct::model()->findByPk($producId);
+            if (!$product) return false;
 
-        if (is_numeric($page)) {
-            $path[1] = substr($path[1], 0, strlen($path[1]) - strlen($page) - 1);
+            return 'content/product/id/' . $producId;
         }
 
-
-
-        if (!isset($path[2])) {
-
-            return is_numeric($page) ? 'category/default/index/id/' . $catId->id . '/page/' . $page : 'category/default/index/id/' . $catId->id;
-        }
-
-        $producId = Helpers::getIDFromStr($path[2]);
-        $product = ContentProduct::model()->findByPk($producId);
-        if (!$product) return false;
-
-        return 'content/product/id/' . $producId;
+        return false;
     }
 }

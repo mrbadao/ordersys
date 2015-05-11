@@ -84,6 +84,20 @@ class Helpers {
         return str_replace(array('&','<','>','\\','"',"'",'?','+',';'), '', $str);
     }
 
+    public static function getPageIDFromStr($str){
+        $producId = strrchr($str,'-');
+        return substr(strrchr($str,'-'), 1, strlen($producId) - 6);
+    }
+
+    public static function getIDFromStr($str){
+        return substr($str, 0, strpos($str,'-'));
+    }
+
+    public static function genUrlfromId($id){
+        $cat = ContentCategories::model()->findByPk($id)->name;
+        return self::genUrlfromName(null,$cat);
+    }
+
     public static function getTags($contentid, $relation){
         $c= new CDbCriteria();
         $c->alias ='t';
