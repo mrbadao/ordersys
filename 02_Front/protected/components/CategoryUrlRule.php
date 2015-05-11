@@ -39,8 +39,6 @@ class CategoryUrlRule extends CBaseUrlRule
 
         if ($path[0] != 'danh-muc-san-pham') return false;
 
-
-
         if(!isset($path[1])) return false;
 
         $catId = null;
