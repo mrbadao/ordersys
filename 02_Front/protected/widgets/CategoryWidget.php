@@ -1,6 +1,6 @@
 <?php
 
-class FooterWidget extends CLinkPager {
+class CategoryWidget extends CLinkPager {
 
     public function init() {
 
@@ -11,7 +11,8 @@ class FooterWidget extends CLinkPager {
      * This overrides the parent implementation by displaying the generated page buttons.
      */
     public function run() {
-        $this->render('footer-widget');
+        $items = ContentCategories::model()->findAll();
+        $this->render('category-widget', compact('items'));
     }
 
 }

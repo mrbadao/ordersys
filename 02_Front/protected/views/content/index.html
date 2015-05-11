@@ -8,14 +8,8 @@
                     <h5>Category</h5>
 
                     <hr/>
-
-                    <ul class="category">
-                        <li><a href="#">About us</a></li>
-                        <li><a href="#">Delivery information</a></li>
-                        <li><a href="#">Privacy policy</a></li>
-                        <li><a href="#">Terms &amp; conditions</a></li>
-                        <li><a href="#">Contact us</a></li>
-                    </ul>
+                    <!--Category-->
+                    <tal:block tal:content="structure php:this.widget('application.widgets.CategoryWidget',array(),true)"/>
                 </div>
             </div>
         </aside>
