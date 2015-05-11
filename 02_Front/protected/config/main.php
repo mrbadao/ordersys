@@ -73,10 +73,6 @@ return array(
 			'urlFormat'=>'path',
 			'showScriptName'=>false,
 			'rules'=>array(
-                array(
-                    'class' => 'application.components.CategoryUrlRule',
-                    'connectionID' => 'db',
-                ),
 				'site/<action:\w+>'=> 'site/<action>',
 				'gii'=>'gii',
 				'gii/<controller:\w+>'=>'gii/<controller>',
@@ -84,6 +80,10 @@ return array(
 				'gii/<action:\w+>'=> 'gii/<action>',
 				'<module:\w+>/<action:\w+>'=>'<module>/default/<action>',
 				'<module:\w+>/<controller:\w+>/<action:\w+>'=>'<module>/<controller>/<action>',
+                array(
+                    'class' => 'application.components.CategoryUrlRule',
+                    'connectionID' => 'db',
+                ),
 			),
 		),
 
