@@ -5,25 +5,26 @@
 <!--[if gte IE 9]>         <html class="no-js gte-ie9"> <![endif]-->
 <!--[if gt IE 99]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
     <title>Men Style Shop</title>
-    <meta name="description" content="">
+    <meta name="description" content=""/>
 
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width"/>
 
-    <link rel="stylesheet" href="/site/css/normalize.min.css">
-    <link rel="stylesheet" href="/site/css/main.css">
-    <link rel="stylesheet" href="/site/css/media-queries.css">
-    <link rel="stylesheet" href="/site/css/bootstrap.css">
+    <link rel="stylesheet" href="/site/css/normalize.min.css"/>
+    <link rel="stylesheet" href="/site/css/main.css"/>
+    <link rel="stylesheet" href="/site/css/media-queries.css"/>
+    <link rel="stylesheet" href="/site/css/bootstrap.css"/>
 
     <script src="/site/js/vendor/modernizr-2.6.1.min.js"></script>
 </head>
 
-<body tal:content="structure content">
-
-
+<body>
+    <tal:block tal:content="structure php:this.widget('application.widgets.HeaderWidget',array(),true)"/>
+    <tal:block tal:content="structure content"/>
+    <tal:block tal:content="structure php:this.widget('application.widgets.FooterWidget',array(),true)"/>
 </body>
 
 </html>

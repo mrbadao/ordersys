@@ -16,7 +16,6 @@ class Controller extends CController
 
 	public function init()
 	{
-		$this->userName = Yii::app()->user->getName();
 		$this->setTitle(Yii::app()->params['appName']);
 		$m = $this->getModule();
 		$this->viewPath = (isset($m))?$m->getViewPath():Yii::app()->getViewPath();
