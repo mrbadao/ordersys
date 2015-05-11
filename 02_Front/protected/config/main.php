@@ -73,6 +73,10 @@ return array(
 			'urlFormat'=>'path',
 			'showScriptName'=>false,
 			'rules'=>array(
+                array(
+                    'class' => 'application.components.CategoryUrlRule',
+                    'connectionID' => 'db',
+                ),
 				'site/<action:\w+>'=> 'site/<action>',
 				'gii'=>'gii',
 				'gii/<controller:\w+>'=>'gii/<controller>',
