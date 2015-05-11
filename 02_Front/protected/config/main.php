@@ -73,7 +73,7 @@ return array(
 			'urlFormat'=>'path',
 			'showScriptName'=>false,
 			'rules'=>array(
-				'content/<action:\w+>'=> 'site/<action>',
+				'content/<action:\w+>'=> 'content/<action>',
                 array(
                     'class' => 'application.components.CategoryUrlRule',
                     'connectionID' => 'db',

@@ -10,52 +10,29 @@
  *
  * @author Administrator
  */
-class Helpers {
-    
+class Helpers
+{
+
     /**
-     * 
+     *
      */
-    public static function getRole(){
-        $id = Yii::app()->user->id;
-        if(!isset($id))
-            Yii::app()->request->redirect('/admin/site/logout');
-        $staff = User::model()->findByPk($id);
-        if(!isset($staff))
-            Yii::app()->request->redirect('/admin/site/logout');
-
-        return $staff->is_super;
-    }
-
-    public static function checkAccessRule($options = null, $param = null){
-        $errMes = 'Bạn không có quyền thực hiện hành động này.';
-        $id = Yii::app()->user->id;
-        if(!isset($id))
-            Yii::app()->request->redirect('/admin/site/logout');
-
-        $staff = User::model()->findByPk($id);
-
-        if(!isset($staff))
-            Yii::app()->request->redirect('/admin/site/logout');
-
-        if(!in_array( $staff->is_super, $param, true)){
-            throw new CHttpException(403, $errMes);
-        }
-    }
-
-    public static function getFirstImg($contentHTML){
+    public static function getFirstImg($contentHTML)
+    {
         $image = '';
         preg_match('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $contentHTML, $image);
-        return ($image != null) ? $image[1] : substr(Yii::app()->request->getBaseUrl(true),0,-5).'upload/images/no_img.jpg';
+        return ($image != null) ? $image[1] : substr(Yii::app()->request->getBaseUrl(true), 0, -5) . 'upload/images/no_img.jpg';
     }
 
-    public static function getNumChars($contentHTML, $num){
+    public static function getNumChars($contentHTML, $num)
+    {
         $contentHTML = strip_tags($contentHTML);
         $worldList = array_slice(explode(' ', $contentHTML), 0, $num - 1);
-        return (implode($worldList) != '') ? implode(' ',$worldList).' ...' : '';
+        return (implode($worldList) != '') ? implode(' ', $worldList) . ' ...' : '';
     }
 
-    public static function getTagDomain($str){
-        $str = trim($str,'/');
+    public static function getTagDomain($str)
+    {
+        $str = trim($str, '/');
         $str = trim($str);
         $str = strtolower($str);
         $str = preg_replace("/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|� �|ặ|ẳ|ẵ)/", 'a', $str);
@@ -73,98 +50,35 @@ class Helpers {
         $str = preg_replace("/(Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ)/", 'U', $str);
         $str = preg_replace("/(Ỳ|Ý|Ỵ|Ỷ|Ỹ)/", 'Y', $str);
         $str = preg_replace("/(Đ)/", 'D', $str);
-        $str = str_replace(" ", "-", str_replace("&*#39;","",$str));
+        $str = str_replace(" ", "-", str_replace("&*#39;", "", $str));
         $str = preg_replace('!\-+!', '-', $str);
         return $str;
     }
 
-    public static function removeSQLInjectionChar($str){
-        $str = trim($str,'/');
+    public static function removeSQLInjectionChar($str)
+    {
+        $str = trim($str, '/');
         $str = trim($str);
-        return str_replace(array('&','<','>','\\','"',"'",'?','+',';'), '', $str);
+        return str_replace(array('&', '<', '>', '\\', '"', "'", '?', '+', ';'), '', $str);
     }
 
-    public static function getPageIDFromStr($str){
-        $producId = strrchr($str,'-');
-        return substr(strrchr($str,'-'), 1, strlen($producId) - 6);
+    public static function getPageIDFromStr($str)
+    {
+        $producId = strrchr($str, '-');
+        return substr(strrchr($str, '-'), 1, strlen($producId) - 6);
     }
 
-    public static function getIDFromStr($str){
-        return substr($str, 0, strpos($str,'-'));
+    public static function getIDFromStr($str)
+    {
+        return substr($str, 0, strpos($str, '-'));
     }
 
-    public static function genUrlfromId($id){
+    public static function genUrlfromId($id)
+    {
         $cat = ContentCategories::model()->findByPk($id)->name;
-        return self::genUrlfromName(null,$cat);
+        return self::genUrlfromName(null, $cat);
     }
 
-    public static function getTags($contentid, $relation){
-        $c= new CDbCriteria();
-        $c->alias ='t';
-        $c->join = 'INNER JOIN tag_relation AS s ON s.tag_id = t.id';
-        $c->addCondition('s.content_id = '.$contentid, 'AND');
-        $c->addCondition('s.relation = "'.$relation.'"', 'AND');
-
-        $ContentTags = ContentTag::model()->findAll($c);
-
-        if($ContentTags){
-            $tags = '';
-            foreach($ContentTags as $tag){
-                $tags .= $tag->name.'; ';
-            }
-            return $tags;
-        }
-
-        return null;
-    }
-
-    public static function deleteTags($contentid, $relation){
-        $contentTags = TagRelation::model()->findAllByAttributes(array('content_id' => $contentid, 'relation' => $relation));
-        foreach($contentTags as $rtag){
-            $tag = ContentTag::model()->findByPk($rtag->tag_id);
-            $tag->use_frequency -= 1;
-            $tag->modified = date("Y-m-d H:m:i");
-            $tag->save(false);
-            $rtag->delete();
-        }
-    }
-
-    public static  function saveTag($tagName, $contentid, $relation){
-        if(!$tagName) return;
-
-        $tagDomain = self::getTagDomain($tagName);
-
-        $tag = ContentTag::model()->findByAttributes(array('abbr_cd' => $tagDomain));
-
-        if($tag == null) $tag = new ContentTag();
-
-        $tag->name = $tagName;
-        $tag->abbr_cd = $tagDomain;
-
-        if($tag->isNewRecord){
-            $tag->created = date("Y-m-d H:m:i");
-            $tag->use_frequency = 1;
-        } else { $tag->use_frequency += 1; }
-
-        $tag->modified = date("Y-m-d H:m:i");
-
-        if($tag->validate()){
-            $tag->save(false);
-            $tagRelation = TagRelation::model()->findByAttributes(array('tag_id' =>$tag->id,
-                                                                        'relation' => $relation,
-                                                                        'content_id' => $contentid
-                                                                 ));
-            if($tagRelation == null){
-                $tagRelation = new TagRelation();
-                $tagRelation->tag_id = $tag->id;
-                $tagRelation->relation = $relation;
-                $tagRelation->content_id = $contentid;
-                $tagRelation->created = date("Y-m-d H:m:i");
-                $tagRelation->modified =date("Y-m-d H:m:i");
-                $tagRelation->save(false);
-            }
-        }
-    }
 }
 
 ?>
