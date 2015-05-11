@@ -78,6 +78,12 @@ class Helpers {
         return $str;
     }
 
+    public static function removeSQLInjectionChar($str){
+        $str = trim($str,'/');
+        $str = trim($str);
+        return str_replace(array('&','<','>','\\','"',"'",'?','+',';'), '', $str);
+    }
+
     public static function getTags($contentid, $relation){
         $c= new CDbCriteria();
         $c->alias ='t';

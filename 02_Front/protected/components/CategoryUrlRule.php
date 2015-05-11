@@ -36,13 +36,24 @@ class CategoryUrlRule extends CBaseUrlRule
 
         if ($path[0] != 'danh-muc-san-pham') return false;
 
-        $page = substr(strrchr($path[1], '-'), 1, strlen(strrchr($path[1], '-')));
+        if(!isset($path[1])) return false;
+
+        $catId = null;
+        $catId = ContentCategories::model()->findByAttributes(array('abbr_cd' => $path[1]));
+
+        if($catId == null) return false;
+
+        if (!isset($path[2])){
+            return 'category/default/index';
+        }
+
+        $page = substr(strrchr($path[2], '-'), 1, strlen(strrchr($path[1], '-')));
 
         if (is_numeric($page)) {
             $path[1] = substr($path[1], 0, strlen($path[1]) - strlen($page) - 1);
         }
 
-        $catId = ContentCategories::model()->findByAttributes(array('abbr_cd' => $path[1]));
+
 
         if (!isset($path[2])) {
 
