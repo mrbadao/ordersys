@@ -20,7 +20,15 @@
             </div>
 
             <div class="products-view-nav row" style="margin-left:0px;">
-                <h5 style="margin: 3px;">Category</h5>
+                <h5 style="margin: 3px;">Sản phẩm mới</h5>
+                <hr style="margin: 0.4em 0px;"/>
+            </div>
+
+            <!--NewProduct-->
+            <tal:block tal:content="structure php:this.widget('application.widgets.PopularProductWidget',array(),true)"/>
+
+            <div class="products-view-nav row" style="margin-left:0px;">
+                <h5 style="margin: 3px;">Sản phẩm hot</h5>
                 <hr style="margin: 0.4em 0px;"/>
             </div>
 

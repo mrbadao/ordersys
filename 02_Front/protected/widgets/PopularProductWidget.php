@@ -14,7 +14,7 @@ class PopularProductWidget extends CLinkPager {
         $query =' SELECT `order_relation`.`product_id` AS `id` , `content_product`.`name` , `content_product`.`thumbnail` , `content_product`.`description` , `content_product`.`price` , `content_product`.`category_id` , `content_product`.`created` , `content_product`.`modified`'.
             ' FROM `order_relation`'.
             ' JOIN `content_product` ON `content_product`.`id` = `order_relation`.`product_id`'.
-            ' WHERE 1'.
+            ' WHERE del_flg = 0 '.
             ' GROUP BY `product_id`'.
             ' ORDER BY Count( * ) DESC'.
             ' LIMIT 0, 5;';
