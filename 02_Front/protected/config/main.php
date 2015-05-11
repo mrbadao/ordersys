@@ -73,13 +73,7 @@ return array(
 			'urlFormat'=>'path',
 			'showScriptName'=>false,
 			'rules'=>array(
-				'site/<action:\w+>'=> 'site/<action>',
-				'gii'=>'gii',
-				'gii/<controller:\w+>'=>'gii/<controller>',
-				'gii/<controller:\w+>/<action:\w+>'=>'gii/<controller>/<action>',
-				'gii/<action:\w+>'=> 'gii/<action>',
-				'<module:\w+>/<action:\w+>'=>'<module>/default/<action>',
-				'<module:\w+>/<controller:\w+>/<action:\w+>'=>'<module>/<controller>/<action>',
+				'content/<action:\w+>'=> 'site/<action>',
                 array(
                     'class' => 'application.components.CategoryUrlRule',
                     'connectionID' => 'db',
