@@ -25,25 +25,25 @@ return array(
 	'modules'=>array(
 		// uncomment the following to enable the Gii tool
 
-		'gii'=>array(
-			'class'=>'system.gii.GiiModule',
-			'password'=>'1',
-			// If removed, Gii defaults to localhost only. Edit carefully to taste.
-			'ipFilters'=>array('127.0.0.1', '118.69.13.44','::1'),
-		),
+//		'gii'=>array(
+//			'class'=>'system.gii.GiiModule',
+//			'password'=>'1',
+//			// If removed, Gii defaults to localhost only. Edit carefully to taste.
+//			'ipFilters'=>array('127.0.0.1', '118.69.13.44','::1'),
+//		),
 
 		'category',
-		'product',
+//		'product',
 
 	),
 
 	// application components
 	'components'=>array(
 
-		'user'=>array(
-			// enable cookie-based authentication
-			'allowAutoLogin'=>true,
-		),
+//		'user'=>array(
+//			// enable cookie-based authentication
+//			'allowAutoLogin'=>true,
+//		),
 
 		'viewRenderer'=>array(
 			'class'=>'ext.PHPTALViewRenderer',
@@ -88,7 +88,7 @@ return array(
 
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
-			'errorAction'=>'site/error',
+			'errorAction'=>'content/error',
 		),
 
 		'log'=>array(
