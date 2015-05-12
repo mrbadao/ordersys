@@ -289,7 +289,7 @@ class NaviBar extends CWidget
         if (isset($item['id'])) {
             if(strpos($route, trim($item['id'], '/')) > -1)
                 return true;
-            elseif(isset($this->defaultActiveID) && strpos($route, trim(defaultActiveID, '/')) > -1) return true;
+            elseif(isset($this->defaultActiveID) && $item['id'] == $this->defaultActiveID) return true;
         }
         return false;
     }
