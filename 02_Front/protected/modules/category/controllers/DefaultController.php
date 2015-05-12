@@ -3,7 +3,7 @@
 class DefaultController extends Controller
 {
 	const SESS_KEY = '_CATEGORIES';
-	const LIMIT = 1;
+	const LIMIT = 10;
 
 	public function actionIndex()
     {

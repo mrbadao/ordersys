@@ -52,7 +52,7 @@ class CategoryUrlRule extends CBaseUrlRule
 
         if(strpos($path[2],"trang")==0){
             $page = substr(strrchr($path[2], '-'), 1, strlen(strrchr($path[2], '-')));
-            return 'news/default/index/id/'.$catId->id.'page/'.$page;
+            return 'category/default/index/id/'.$catId->id.'/page/'.$page;
         }else{
             $producId = Helpers::getIDFromStr($path[2]);
             $product = ContentProduct::model()->findByPk($producId);

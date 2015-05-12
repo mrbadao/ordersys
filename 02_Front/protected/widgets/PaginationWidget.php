@@ -168,17 +168,17 @@ class PaginationWidget extends CLinkPager {
         }
 
         if ($page == ($firstPage + 1) && $currentPage > ($firstPage + 3) && $this->getPageCount() > 7) {
-            return '<li>' . CHtml::link($label, $this->createPageUrl($page)) . '</li><li><a class="'.$class.'">...</a></li>';
+            return '<li>' . CHtml::link($label, $this->createPageUrl($page), array("class" => $class)) . '</li><li><a class="'.$class.'">...</a></li>';
         }
 
         if ($page == ($lastPage - 2) && ($currentPage < $lastPage - 4) && $this->getPageCount() > 7) {
-            return '<li><span class="skip-marker">...</span></li><li>' . CHtml::link($label, $this->createPageUrl($page)) . '</li>';
+            return '<li><a class="'.$class.'">...</a></li><li>' . CHtml::link($label, $this->createPageUrl($page),array("class" => $class)) . '</li>';
         }
 
         if ($selected)
-            return '<li class="' . $class . '"><strong>' . $label . '</strong></li>';
+            return '<li class="' . $class . '"><a href="javascript:void(0)">' . $label . '</a></li>';
 
-        return '<li>' . CHtml::link($label, $this->createPageUrl($page)) . '</li>';
+        return '<li>' . CHtml::link($label, $this->createPageUrl($page),array("class" => $class)) . '</li>';
     }
 
     /**
