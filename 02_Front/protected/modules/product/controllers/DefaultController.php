@@ -8,6 +8,10 @@ class DefaultController extends Controller
 	public function actionIndex()
 	{
 		$id = isset($_GET['id']) ? $_GET['id'] : null;
-        $this->render('index');
+        $item = ContentProduct::model()->findByAttributes(array('id' => $id, 'del_flg' => '0'));
+
+        if($item == null) throw new CHttpException(404,"Page not found.");
+
+        $this->render('index',compact('item'));
 	}
 }

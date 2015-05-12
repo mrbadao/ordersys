@@ -12,15 +12,15 @@
                 <div class="span6 gallery" style="margin-bottom: 10px;">
                     <div class="gallery-sub-wrap clearfix">
 
-                        <img src="img/ph/bun-thang.jpg" alt="" style="width: 100%;"/>
+                        <img src="${item/thumbnail}" alt="${item/name}" style="width: 100%;"/>
 
                     </div>
                 </div>
 
                 <div class="span6 product">
-                    <h1>Green camouflage utility</h1>
+                    <h1>${item/name}</h1>
                   <span class="price">
-                      <span class="value">Giá: 320.000</span><span class="currency"> đ</span>
+                      <span class="value">Giá: <tal:block tal:content="php: number_format(item['price'])"/></span><span class="currency">đ</span>
                     </span>
 
                     <hr/>
@@ -29,9 +29,9 @@
                     <ul class="rr clearfix buy-wrapper">
                         <li class="clearfix quantity">
 
-                            <div class="info-title">Quantity:</div>
+                            <div class="info-title">Số lượng:</div>
                             <div class="f-select-wrapper fl">
-                                <div id="current-quantity" class="current" class="clearfix">
+                                <div id="current-quantity" class="current clearfix">
                                     <div class="value">2</div>
                                     <div class="button gradient">
                                         <span class="arrow ir">Open</span>
@@ -43,6 +43,12 @@
                                     <option selected="selected">2</option>
                                     <option>3</option>
                                     <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
                                 </select>
                             </div>
 
@@ -50,8 +56,8 @@
                         <li>
 
                             <a href="#" class="add-to-cart clearfix">
-                                <span class="icon ir">Cart</span>
-                                <span class="text">Add to cart</span>
+                                <span class="icon ir">Giỏ</span>
+                                <span class="text">Thêm vào giỏ</span>
                             </a>
 
                         </li>
@@ -60,7 +66,7 @@
                     <div class="share-product">
                         <!-- AddThis Button BEGIN -->
                         <div class="addthis_toolbox addthis_default_style ">
-                            <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+                            <a class="addthis_button_facebook_like"></a>
                             <a class="addthis_button_tweet"></a>
                             <a class="addthis_button_pinterest_pinit"></a>
                             <a class="addthis_counter addthis_pill_style"></a>
@@ -79,32 +85,12 @@
             <div class="prod-info clearfix">
                 <div class="tabs">
                     <ul class="tabs rr clearfix">
-                        <li class="current" id="tab-1">Product info</li>
+                        <li class="current" id="tab-1">Miêu tả</li>
                     </ul>
                 </div>
                 <ul class="rr content">
                     <li class="current tab-1">
-                        <p>
-                            Product Code:255129827
-                        </p>
-
-                        <p>
-                            Donec a neque libero. Pellentesque aliquet, sem eget laoreet ultrices, ipsum metus feugiat
-                            sem, quis fermentum turpis eros eget velit. Donec ac tempus ante. Fusce ultricies massa
-                            massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed
-                            commodo augue nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                            tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in accumsan elit odio quis
-                            mi. Cras neque metus, consequat et blandit et, luctus a nunc. Etiam gravida vehicula tellus,
-                            in imperdiet ligula euismod eget. Pellentesque habitant morbi tristique senectus et netus et
-                            malesuada fames ac turpis egestas. Nam erat mi, rutrum at sollicitudin rhoncus, ultricies
-                            posuere erat. Duis convallis, arcu nec aliquam consequat, purus felis vehicula felis, a
-                            dapibus enim lorem nec augue. Nunc facilisis sagittis ullamcorper. Proin lectus ipsum,
-                            gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum
-                            primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet
-                            congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt.
-                            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                            Integer enim purus, posuere at ultricies eu, placerat a felis.
-                        </p>
+                        <tal:block tal:content="structure ${item/description|''}"/>
                     </li>
                 </ul>
             </div>
@@ -117,7 +103,7 @@
     <div class="row top-spacing">
         <div class="span12 main-heading">
             <div class="span12" style="position: relative; margin-left: 0;">
-                <h1 style="text-align: left;">Other products</h1>
+                <h1 style="text-align: left;">Sản phẩm khác</h1>
                 <hr/>
             </div>
         </div>
