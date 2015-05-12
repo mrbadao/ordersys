@@ -7,13 +7,13 @@ class DefaultController extends Controller
 
 	public function actionIndex()
     {
-        $cat_name = null;
+        $category = null;
         $this->layout = "main";
 
         $id = isset($_GET['id']) ? $_GET['id'] : null;
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
 
-        $cat_name = ContentCategories::model()->findByPk($id);
+        $category = ContentCategories::model()->findByPk($id);
 
         if($cat_name == null) throw new CHttpException(404,'Url Site not exits');
 
@@ -33,6 +33,6 @@ class DefaultController extends Controller
         $pages->pageSize = $c->limit;
         $pages->applyLimit($c);
 
-        $this->render('index', compact('items', 'pages', 'cat_name'));
+        $this->render('index', compact('items', 'pages', 'category'));
     }
 }
