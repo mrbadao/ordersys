@@ -15,6 +15,8 @@ class ContentUrlRule extends CBaseUrlRule
         switch($route){
             case 'content/about';
                 return 'gioi-thieu.html';
+            case 'category/default/search';
+                return 'tim-kiem.html';
             case 'content/about/deliveryinfo';
                 return 'thong-tin-giao-hang.html';
             case 'content/contact';
@@ -33,6 +35,8 @@ class ContentUrlRule extends CBaseUrlRule
         switch($path[0]){
             case 'gioi-thieu.html';
                 return '/content/about';
+            case 'tim-kiem.html';
+                return 'category/default/search';
             case 'thong-tin-giao-hang.html';
                 return '/content/about/deliveryinfo';
             case 'lien-he.html';

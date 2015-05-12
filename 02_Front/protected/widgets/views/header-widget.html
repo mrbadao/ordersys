@@ -52,7 +52,9 @@
             <tal:block tal:content="structure php:this.widget('application.widgets.NaviBar',menu,true)"/>
         </div>
         <div class="span3">
-            <input type="text" class="search-box" placeholder="Search..." value=""/>
+            <form method="post" action="/site/tim-kiem.html">
+                <input type="text" class="search-box" placeholder="Tìm kiếm sản phẩm..." value=""/>
+            </form>
         </div>
     </div>
 </header>
