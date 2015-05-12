@@ -221,3 +221,20 @@ function checkSearchKey(){
     if(searchKey.length < 1) return false;
     return true;
 }
+
+function addCart(product_id, qty){
+    var formData = new FormData();
+    formData.append('id', product_id);
+    $.ajax({
+        url: "/site/cart/default/additem",
+        type: "POST",
+        data: formData,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (data)
+        {
+            alert(data);
+        }
+    });
+}
