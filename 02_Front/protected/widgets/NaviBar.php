@@ -151,11 +151,9 @@ class NaviBar extends CWidget
     {
         if(count($items))
         {
-            echo '<div class="row main-menu-wrapper"><div class="span9">';
             echo CHtml::openTag('ul',$this->htmlOptions)."\n";
             $this->renderMenuRecursive($items);
             echo CHtml::closeTag('ul');
-            echo '</div></div>';
         }
     }
 
@@ -172,6 +170,7 @@ class NaviBar extends CWidget
             $count++;
             $options=isset($item['itemOptions']) ? $item['itemOptions'] : array();
             $class=array();
+
             if($item['active'] && $this->activeCssClass!='')
                 $class[]=$this->activeCssClass;
             if($count===1 && $this->firstItemCssClass!==null)

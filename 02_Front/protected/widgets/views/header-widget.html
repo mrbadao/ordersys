@@ -45,7 +45,14 @@
         </div>
 
     </div>
-    <tal:block tal:content="structure php:this.widget('application.widgets.NaviBar',this.menu,true)"/>
+
+    <!--navi bar-->
+    <div class="row main-menu-wrapper">
+        <div class="span9">
+            <tal:block tal:content="structure php:this.widget('application.widgets.NaviBar',menu,true)"/>
+        </div>
+    </div>
+
     <div class="row main-menu-wrapper">
 
         <div class="span9">

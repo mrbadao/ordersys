@@ -24,7 +24,7 @@
 </head>
 
 <body>
-    <tal:block tal:content="structure php:this.widget('application.widgets.HeaderWidget',this.menu,true)"/>
+    <tal:block tal:content="structure php:this.widget('application.widgets.HeaderWidget',array(),true)"/>
     <tal:block tal:content="structure content"/>
     <tal:block tal:content="structure php:this.widget('application.widgets.FooterWidget',array(),true)"/>
 </body>
