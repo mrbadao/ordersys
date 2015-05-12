@@ -12,6 +12,8 @@ class DefaultController extends Controller
 
         if($item == null) throw new CHttpException(404,"Page not found.");
 
+        $this->setTitle($item->name.' | '.Yii::app()->params['appName']);
+
         $c = new CDbCriteria();
         $c->order = " id DESC";
         $c->offset = 0;
