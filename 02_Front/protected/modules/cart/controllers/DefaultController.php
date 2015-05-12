@@ -4,11 +4,12 @@ class DefaultController extends Controller
 {
     public function actionIndex()
     {
-        $this->render('index');
+        throw new CHttpException(404,'Page not exists.');
     }
 
     public function actionAddItem()
     {
+        if(!Yii::app()->request->isAjaxRequest) throw new CHttpException(404,'Page not exists.');
         var_dump('dadadd');
     }
 }
