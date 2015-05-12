@@ -15,7 +15,7 @@ class DefaultController extends Controller
 
         $category = ContentCategories::model()->findByPk($id);
 
-        if($cat_name == null) throw new CHttpException(404,'Url Site not exits');
+        if($category == null) throw new CHttpException(404,'Url Site not exits');
 
         $c = new CDbCriteria();
         $c->order = "id DESC";
