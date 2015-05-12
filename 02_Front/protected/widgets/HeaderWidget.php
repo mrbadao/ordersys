@@ -1,6 +1,7 @@
 <?php
 
 class HeaderWidget extends CLinkPager {
+    public $menu = array();
 
     public function init() {
 
