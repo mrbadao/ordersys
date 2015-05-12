@@ -25,7 +25,7 @@ class Helpers
 
     public static function getNumChars($contentHTML, $num)
     {
-        $contentHTML = strip_tags($contentHTML);
+        $contentHTML = html_entity_decode(strip_tags($contentHTML));
         $worldList = array_slice(explode(' ', $contentHTML), 0, $num - 1);
         return (implode($worldList) != '') ? implode(' ', $worldList) . ' ...' : '';
     }
