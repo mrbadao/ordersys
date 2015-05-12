@@ -43,6 +43,7 @@
 class NaviBar extends CWidget
 {
     public $items=array();
+    public $defaultActiveID;
     /**
      * @var string the template used to render an individual menu item. In this template,
      * the token "{menu}" will be replaced with the corresponding menu link or text.
@@ -187,9 +188,9 @@ class NaviBar extends CWidget
                     $options['class'].=' '.implode(' ',$class);
             }
 
-            echo CHtml::openTag('li', $options);
+            echo CHtml::openTag('li');
 
-            $menu=$this->renderMenuItem($item);
+            $menu=$this->renderMenuItem($item,$options);
             if(isset($this->itemTemplate) || isset($item['template']))
             {
                 $template=isset($item['template']) ? $item['template'] : $this->itemTemplate;
@@ -216,15 +217,15 @@ class NaviBar extends CWidget
      * @return string
      * @since 1.1.6
      */
-    protected function renderMenuItem($item)
+    protected function renderMenuItem($item, $options)
     {
         if(isset($item['url']))
         {
             $label=$this->linkLabelWrapper===null ? $item['label'] : CHtml::tag($this->linkLabelWrapper, $this->linkLabelWrapperHtmlOptions, $item['label']);
-            return CHtml::link($label,$item['url'],isset($item['linkOptions']) ? $item['linkOptions'] : array());
+            return CHtml::link($label,$item['url'],isset($options) ? $options : array());
         }
         else
-            return CHtml::tag('span',isset($item['linkOptions']) ? $item['linkOptions'] : array(), $item['label']);
+            return CHtml::tag('span',isset($options) ? $options : array(), $item['label']);
     }
 
     /**
@@ -288,6 +289,7 @@ class NaviBar extends CWidget
         if (isset($item['id'])) {
             if(strpos($route, trim($item['id'], '/')) > -1)
                 return true;
+            elseif(isset($this->defaultActiveID) && strpos($route, trim(defaultActiveID, '/')) > -1) return true;
         }
         return false;
     }

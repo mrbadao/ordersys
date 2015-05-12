@@ -12,6 +12,7 @@ class HeaderWidget extends CLinkPager {
         );
 
         $this->menu['activeCssClass'] = 'current';
+        $this->menu['$defaultActiveID'] = '/content/index';
         $this->menu['htmlOptions'] = array('id' => 'main-menu', 'class' => 'main-menu clearfix rr');
     }
 
