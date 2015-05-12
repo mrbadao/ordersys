@@ -10,6 +10,10 @@ class DefaultController extends Controller
     public function actionAddItem()
     {
         if(!Yii::app()->request->isAjaxRequest) throw new CHttpException(404,'Page not exists.');
-        var_dump('dadadd');
+
+        $id = isset($_POST['pid']) ? $_POST['pid'] : null;
+        $qty = isset($_POST['qty']) ? $_POST['qty'] : null;
+
+        echo $id.$qty;
     }
 }

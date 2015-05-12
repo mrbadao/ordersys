@@ -224,7 +224,8 @@ function checkSearchKey(){
 
 function addCart(product_id, qty){
     var formData = new FormData();
-    formData.append('id', product_id);
+    formData.append('pid', product_id);
+    formData.append('qty', qty);
     $.ajax({
         url: "/site/cart/default/additem",
         type: "POST",
