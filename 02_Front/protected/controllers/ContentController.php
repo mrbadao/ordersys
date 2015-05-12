@@ -30,4 +30,8 @@ class ContentController extends Controller
 	{
 		$this->render('index');
 	}
+
+    public function actionError(){
+
+    }
 }
