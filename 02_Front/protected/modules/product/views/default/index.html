@@ -1,83 +1,192 @@
-<h1>Quản lí sản phẩm</h1>
-<article>
-    <p>Để tìm sản phẩm. Nhập các tiêu chí tìm kiếm, vui lòng click vào nút Search.</p>
-</article>
+<div class="container breadcrumb-wrapper">
+    <div class="row">
+        <div class="span12 breadcrumb" metal:use-macro="${this/viewPath}/${this/id}/breadcrumb.html/${this/action/id}"></div>
+    </div>
+</div>
 
-<form name="frmSearch" action="/admin/product/search" method="post">
-    <div class="mBoxitem_table">
-        <table class="tableTate" cellspacing="0" cellpadding="0" border="0">
-            <tr>
-                <th>Tên</th>
-                <td><input  value="${search/name|''}" name="search[name]" class="txtbox" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 300px;"/></td>
-            </tr>
-            <tr>
-                <th>Category</th>
-                <td>
-                    <select name="search[category_id]">
-                        <option value="">Chọn danh mục</option>
-                        <option tal:repeat="cat catItems" tal:attributes="selected php:cat['id'] == search['category_id'] ? 'selected' :'' " value="${cat/id}">${cat/name}</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <th>Tình trạng</th>
-                <td>
-                    <select name="search[del_flg]">
-                        <option value="">Chọn danh mục</option>
-                        <option value="0" tal:attributes="selected php:'0' == search['del_flg'] ? 'selected' :'' ">Đang bán</option>
-                        <option value="1" tal:attributes="selected php:'1' == search['del_flg'] ? 'selected' :'' ">Ngừng bán</option>
-                    </select>
-                </td>
-            </tr>
-        </table>
-        <div class="BtnArea" style="text-align: center !important;">
-            <input class="btnMiddle themeNormal" type="submit" title="Search" value="Search"/>
+<div role="main" class="container product-details">
+    <div class="row">
+
+        <div class="span12">
+            <div class="row">
+                <div class="span6 gallery" style="margin-bottom: 10px;">
+                    <div class="gallery-sub-wrap clearfix">
+
+                        <img src="img/ph/bun-thang.jpg" alt="" style="width: 100%;"/>
+
+                    </div>
+                </div>
+
+                <div class="span6 product">
+                    <h1>Green camouflage utility</h1>
+                  <span class="price">
+                      <span class="value">Giá: 320.000</span><span class="currency"> đ</span>
+                    </span>
+
+                    <hr/>
+
+
+                    <ul class="rr clearfix buy-wrapper">
+                        <li class="clearfix quantity">
+
+                            <div class="info-title">Quantity:</div>
+                            <div class="f-select-wrapper fl">
+                                <div id="current-quantity" class="current" class="clearfix">
+                                    <div class="value">2</div>
+                                    <div class="button gradient">
+                                        <span class="arrow ir">Open</span>
+                                    </div>
+                                </div>
+
+                                <select id="main-quantity" class="main">
+                                    <option>1</option>
+                                    <option selected="selected">2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                </select>
+                            </div>
+
+                        </li>
+                        <li>
+
+                            <a href="#" class="add-to-cart clearfix">
+                                <span class="icon ir">Cart</span>
+                                <span class="text">Add to cart</span>
+                            </a>
+
+                        </li>
+                    </ul>
+
+                    <div class="share-product">
+                        <!-- AddThis Button BEGIN -->
+                        <div class="addthis_toolbox addthis_default_style ">
+                            <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+                            <a class="addthis_button_tweet"></a>
+                            <a class="addthis_button_pinterest_pinit"></a>
+                            <a class="addthis_counter addthis_pill_style"></a>
+                        </div>
+                        <script type="text/javascript"
+                                src="../../../s7.addthis.com/js/300/addthis_widget.js#pubid=xa-508f0d4568c64922"></script>
+                        <!-- AddThis Button END -->
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr/>
+
+            <div class="prod-info clearfix">
+                <div class="tabs">
+                    <ul class="tabs rr clearfix">
+                        <li class="current" id="tab-1">Product info</li>
+                    </ul>
+                </div>
+                <ul class="rr content">
+                    <li class="current tab-1">
+                        <p>
+                            Product Code:255129827
+                        </p>
+
+                        <p>
+                            Donec a neque libero. Pellentesque aliquet, sem eget laoreet ultrices, ipsum metus feugiat
+                            sem, quis fermentum turpis eros eget velit. Donec ac tempus ante. Fusce ultricies massa
+                            massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed
+                            commodo augue nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                            tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in accumsan elit odio quis
+                            mi. Cras neque metus, consequat et blandit et, luctus a nunc. Etiam gravida vehicula tellus,
+                            in imperdiet ligula euismod eget. Pellentesque habitant morbi tristique senectus et netus et
+                            malesuada fames ac turpis egestas. Nam erat mi, rutrum at sollicitudin rhoncus, ultricies
+                            posuere erat. Duis convallis, arcu nec aliquam consequat, purus felis vehicula felis, a
+                            dapibus enim lorem nec augue. Nunc facilisis sagittis ullamcorper. Proin lectus ipsum,
+                            gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum
+                            primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet
+                            congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt.
+                            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                            Integer enim purus, posuere at ultricies eu, placerat a felis.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+
+
+    </div>
+    <div class="row top-spacing">
+        <div class="span12 main-heading">
+            <div class="span12" style="position: relative; margin-left: 0;">
+                <h1 style="text-align: left;">Other products</h1>
+                <hr/>
+            </div>
         </div>
     </div>
-</form>
 
-<form method="post" action="./" name="form">
-    <p class="centering txtWarning" tal:condition="nodata">Không tồn tại thông tin.</p>
-    <div class="mBoxitem_table">
-        <div class="mBoxitem_listinfo">
-            <p class="pageList_data"><strong>Số lượng tin：</strong>${count}</p>
-        </div>
-
-        <div class="mBoxitem_listinfo">
-            <div tal:replace="structure php:this.widget('PaginationWidget',array('pages'=>pages),true)"></div>
-            <ul class="pageList_link" tal:replace="">
-                <li><a href="javascript:void(0);">≪</a></li>
-                <li><a href="javascript:void(0);">&lt;</a></li>
-                <li><a href="javascript:void(0);">1</a></li>
-                <li><a href="javascript:void(0);">2</a></li>
-                <li><strong>3</strong></li>
-                <li><a href="javascript:void(0);">4</a></li>
-                <li><a href="javascript:void(0);">5</a></li>
-                <li><a href="javascript:void(0);">&gt;</a></li>
-                <li><a href="javascript:void(0);">≫</a></li>
-            </ul>
-        </div>
-
-        <table cellpadding="0" cellspacing="0" border="0" class="tableYoko">
-            <thead>
-                <tr>
-                    <th>Tên sản phẩm</th>
-                    <th class="thYokoM">Category</th>
-                    <th class="thYokoM">Tình trạng</th>
-                    <th class="thYokoM">Ngày đăng</th>
-                    <th class="thYokoM">Ngày sữa</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tr tal:repeat="item items">
-                <td tal:content="item/name"></td>
-                <td tal:content="item/cat_name"></td>
-                <td tal:condition="php:item['del_flg'] == '0'"> Đang bán</td>
-                <td tal:condition="php:item['del_flg'] == '1'"> Ngừng bán</td>
-                <td><span tal:condition="exists:item/created" tal:content="dateformat:item/created">2012/04/13 23:00</span></td>
-                <td><span tal:condition="exists:item/modified" tal:content="dateformat:item/modified">2012/04/13 23:00</span></td>
-                <td class="tdYoko_btn_s1"><a href="/admin/product/view?id=${item/id}" class="btnTable themeNormal">Chi tiết</a></td>
-            </tr>
-        </table>
+    <div id="other-prod-slider">
+        <ul class="row-fluid clearfix rr other-products">
+            <li class="span3 alpha25">
+                <a href="5-product-details.html">
+                    <img src="img/ph/bun-thang.jpg" alt=""/>
+                </a>
+              <span class="info">
+                <span class="title">Men glass mode 2012</span>
+                <span class="price">
+                  <span class="actual"><span>100.000</span><span> d</span></span>
+                </span>
+              </span>
+            </li>
+            <li class="span3 alpha25">
+                <a href="5-product-details.html">
+                    <span class="badge off ir hidden">Off</span>
+                    <img src="img/ph/bun-thang.jpg" alt=""/>
+                </a>
+              <span class="info">
+                <span class="title">Men glass mode 2012</span>
+                <span class="price">
+                  <span class="old hidden"><span>$</span><span>100</span> - </span>
+                  <span class="actual"><span>$</span><span>100</span></span>
+                </span>
+              </span>
+            </li>
+            <li class="span3 alpha25">
+                <a href="5-product-details.html">
+                    <span class="badge off ir hidden">Off</span>
+                    <img src="img/ph/bun-thang.jpg" alt=""/>
+                </a>
+              <span class="info">
+                <span class="title">Men glass mode 2012</span>
+                <span class="price">
+                  <span class="old"><span>$</span><span>100</span> - </span>
+                  <span class="actual"><span>$</span><span>100</span></span>
+                </span>
+              </span>
+            </li>
+            <li class="span3 alpha25">
+                <a href="5-product-details.html">
+                    <span class="badge off ir">Off</span>
+                    <img src="img/ph/bun-thang.jpg" alt=""/>
+                </a>
+              <span class="info">
+                <span class="title">Men glass mode 2012</span>
+                <span class="price">
+                  <span class="old hidden"><span>$</span><span>100</span> - </span>
+                  <span class="actual"><span>$</span><span>100</span></span>
+                </span>
+              </span>
+            </li>
+            <li class="span3 alpha25">
+                <a href="5-product-details.html">
+                    <span class="badge off ir">Off</span>
+                    <img src="img/ph/bun-thang.jpg" alt=""/>
+                </a>
+              <span class="info">
+                <span class="title">Men glass mode 2012</span>
+                <span class="price">
+                  <span class="actual"><span>100.000</span><span> đ</span></span>
+                </span>
+              </span>
+            </li>
+        </ul>
     </div>
-</form>
+</div>
