@@ -6,23 +6,7 @@
 
 
 <div class="top-bar">
-    <div class="container">
-        <div class="row">
-
-            <div class="span12 menu clearfix">
-                <ul class="clearfix rr">
-                    <li>
-                        <a href="#">
-                            <span class="ir icon checkout"></span>
-                            <span>Checkout</span>
-                        </a>
-                    </li>
-
-                </ul>
-            </div>
-
-        </div>
-    </div>
+    <tal:block tal:content="structure php:this.widget('application.widgets.SnsFooterWidget', aray(), true)"/>
 </div>
 
 
