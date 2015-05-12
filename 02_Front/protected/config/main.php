@@ -40,10 +40,10 @@ return array(
 	// application components
 	'components'=>array(
 
-//		'user'=>array(
-//			// enable cookie-based authentication
-//			'allowAutoLogin'=>true,
-//		),
+		'user'=>array(
+			// enable cookie-based authentication
+			'allowAutoLogin'=>true,
+		),
 
 		'viewRenderer'=>array(
 			'class'=>'ext.PHPTALViewRenderer',
@@ -64,6 +64,10 @@ return array(
 			'rules'=>array(
 				'content/<action:\w+>'=> 'content/<action>',
 
+                array(
+                    'class' => 'application.components.ContentUrlRule',
+                    'connectionID' => 'db',
+                ),
                 array(
                     'class' => 'application.components.CategoryUrlRule',
                     'connectionID' => 'db',

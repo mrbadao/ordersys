@@ -31,6 +31,18 @@ class ContentController extends Controller
 		$this->render('index');
 	}
 
+    public function actionAbout(){
+        var_dump('gioi thieu');
+    }
+
+    public function actionDeliveryInfo(){
+        var_dump('thong tin giao hang');
+    }
+
+    public function actionContact(){
+        var_dump('Lien he');
+    }
+
     public function actionError(){
         $this->layout = "error-layout";
         $this->render('error');
