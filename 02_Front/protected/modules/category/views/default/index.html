@@ -28,6 +28,10 @@
                 <hr style="margin: 0.4em 0px;"/>
             </div>
 
+            <div tal:condition="nodata" class="products-view-nav row" style="margin-left:0px;">
+                <h5 style="text-align: center;">Không tim thây kết quả nào.</h5>
+            </div>
+
             <!--Product List-->
             <ul class="row clearfix rr list-display product" tal:condition="items">
                 <li class="span9" tal:repeat="item items">

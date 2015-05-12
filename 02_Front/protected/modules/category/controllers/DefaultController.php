@@ -3,7 +3,7 @@
 class DefaultController extends Controller
 {
 	const SESS_KEY = '_FRONT_END_PRODUCT_SEARCH';
-	const LIMIT = 1;
+	const LIMIT = 10;
 
 	public function actionIndex()
     {
@@ -35,8 +35,9 @@ class DefaultController extends Controller
         $pages->applyLimit($c);
 
         $title = $category->name;
+        $nodata = ($count)?false:true;
 
-        $this->render('index', compact('items', 'pages', 'category','title'));
+        $this->render('index', compact('items', 'pages', 'nodata', 'category','title'));
     }
 
     public function actionSearch(){
