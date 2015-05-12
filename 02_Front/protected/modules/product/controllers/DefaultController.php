@@ -12,6 +12,15 @@ class DefaultController extends Controller
 
         if($item == null) throw new CHttpException(404,"Page not found.");
 
-        $this->render('index',compact('item'));
+        $c = new CDbCriteria();
+        $c->order = " id DESC";
+        $c->offset = 0;
+        $c->limit = 4;
+        $c->addCondition('id != '.$id, 'AND');
+        $c->addCondition('del_flg = 0', 'AND');
+
+        $relatedItems = ContentProduct::model()->findAll($c);
+
+        $this->render('index',compact('item', 'relatedItems'));
 	}
 }

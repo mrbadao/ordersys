@@ -32,7 +32,7 @@
                             <div class="info-title">Số lượng:</div>
                             <div class="f-select-wrapper fl">
                                 <div id="current-quantity" class="current clearfix">
-                                    <div class="value">2</div>
+                                    <div class="value">1</div>
                                     <div class="button gradient">
                                         <span class="arrow ir">Open</span>
                                     </div>
@@ -90,7 +90,7 @@
                 </div>
                 <ul class="rr content">
                     <li class="current tab-1">
-                        <tal:block tal:content="structure ${item/description|''}"/>
+                        <tal:block tal:content="structure item/description"/>
                     </li>
                 </ul>
             </div>
@@ -100,7 +100,7 @@
 
 
     </div>
-    <div class="row top-spacing">
+    <div class="row top-spacing" tal:condition="relatedItems">
         <div class="span12 main-heading">
             <div class="span12" style="position: relative; margin-left: 0;">
                 <h1 style="text-align: left;">Sản phẩm khác</h1>
@@ -109,67 +109,16 @@
         </div>
     </div>
 
-    <div id="other-prod-slider">
+    <div id="other-prod-slider" tal:condition="relatedItems">
         <ul class="row-fluid clearfix rr other-products">
-            <li class="span3 alpha25">
-                <a href="5-product-details.html">
-                    <img src="img/ph/bun-thang.jpg" alt=""/>
+            <li class="span3 alpha25" tal:repeat="relatedItem relatedItems">
+                <a href="/site/danh-muc-san-pham/${relatedItem/frendlyUrl}">
+                    <img src="${relatedItem/thumbnail|''}" alt="${relatedItem/name|''}"/>
                 </a>
               <span class="info">
-                <span class="title">Men glass mode 2012</span>
+                <span class="title">${relatedItem/name|''}</span>
                 <span class="price">
-                  <span class="actual"><span>100.000</span><span> d</span></span>
-                </span>
-              </span>
-            </li>
-            <li class="span3 alpha25">
-                <a href="5-product-details.html">
-                    <span class="badge off ir hidden">Off</span>
-                    <img src="img/ph/bun-thang.jpg" alt=""/>
-                </a>
-              <span class="info">
-                <span class="title">Men glass mode 2012</span>
-                <span class="price">
-                  <span class="old hidden"><span>$</span><span>100</span> - </span>
-                  <span class="actual"><span>$</span><span>100</span></span>
-                </span>
-              </span>
-            </li>
-            <li class="span3 alpha25">
-                <a href="5-product-details.html">
-                    <span class="badge off ir hidden">Off</span>
-                    <img src="img/ph/bun-thang.jpg" alt=""/>
-                </a>
-              <span class="info">
-                <span class="title">Men glass mode 2012</span>
-                <span class="price">
-                  <span class="old"><span>$</span><span>100</span> - </span>
-                  <span class="actual"><span>$</span><span>100</span></span>
-                </span>
-              </span>
-            </li>
-            <li class="span3 alpha25">
-                <a href="5-product-details.html">
-                    <span class="badge off ir">Off</span>
-                    <img src="img/ph/bun-thang.jpg" alt=""/>
-                </a>
-              <span class="info">
-                <span class="title">Men glass mode 2012</span>
-                <span class="price">
-                  <span class="old hidden"><span>$</span><span>100</span> - </span>
-                  <span class="actual"><span>$</span><span>100</span></span>
-                </span>
-              </span>
-            </li>
-            <li class="span3 alpha25">
-                <a href="5-product-details.html">
-                    <span class="badge off ir">Off</span>
-                    <img src="img/ph/bun-thang.jpg" alt=""/>
-                </a>
-              <span class="info">
-                <span class="title">Men glass mode 2012</span>
-                <span class="price">
-                  <span class="actual"><span>100.000</span><span> đ</span></span>
+                  <span class="actual"><span><tal:block tal:content="php: number_format(relatedItem['price'])"/></span><span> d</span></span>
                 </span>
               </span>
             </li>
