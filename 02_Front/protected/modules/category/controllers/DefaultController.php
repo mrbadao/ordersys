@@ -8,7 +8,7 @@ class DefaultController extends Controller
 	public function actionIndex()
     {
         $category = null;
-        $this->layout = "main";
+//        $this->layout = "main";
 
         $id = isset($_GET['id']) ? $_GET['id'] : null;
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
