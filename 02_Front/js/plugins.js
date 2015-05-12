@@ -369,7 +369,7 @@ if (!(window.console && console.log)) {
 $.fn.mobileMenu = function(options) {
 	
 	var defaults = {
-			defaultText: 'Navigate to...',
+			defaultText: 'Đi đến...',
 			className: 'select-menu',
 			subMenuClass: 'sub-menu',
 			subMenuDash: '&ndash;'
