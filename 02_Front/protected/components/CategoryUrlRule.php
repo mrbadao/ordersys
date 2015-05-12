@@ -50,11 +50,11 @@ class CategoryUrlRule extends CBaseUrlRule
             return 'category/default/index/id/'.$catId->id;
         }
 
-        if(strpos($path[2],"trang")==0){
+        if(strpos($path[2],"trang") > -1 && strpos($path[2],"trang")==0){
             $page = substr(strrchr($path[2], '-'), 1, strlen(strrchr($path[2], '-')));
             return 'category/default/index/id/'.$catId->id.'/page/'.$page;
         }else{
-            $producId = Helpers::getIDFromStr($path[2]);
+            $producId = $path[2];
             $product = ContentProduct::model()->findByPk($producId);
             if ($product == null) throw new CHttpException(404,'Url Site not exits');
 
