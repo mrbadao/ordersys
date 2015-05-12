@@ -16,7 +16,7 @@ class DefaultController extends Controller
 
         if($category == null) throw new CHttpException(404,'Url Site not exits');
 
-        $this->setTitle($category->name.' | '.Yii::app()->params['appName']);
+        $this->setTitle($category->name.' | '.Yii::app()->params['name']);
 
         $c = new CDbCriteria();
         $c->order = "id DESC";

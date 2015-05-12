@@ -44,7 +44,7 @@ class CategoryUrlRule extends CBaseUrlRule
         $catId = null;
         $catId = ContentCategories::model()->findByAttributes(array('abbr_cd' => $path[1]));
 
-        if($catId == null) return false;
+        if($catId == null) throw new CHttpException(404,'Url Site not exits');
 
         if (!isset($path[2])){
             return 'category/default/index/id/'.$catId->id;
