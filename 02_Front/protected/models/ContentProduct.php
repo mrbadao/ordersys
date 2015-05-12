@@ -17,6 +17,7 @@
 class ContentProduct extends CActiveRecord
 {
 	public $cat_name = '';
+    public $frendlyUrl = '';
 	/**
 	 * @return string the associated database table name
 	 */
@@ -118,10 +119,20 @@ class ContentProduct extends CActiveRecord
 	}
 
 	public function afterSave(){
-		$this->cat_name = ContentCategories::model()->findByPk($this->category_id)->name;
+        $category = ContentCategories::model()->findByPk($this->category_id);
+
+        if($category){
+            $this->cat_name = $category->name;
+            $this->frendlyUrl = $category->abbr_cd.'/'.$this->id.'/'.Helpers::getDomainFromName($this->name).'.html';
+        }
 	}
 
 	public function afterFind(){
-		$this->cat_name = ContentCategories::model()->findByPk($this->category_id)->name;
+        $category = ContentCategories::model()->findByPk($this->category_id);
+
+        if($category){
+            $this->cat_name = $category->name;
+            $this->frendlyUrl = $category->abbr_cd.'/'.$this->id.'/'.Helpers::getDomainFromName($this->name).'.html';
+        }
 	}
 }

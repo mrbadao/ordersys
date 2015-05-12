@@ -30,7 +30,7 @@ class Helpers
         return (implode($worldList) != '') ? implode(' ', $worldList) . ' ...' : '';
     }
 
-    public static function getTagDomain($str)
+    public static function getDomainFromName($str)
     {
         $str = trim($str, '/');
         $str = trim($str);
