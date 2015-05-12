@@ -2,11 +2,11 @@
 
 class PaginationWidget extends CLinkPager {
 
-    const CSS_PREVIOUS_PAGE = 'backward';
-    const CSS_NEXT_PAGE = 'forward';
-    const CSS_INTERNAL_PAGE = 'page';
+    const CSS_PREVIOUS_PAGE = 'arrow prev ir';
+    const CSS_NEXT_PAGE = 'arrow next ir';
+    const CSS_INTERNAL_PAGE = '';
     const CSS_HIDDEN_PAGE = 'hidden';
-    const CSS_SELECTED_PAGE = 'stay';
+    const CSS_SELECTED_PAGE = 'current';
 
     /**
      * @var integer maximum number of page buttons that can be displayed. Defaults to 10.
@@ -51,19 +51,15 @@ class PaginationWidget extends CLinkPager {
      */
     public function init() {
         if ($this->nextPageLabel === null)
-            //$this->nextPageLabel = '/common/img/icon_arrow05_next_n.png';
-												//$this->nextPageLabel = '&gt;&gt;';
-            $this->nextPageLabel = '≫';
+
+            $this->nextPageLabel = 'Next';
         if ($this->prevPageLabel === null)
-            //$this->prevPageLabel = '/common/img/icon_arrow05_prev_n.png';
-												//$this->prevPageLabel = '&lt;&lt;';
-            $this->prevPageLabel = '≪';
+
+            $this->prevPageLabel = 'Previous';
         if ($this->header === null)
-            //$this->header = "<div class='pagenation-A01'><nav>";
-            //$this->header = '<div class="pageList_link">';
+
         if ($this->footer === null)
-            //$this->footer = "</nav></div>";
-            //$this->footer = "</div>";
+
         if ($this->cssFile === null) {
             $this->cssFile = Yii::app()->request->baseUrl . '/css/pagination.css';
         }
@@ -76,11 +72,12 @@ class PaginationWidget extends CLinkPager {
     public function run() {
         $this->registerClientScript();
         $buttons = $this->createPageButtons();
+
         if (empty($buttons))
             return;
+
         echo $this->header;
-								//echo CHtml::tag('ul', array(), implode("\n", $buttons));
-        echo CHtml::tag('ul', array('class' => 'pageList_link'), implode("\n", $buttons));
+        echo CHtml::tag('ul', array('class' => 'navigation rr'), implode("\n", $buttons));
         echo $this->footer;
     }
 
@@ -96,17 +93,16 @@ class PaginationWidget extends CLinkPager {
             return array();
 
         list($beginPage, $endPage) = $this->getPageRange();
-        $currentPage = $this->getCurrentPage(false); // currentPage is calculated in getPageRange()
+        $currentPage = $this->getCurrentPage(false);
         $buttons = array();
 
         // prev page
         if (($page = $currentPage - 1) < 0)
             $page = 0;
-        //$buttons[] = $this->createPageButton($this->prevPageLabel, $page, self::CSS_PREVIOUS_PAGE, true, false) . '<li class="direct"><ul>';
+
         if($currentPage > 0)
         {
-            //$buttons[] = $this->createPageButton($this->prevPageLabel, $page, self::CSS_PREVIOUS_PAGE, 0, false) . '<li class="direct"><ul>';
-												$buttons[] = $this->createPageButton($this->prevPageLabel, $page, self::CSS_PREVIOUS_PAGE, 0, false);
+            $buttons[] = $this->createPageButton($this->prevPageLabel, $page, self::CSS_PREVIOUS_PAGE, 0, false);
         }
 
 
@@ -142,11 +138,10 @@ class PaginationWidget extends CLinkPager {
         // next page
         if (($page = $currentPage + 1) >= $pageCount - 1)
             $page = $pageCount - 1;
-        //$buttons[] = "</ul></li>" . $this->createPageButton($this->nextPageLabel, $page, self::CSS_NEXT_PAGE, true, false);
+
         if($currentPage < $lastPage-1)
         {
-            //$buttons[] = "</ul></li>" . $this->createPageButton($this->nextPageLabel, $page, self::CSS_NEXT_PAGE, 0, false);
-												$buttons[] = $this->createPageButton($this->nextPageLabel, $page, self::CSS_NEXT_PAGE, 0, false);
+            $buttons[] = $this->createPageButton($this->nextPageLabel, $page, self::CSS_NEXT_PAGE, 0, false);
         }
 
 
@@ -167,19 +162,17 @@ class PaginationWidget extends CLinkPager {
         $currentPage = $this->getCurrentPage();
         $lastPage = $this->getPageCount();
         $firstPage = 0;
+
         if ($button) {
-            $image = CHtml::image($label, "次へ", array("width" => "26", "height" => "26"));
-            return '<li class="' . $class . '">' . CHtml::link($image, $this->createPageUrl($page), array("class" => "rollover")) . '</li>';
+            return '<li>' . CHtml::link($label, $this->createPageUrl($page), array("class" => $class)) . '</li>';
         }
 
         if ($page == ($firstPage + 1) && $currentPage > ($firstPage + 3) && $this->getPageCount() > 7) {
-            //return '<li>' . CHtml::link($label, $this->createPageUrl($page)) . '<span class="skip-marker">…</span></li>';
-												return '<li>' . CHtml::link($label, $this->createPageUrl($page)) . '</li><li><span class="skip-marker">...</span></li>';
+            return '<li>' . CHtml::link($label, $this->createPageUrl($page)) . '</li><li><a class="'.$class.'">...</a></li>';
         }
 
         if ($page == ($lastPage - 2) && ($currentPage < $lastPage - 4) && $this->getPageCount() > 7) {
-            //return '<li><span class="skip-marker">…</span>' . CHtml::link($label, $this->createPageUrl($page)) . '</li>';
-												return '<li><span class="skip-marker">...</span></li><li>' . CHtml::link($label, $this->createPageUrl($page)) . '</li>';
+            return '<li><span class="skip-marker">...</span></li><li>' . CHtml::link($label, $this->createPageUrl($page)) . '</li>';
         }
 
         if ($selected)
@@ -207,8 +200,8 @@ class PaginationWidget extends CLinkPager {
      * Registers the needed client scripts (mainly CSS file).
      */
     public function registerClientScript() {
-        if ($this->cssFile !== false)
-            self::registerCssFile($this->cssFile);
+//        if ($this->cssFile !== false)
+//            self::registerCssFile($this->cssFile);
     }
 
     /**
