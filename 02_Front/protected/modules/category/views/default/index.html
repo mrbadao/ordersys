@@ -59,7 +59,9 @@
             </ul>
 
             <!--paging-->
-            <tal:block tal:content="structure php:this.widget('PaginationWidget',array('pages'=>pages),true)"/>
+            <div class="products-view-nav row bottom">
+                <tal:block tal:content="structure php:this.widget('PaginationWidget',array('pages'=>pages),true)"/>
+            </div>
         </div>
     </div>
 </div>
