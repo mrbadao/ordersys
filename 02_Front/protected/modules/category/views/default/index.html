@@ -1,67 +1,65 @@
-<h1>Quản lí categories</h1>
-<article>
-    <p>Để tìm categories. Nhập các tiêu chí tìm kiếm, vui lòng click vào nút Search.</p>
-</article>
+<div role="main" class="container products grid">
+    <div class="row">
+        <aside class="span3 left-nav">
+            <div class="row">
+                <div class="span3">
+                    <h5>Category</h5>
 
-<form name="frmSearch" action="/admin/category/search" method="post">
-    <div class="mBoxitem_table">
-        <table class="tableTate" cellspacing="0" cellpadding="0" border="0">
-            <tr>
-                <th>Tên</th>
-                <td><input  value="${search/name|''}" name="search[name]" class="txtbox" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 300px;"/></td>
-            </tr>
-            <tr>
-                <th>Domain</th>
-                <td>
-                    <input  value="${search/abbr_cd|''}" name="search[abbr_cd]" class="txtbox" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 300px;"/>
-                </td>
-            </tr>
-        </table>
-        <div class="BtnArea" style="text-align: center !important;">
-            <input class="btnMiddle themeNormal" type="submit" title="Search" value="Search"/>
-        </div>
-    </div>
-</form>
+                    <hr/>
+                    <!--Category-->
+                    <tal:block tal:content="structure php:this.widget('application.widgets.CategoryWidget',array(),true)"/>
+                </div>
+            </div>
+        </aside>
 
-<form method="post" action="./" name="form">
-    <p class="centering txtWarning" tal:condition="nodata">Không tồn thông tin.</p>
-    <div class="mBoxitem_table">
-        <div class="mBoxitem_listinfo">
-            <p class="pageList_data"><strong>Số lượng tin：</strong>${count}</p>
-        </div>
+        <div class="span9">
+            <div class="featured clearfix hidden-phone">
+                <img src="img/top-banner.jpg" style="width:100%;" alt=""/>
+            </div>
 
-        <div class="mBoxitem_listinfo">
-            <div tal:replace="structure php:this.widget('PaginationWidget',array('pages'=>pages),true)"></div>
-            <ul class="pageList_link" tal:replace="">
-                <li><a href="javascript:void(0);">≪</a></li>
-                <li><a href="javascript:void(0);">&lt;</a></li>
-                <li><a href="javascript:void(0);">1</a></li>
-                <li><a href="javascript:void(0);">2</a></li>
-                <li><strong>3</strong></li>
-                <li><a href="javascript:void(0);">4</a></li>
-                <li><a href="javascript:void(0);">5</a></li>
-                <li><a href="javascript:void(0);">&gt;</a></li>
-                <li><a href="javascript:void(0);">≫</a></li>
+            <div class="products-view-nav row" style="margin-left:0px;">
+                <h5 style="margin: 3px;">${cat_name|''}</h5>
+                <hr style="margin: 0.4em 0px;"/>
+            </div>
+
+            <!--Product List-->
+            <ul class="row clearfix rr list-display product" tal:condition="items">
+                <li class="span9" tal:repeat="item items">
+                    <div class="row">
+                        <div class="span4 photo-wrapper">
+                            <a href="5-product-details.html">
+                                <img src="${item/thumbnail}" alt="${item/name}"/>
+                            </a>
+                        </div>
+                        <div class="span5 info clearfix">
+                            <h1>${item/name}</h1>
+                            <p tal:content="php: Helpers::getNumChars(item['description'], 34)">
+                                Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc.
+                                Vestibulum ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia Curae;
+                                Aenean eleifend laoreet congue.
+                            </p>
+                            <hr/>
+                            <div class="row price-wrapper">
+                                <div class="span2 clearfix">
+                                    <a href="7-cart.html" class="add-to-cart">
+                                        <span class="icon ir">giỏ</span>
+                                        <span class="text">Thêm vào giỏ</span>
+                                    </a>
+                                </div>
+                                <div class="span2">
+                        <span class="price">
+                          <span class="value" tal:content="php: number_format(item['price'])">50.000</span><span class="currency">đ</span>
+                        </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
-
-        <table cellpadding="0" cellspacing="0" border="0" class="tableYoko">
-            <thead>
-                <tr>
-                    <th>Tên</th>
-                    <th class="thYokoM">Domain</th>
-                    <th class="thYokoM">Ngày đăng</th>
-                    <th class="thYokoM">Ngày sữa</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tr tal:repeat="item items">
-                <td tal:content="item/name"></td>
-                <td tal:content="item/abbr_cd"></td>
-                <td><span tal:condition="exists:item/created" tal:content="dateformat:item/created">2012/04/13 23:00</span></td>
-                <td><span tal:condition="exists:item/modified" tal:content="dateformat:item/modified">2012/04/13 23:00</span></td>
-                <td class="tdYoko_btn_s1"><a href="/admin/category/view?id=${item/id}" class="btnTable themeNormal">Chi tiết</a></td>
-            </tr>
-        </table>
     </div>
-</form>
+</div>
+
+
+
