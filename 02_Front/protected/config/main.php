@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'Owl Food Shop',
+	'name'=>'Thức ăn cú đêm',
 	'language' => 'en',
     'defaultController' =>'Content',
 
