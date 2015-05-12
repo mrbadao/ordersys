@@ -8,7 +8,7 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'CMS Order Sys',
-	'language' => 'vi',
+	'language' => 'en',
     'defaultController' =>'Content',
 
 	// preloading 'log' component
