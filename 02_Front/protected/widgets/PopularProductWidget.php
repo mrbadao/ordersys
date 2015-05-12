@@ -21,6 +21,16 @@ class PopularProductWidget extends CLinkPager {
 
         $items=  Yii::app()->db->createCommand($query)->queryAll();
 
+        for($i = 0; $i < count($items); $i++){
+            $items[$i]['frendlyUrl'] = '';
+
+            $category = ContentCategories::model()->findByPk($items[$i]['category_id']);
+
+            if($category){
+                $items[$i]['frendlyUrl'] = $category->abbr_cd.'/'.$items[$i]['id'].'/'.Helpers::getDomainFromName($items[$i]['name']).'.html';
+            }
+        }
+
         $this->render('popular-product-widget', compact('items'));
     }
 
