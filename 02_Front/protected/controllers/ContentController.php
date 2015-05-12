@@ -32,6 +32,7 @@ class ContentController extends Controller
 	}
 
     public function actionError(){
-
+        $this->layout = "error-layout";
+        $this->render('error');
     }
 }
