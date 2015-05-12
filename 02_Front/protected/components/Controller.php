@@ -6,7 +6,6 @@
 class Controller extends CController
 {
 	public $viewPath;
-//	public $layout='main';
 	public $title='';
 
 	public function init()

@@ -8,7 +8,6 @@ class DefaultController extends Controller
 	public function actionIndex()
     {
         $category = null;
-//        $this->layout = "main";
 
         $id = isset($_GET['id']) ? $_GET['id'] : null;
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -16,6 +15,8 @@ class DefaultController extends Controller
         $category = ContentCategories::model()->findByPk($id);
 
         if($category == null) throw new CHttpException(404,'Url Site not exits');
+
+        $this->setTitle($category->name.' | '.Yii::app()->params['appName']);
 
         $c = new CDbCriteria();
         $c->order = "id DESC";
