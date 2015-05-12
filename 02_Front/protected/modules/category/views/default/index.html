@@ -33,7 +33,7 @@
                         </div>
                         <div class="span5 info clearfix">
                             <h1>${item/name}</h1>
-                            <p tal:content="php: Helpers::getNumChars(item['description'], 34)">
+                            <p tal:content="structure php: Helpers::getNumChars(item['description'], 34)">
                                 Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc.
                                 Vestibulum ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia Curae;
                                 Aenean eleifend laoreet congue.
