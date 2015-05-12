@@ -33,7 +33,7 @@ return array(
 //		),
 
 		'category',
-//		'product',
+		'product',
 
 	),
 
