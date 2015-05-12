@@ -10,9 +10,9 @@ class Controller extends CController
 
 	public function init()
 	{
-		$this->setTitle(Yii::app()->params['name']);
-		$m = $this->getModule();
-		$this->viewPath = (isset($m))?$m->getViewPath():Yii::app()->getViewPath();
+        $this->setTitle(Yii::app()->params['appName']);
+        $m = $this->getModule();
+        $this->viewPath = (isset($m))?$m->getViewPath():Yii::app()->getViewPath();
 	}
 
 	public function render($view,$data=null,$return=false)
