@@ -3,7 +3,7 @@
 class DefaultController extends Controller
 {
 	const SESS_KEY = '_FRONT_END_PRODUCT_SEARCH';
-	const LIMIT = 10;
+	const LIMIT = 1;
 
 	public function actionIndex()
     {
@@ -96,7 +96,7 @@ class DefaultController extends Controller
 
         $nodata = ($count)?false:true;
 
-        $c->limit = 10;
+        $c->limit = self::LIMIT;
         $c->offset = $c->limit * ($page-1);
 
         $items = ContentProduct::model()->findAll($c);

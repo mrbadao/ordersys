@@ -15,10 +15,16 @@ class ContentUrlRule extends CBaseUrlRule
         switch($route){
             case 'content/about';
                 return 'gioi-thieu.html';
+
             case 'category/default/search';
-                return 'tim-kiem.html';
+                if(isset($params['page'])){
+                    return 'tim-kiem/trang-'.$params['page'].'/';
+                }
+                return 'tim-kiem/';
+
             case 'content/about/deliveryinfo';
                 return 'thong-tin-giao-hang.html';
+
             case 'content/contact';
                 return 'lien-he.html';
         }
@@ -35,7 +41,10 @@ class ContentUrlRule extends CBaseUrlRule
         switch($path[0]){
             case 'gioi-thieu.html';
                 return '/content/about';
-            case 'tim-kiem.html';
+            case 'tim-kiem';
+                if(isset($path[1]) && is_numeric($path[1]) && strpos($path[1],"trang") > -1 && strpos($path[1],"trang")==0){
+                    $_GET['page'] = $path[1];
+                }
                 return 'category/default/search';
             case 'thong-tin-giao-hang.html';
                 return '/content/about/deliveryinfo';
