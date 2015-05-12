@@ -52,8 +52,8 @@
             <tal:block tal:content="structure php:this.widget('application.widgets.NaviBar',menu,true)"/>
         </div>
         <div class="span3">
-            <form method="post" action="/site/tim-kiem/">
-                <input name="search[name]" type="text" class="search-box" placeholder="Tìm kiếm sản phẩm..." value=""/>
+            <form method="post" action="/site/tim-kiem/" id="frmSearch" onsubmit="return checkSearchKey();">
+                <input id="search_key" name="search[name]" type="text" class="search-box" placeholder="Tìm kiếm sản phẩm..." value=""/>
             </form>
         </div>
     </div>

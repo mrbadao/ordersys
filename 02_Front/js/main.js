@@ -1,4 +1,4 @@
-$(function() {  
+$(function() {
 
   // collections navigation
   $('.collections .down').click(function() {
@@ -187,23 +187,7 @@ $(function() {
       $(this).parent().next().val(val);
     }
   });
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
   // placeholder polyfill
     
 	if(!Modernizr.input.placeholder) {
@@ -230,3 +214,10 @@ $(function() {
 	}
   
 });
+
+function checkSearchKey(){
+    var searchKey = $('#search_key').val();
+    console.log(searchKey.length);
+    if(searchKey.length < 1) return false;
+    return true;
+}
