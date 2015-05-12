@@ -18,6 +18,7 @@ class DefaultController extends Controller
 
         if($id != null && $qty != null){
             $session = Yii::app()->session;
+            $cart = null;
 
             if($session->contains(self::SESSION_KEY)){
                 $cart = $session[self::SESSION_KEY];
@@ -25,15 +26,19 @@ class DefaultController extends Controller
             }
 
             $_result = array();
+            $flg = false;
 
 
                 if($cart !=null){
                     foreach($cart as $existsItem){
-                        if($item['id'] == $existsItem['id']){
-                            $existsItem['qty'] = $item['qty'];
+                        if($id == $existsItem['id']){
+                            $existsItem['qty'] += $qty;
+                            $flg = true;
                         }
                         $_result[] = $existsItem;
                     }
+                }else{
+                    $cart[] = array('id' => $id, 'qty' => $qty);
                 }
 
             $cart = $_result;
