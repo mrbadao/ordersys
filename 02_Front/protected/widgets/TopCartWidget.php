@@ -2,6 +2,7 @@
 
 class TopCartWidget extends CLinkPager
 {
+    const SESSION_KEY = '_CART';
     public $session;
 
     public function init()
