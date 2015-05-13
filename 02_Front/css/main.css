@@ -445,7 +445,7 @@ font-weight: bold;
 .main-menu a.current,
 .left-nav a:hover,
 .left-nav a.current{
-  color: #ed1c24;
+  color: #ed1c24 !important;
 }
 
 /* shop submenu */
