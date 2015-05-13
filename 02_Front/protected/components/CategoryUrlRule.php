@@ -56,9 +56,9 @@ class CategoryUrlRule extends CBaseUrlRule
         }else{
             $producId = $path[2];
             $product = ContentProduct::model()->findByPk($producId);
-            if ($product == null) throw new CHttpException(404,'Url Site not exits');
 
-            return 'product/default/index/id/' . $producId;
+            if ($product) return 'product/default/index/id/' . $producId;
+            throw new CHttpException(404,'Url Site not exits');
         }
 
         return false;
