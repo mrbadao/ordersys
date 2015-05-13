@@ -9,7 +9,7 @@
         <h5 style="text-align: center;">Bạn chưa mua sản phẩm nào.</h5>
     </div>
 
-    <table>
+    <table tal:condition="not: nodata">
         <tr class="headers">
             <th class="alpha50 dark">
                 Tên sản phẩm
@@ -21,26 +21,25 @@
                 Thành giá
             </th>
         </tr>
-        <tr>
+        <tr tal:repeat=""item items>
             <td class="article clearfix">
                 <div class="info-wrapper">
-                    <h2>Men glass mode 2012</h2>
+                    <h2>${item/name|''}</h2>
                 </div>
 
             </td>
             <td class="quantity dark">
-
                 <div class="quant-input">
                     <div class="arrows">
                         <div class="arrow plus gradient"><span class="ir">Plus</span></div>
                         <div class="arrow minus gradient"><span class="ir">Minus</span></div>
                     </div>
-                    <input type="text" value="2"/>
+                    <input type="text" value="${item/qty|1}"/>
                 </div>
 
             </td>
             <td class="price">
-                <span class="value">600,000</span>
+                <span class="value" tal:content="item/unit_total">600,000</span>
                 <span class="currency">đ</span>
             </td>
         </tr>
@@ -54,7 +53,7 @@
                         Tổng cộng
                     </div>
                     <div class="half-col value-wrapper">
-                        <span class="value">880,000</span>
+                        <span class="value" tal:content="total">880,000</span>
                         <span class="currency">đ</span>
                     </div>
                 </div>

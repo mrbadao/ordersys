@@ -7,7 +7,36 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         $nodata = false;
-        $this->render('index', compact('nodata'));
+        $cart = null;
+        $items = array();
+        $total = 0;
+
+        $session = Yii::app()->session;
+        if ($session->contains(self::SESSION_KEY)) {
+            $cart = $session[self::SESSION_KEY];
+            $session->remove(self::SESSION_KEY);
+        }
+
+        if($cart == null){
+            $nodata = true;
+        }else{
+            foreach($cart as $item){
+                $temp['id'] =$item['id'];
+                $temp['qty'] =$item['qty'];
+
+                $product = Helpers::getProduct($item['id']);
+                if($product) {
+                    $temp['name'] = $product->name;
+                    $temp['unit_total'] = number_format($item['qty'] * $product->price);
+                    $total = $item['qty'] * $product->price;
+                }
+                $items[] = $temp;
+            }
+            $total = number_format($total);
+        }
+
+
+        $this->render('index', compact('nodata', 'items', 'total'));
     }
 
     public function actionAddItem()
