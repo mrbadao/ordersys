@@ -103,6 +103,6 @@ class DefaultController extends Controller
     }
 
     public function actionCheckout(){
-        var_dump('sadasd');
+        $this->render('checkout');
     }
 }
