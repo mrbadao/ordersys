@@ -1,7 +1,7 @@
 <?php
 
 class CategoryWidget extends CLinkPager {
-
+    public $activeCategoryId;
     public function init() {
 
     }
@@ -12,7 +12,8 @@ class CategoryWidget extends CLinkPager {
      */
     public function run() {
         $items = ContentCategories::model()->findAll();
-        $this->render('category-widget', compact('items'));
+        $activeCategoryId = $this->activeCategoryId();
+        $this->render('category-widget', compact('items', 'activeCategoryId'));
     }
 
 }

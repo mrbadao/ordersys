@@ -1,3 +1,3 @@
 <ul class="category">
-    <li tal:condition="items" tal:repeat="item items"><a href="/site/danh-muc-san-pham/${item/abbr_cd}/">${item/name}</a></li>
+    <li tal:condition="items" tal:repeat="item items"><a tal:attributes="class php:item['id'] == activeCategoryId ? 'current' : '' " href="/site/danh-muc-san-pham/${item/abbr_cd}/">${item/name}</a></li>
 </ul>
