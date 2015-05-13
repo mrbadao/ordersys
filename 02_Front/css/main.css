@@ -1880,8 +1880,8 @@ font-weight: bold;
 }
 .cart .article .info-wrapper {
   float: right;
-  width: 57%;
-  text-align: left;
+  width: 100%;
+  text-align: center;
 }
 .cart .article .info {
   margin: 10px 0 0 70px;
