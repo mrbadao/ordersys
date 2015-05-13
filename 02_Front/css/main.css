@@ -442,7 +442,9 @@ font-weight: bold;
   text-decoration: none;
 }
 .main-menu a:hover,
-.main-menu a.current {
+.main-menu a.current,
+.left-nav a:hover,
+.left-nav a.current{
   color: #ed1c24;
 }
 
