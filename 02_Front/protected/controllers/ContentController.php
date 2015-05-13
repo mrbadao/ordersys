@@ -32,7 +32,7 @@ class ContentController extends Controller
 	}
 
     public function actionAbout(){
-        var_dump('gioi thieu');
+        $this->render('about');
     }
 
     public function actionDeliveryInfo(){
