@@ -14,7 +14,6 @@ class DefaultController extends Controller
         $session = Yii::app()->session;
         if ($session->contains(self::SESSION_KEY)) {
             $cart = $session[self::SESSION_KEY];
-            $session->remove(self::SESSION_KEY);
         }
 
         if($cart == null){
