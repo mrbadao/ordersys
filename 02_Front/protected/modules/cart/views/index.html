@@ -1,0 +1,74 @@
+<div class="container breadcrumb-wrapper">
+    <div class="row">
+        <div class="span12 breadcrumb" metal:use-macro="${this/viewPath}/${this/id}/breadcrumb.html/${this/action/id}"></div>
+    </div>
+</div>
+
+<div role="main" class="container cart">
+    <div tal:condition="nodata" class="products-view-nav row" style="margin-left:0px;">
+        <h5 style="text-align: center;">Bạn chưa mua sản phẩm nào.</h5>
+    </div>
+
+    <table>
+        <tr class="headers">
+            <th class="alpha50 dark">
+                Tên sản phẩm
+            </th>
+            <th class="alpha16">
+                Số lượng
+            </th>
+            <th class="alpha16 dark">
+                Thành giá
+            </th>
+        </tr>
+        <tr>
+            <td class="article clearfix">
+                <div class="info-wrapper">
+                    <h2>Men glass mode 2012</h2>
+                </div>
+
+            </td>
+            <td class="quantity dark">
+
+                <div class="quant-input">
+                    <div class="arrows">
+                        <div class="arrow plus gradient"><span class="ir">Plus</span></div>
+                        <div class="arrow minus gradient"><span class="ir">Minus</span></div>
+                    </div>
+                    <input type="text" value="2"/>
+                </div>
+
+            </td>
+            <td class="price">
+                <span class="value">600,000</span>
+                <span class="currency">đ</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="1" class="empty">
+            </td>
+            <td colspan="3" class="total-wrapper">
+                <div class="total clearfix">
+                    <div class="half-col">
+                        Tổng cộng
+                    </div>
+                    <div class="half-col value-wrapper">
+                        <span class="value">880,000</span>
+                        <span class="currency">đ</span>
+                    </div>
+                </div>
+
+            </td>
+        </tr>
+    </table>
+
+    <div class="row-fluid checkout">
+        <div class="span4">
+            <a href="#" class="btn"><span class="gradient">Cập nhật</span></a>
+            <a href="#" class="btn"><span class="gradient">Thanh toán</span></a>
+        </div>
+
+    </div>
+
+</div>

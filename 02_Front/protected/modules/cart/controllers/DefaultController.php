@@ -6,7 +6,7 @@ class DefaultController extends Controller
 
     public function actionIndex()
     {
-        throw new CHttpException(404, 'Page not exists.');
+        $this->render('index');
     }
 
     public function actionAddItem()

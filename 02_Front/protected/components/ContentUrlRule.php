@@ -53,6 +53,9 @@ class ContentUrlRule extends CBaseUrlRule
 
             case 'lien-he.html';
                 return '/content/contact';
+
+            case 'gio-hang.html';
+                return '/cart/default/index';
         }
 
         return false;
