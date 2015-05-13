@@ -237,9 +237,10 @@ function addCart(product_id, qty){
         {
             if(data){
                 var jsonObject = JSON.parse(data);
+
                 if(jsonObject.hasOwnProperty('count') && jsonObject.hasOwnProperty('total')) {
-                    $('.shopping-cart #cart-item-count').val(jsonObject.count);
-                    $('.shopping-cart #cart-item-total').val(jsonObject.total);
+                    $('.shopping-cart #cart-item-count').text(jsonObject.count);
+                    $('.shopping-cart #cart-item-total').text(jsonObject.total);
                 }
             }
         }

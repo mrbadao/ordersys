@@ -52,6 +52,8 @@ class DefaultController extends Controller
                 }
             }
 
+            $_result['total'] = number_format($_result['total']);
+
             $session->add(self::SESSION_KEY, $cart);
 
             echo json_encode($_result);
