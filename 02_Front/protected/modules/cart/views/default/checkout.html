@@ -11,13 +11,13 @@
             <h3>Quy trình thanh toán</h3>
             <ul class="rr">
                 <li>
-                    <a href="#">Thông tin</a>
+                    <a href="#" class="active" id="progress-1">Thông tin</a>
                 </li>
                 <li>
-                    <a href="#">Xác định vị trí</a>
+                    <a href="#" id="progress-2">Xác định vị trí</a>
                 </li>
                 <li>
-                    <a href="#">Thanh toán</a>
+                    <a href="#" id="progress-3">Thanh toán</a>
                 </li>
             </ul>
         </div>
@@ -44,18 +44,18 @@
                                     <ul class="rr">
                                         <li>
                                             <label>
-                                                <input type="text" name="account" placeholder="Tên của bạn..."/>
+                                                <input type="text" name="name" placeholder="Tên của bạn..."/>
                                             </label>
                                         </li>
                                         <li>
                                             <label>
-                                                <input type="password" name="password"
+                                                <input type="number" name="phone"
                                                        placeholder="Số điện thoại liên lạc..."/>
                                             </label>
                                         </li>
                                     </ul>
 
-                                    <a href="javascript:checkoutMoveStep('#checkout-step-1', '#checkout-step-2')" class="btn secondary">
+                                    <a href="javascript:checkoutMoveStep('#checkout-step-1', '#checkout-step-2', '#progress-2')" class="btn secondary">
                                         <span class="gradient">Tiếp tục</span>
                                     </a>
 
@@ -87,7 +87,7 @@
                                         </li>
                                     </ul>
 
-                                    <a href="javascript:checkoutMoveStep('#checkout-step-2', '#checkout-step-3')" class="btn secondary">
+                                    <a href="javascript:checkoutMoveStep('#checkout-step-2', '#checkout-step-3', '#progress-3')" class="btn secondary">
                                         <span class="gradient">Tiếp tục</span>
                                     </a>
 

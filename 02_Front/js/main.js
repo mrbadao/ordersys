@@ -251,7 +251,7 @@ function submitFrmCart(){
     $('#frm-cart').submit();
 }
 
-function checkoutMoveStep(curentStepId, nextStepId){
+function checkoutMoveStep(curentStepId, nextStepId, nextProgressId){
     console.log(curentStepId);
     var hasError = false;
     $(curentStepId).find('input').each(function(){
@@ -263,6 +263,8 @@ function checkoutMoveStep(curentStepId, nextStepId){
         alert('Hãy nhập đầy đủ thông tin.')
     }else{
         $('.checkout-list').find('.current').each(function(){$(this).removeClass('current')});
+        $('.checkout .progress').find('active').each(function(){$(this).removeClass('active')});
         $(nextStepId).addClass('current');
+        $(nextProgressId).addClass('active');
     }
 }
