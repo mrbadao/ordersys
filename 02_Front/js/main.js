@@ -250,3 +250,19 @@ function addCart(product_id, qty){
 function submitFrmCart(){
     $('#frm-cart').submit();
 }
+
+function checkoutMoveStep(curentStepId, nextStepId){
+    console.log(curentStepId);
+    var hasError = false;
+    $(curentStepId).find('input').each(function(){
+        var value = $(this).val();
+        if(value.length < 1) hasError = true;
+    });
+
+    if(hasError){
+        alert('Hãy nhập đầy đủ thông tin.')
+    }else{
+        $('.checkout-list').find('.current').each(function(){$(this).removeClass('current')});
+        $(nextStepId).addClass('current');
+    }
+}
