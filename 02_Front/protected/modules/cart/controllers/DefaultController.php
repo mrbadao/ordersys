@@ -28,7 +28,7 @@ class DefaultController extends Controller
                 if($product) {
                     $temp['name'] = $product->name;
                     $temp['unit_total'] = number_format($item['qty'] * $product->price);
-                    $total = $item['qty'] * $product->price;
+                    $total += $item['qty'] * $product->price;
                 }
                 $items[] = $temp;
             }
