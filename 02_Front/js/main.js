@@ -235,7 +235,13 @@ function addCart(product_id, qty){
         processData: false,
         success: function (data)
         {
-            alert(data);
+            if(data){
+                var jsonObject = JSON.parse(data);
+                if(jsonObject.hasOwnProperty('count') && jsonObject.hasOwnProperty('total')) {
+                    $('.shopping-cart #cart-item-count').val(jsonObject.count);
+                    $('.shopping-cart #cart-item-total').val(jsonObject.total);
+                }
+            }
         }
     });
 }
