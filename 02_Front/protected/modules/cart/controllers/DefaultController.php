@@ -6,7 +6,8 @@ class DefaultController extends Controller
 
     public function actionIndex()
     {
-        $this->render('index');
+        $nodata = false;
+        $this->render('index', compact('nodata'));
     }
 
     public function actionAddItem()
