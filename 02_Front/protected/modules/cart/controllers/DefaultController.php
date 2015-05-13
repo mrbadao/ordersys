@@ -101,4 +101,8 @@ class DefaultController extends Controller
             echo json_encode($_result);
         }
     }
+
+    public function actionCheckout(){
+        var_dump('sadasd');
+    }
 }
