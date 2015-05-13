@@ -37,12 +37,8 @@
             </a>
         </div>
 
-
-        <div class="shopping-cart">
-            <span class="icon ir">Cart</span>
-            <span class="text"><a href="#"><span class="title">Giỏ hàng</span></a> (<span>0</span> Sản phẩm) - </span>
-            <span class="price"><span>100,000</span><span>đ</span></span>
-        </div>
+        <!--top cart-->
+        <tal:block tal:content="structure php:this.widget('application.widgets.TopCartWidget',menu,true)"/>
 
     </div>
 
