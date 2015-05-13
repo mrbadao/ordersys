@@ -222,11 +222,6 @@ function checkSearchKey(){
     return true;
 }
 
-function submitFrmCart(){
-    $('#frm-cart').submit();
-}
-
-
 function addCart(product_id, qty){
     var formData = new FormData();
     formData.append('pid', product_id);
@@ -250,4 +245,8 @@ function addCart(product_id, qty){
             }
         }
     });
+}
+
+function submitFrmCart(){
+    $('#frm-cart').submit();
 }
