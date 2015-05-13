@@ -79,6 +79,9 @@ class Helpers
         return self::genUrlfromName(null, $cat);
     }
 
+    public static function getProduct($id){
+        return ContentProduct::model()->findByPk($id);
+    }
 }
 
 ?>

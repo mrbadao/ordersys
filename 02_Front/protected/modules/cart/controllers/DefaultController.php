@@ -6,49 +6,55 @@ class DefaultController extends Controller
 
     public function actionIndex()
     {
-        throw new CHttpException(404,'Page not exists.');
+        throw new CHttpException(404, 'Page not exists.');
     }
 
     public function actionAddItem()
     {
-        if(!Yii::app()->request->isAjaxRequest) throw new CHttpException(404,'Page not exists.');
+        if (!Yii::app()->request->isAjaxRequest) throw new CHttpException(404, 'Page not exists.');
 
         $id = isset($_POST['pid']) ? $_POST['pid'] : null;
         $qty = isset($_POST['qty']) ? $_POST['qty'] : null;
 
-        if($id != null && $qty != null){
+        if ($id != null && $qty != null) {
             $session = Yii::app()->session;
-            $cart = null;
+            $cart = array();
+            $flg = false;
 
-            if($session->contains(self::SESSION_KEY)){
+            if ($session->contains(self::SESSION_KEY)) {
                 $cart = $session[self::SESSION_KEY];
                 $session->remove(self::SESSION_KEY);
             }
 
-            $_result = array();
-            $flg = false;
-
-
-                if($cart !=null){
-                    foreach($cart as $existsItem){
-                        if($id == $existsItem['id']){
-                            $existsItem['qty'] += $qty;
-                            $flg = true;
-                        }
-                        $_result[] = $existsItem;
+            if ($cart != null) {
+                for($i=0; $i<count($cart); $i++) {
+                    if ($id == $cart[$i]['id']) {
+                        $cart[$i]['qty'] += $qty;
+                        $flg = true;
                     }
-                }else{
-                    $cart[] = array('id' => $id, 'qty' => $qty);
                 }
+            }
 
-            $cart = $_result;
+            if(!$flg) {
+                $cart[] = array('id' => $id, 'qty' => $qty);
+            }
+
+            $_result['count'] = count($cart);
+            $_result['total'] = 0;
+
+            for($i=0; $i<count($cart); $i++){
+                $product = Helpers::getProduct($cart[$i]['id']);
+
+                if($product){
+                    $_result['total'] += $product->price * $cart[$i]['qty'];
+                }else{
+                    unset($cart[$i]);
+                }
+            }
+
             $session->add(self::SESSION_KEY, $cart);
 
-            Helpers::_sendResponse(200, json_encode(array(
-                'status' => array(
-                    "status_code" => "1007",
-                    "status_message" => "Item is edited successly.",
-                ))));
+            echo json_encode($_result);
         }
     }
 }
