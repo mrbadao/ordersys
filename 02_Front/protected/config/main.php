@@ -73,6 +73,10 @@ return array(
                     'class' => 'application.components.CategoryUrlRule',
                     'connectionID' => 'db',
                 ),
+                array(
+                    'class' => 'application.components.CartUrlRule',
+                    'connectionID' => 'db',
+                ),
                 '<module:\w+>/<action:\w+>'=>'<module>/default/<action>',
 			),
 		),
