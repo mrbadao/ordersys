@@ -39,8 +39,8 @@
                                 </div>
 
                                 <select id="main-quantity" class="main">
-                                    <option>1</option>
-                                    <option selected="selected">2</option>
+                                    <option selected="selected">1</option>
+                                    <option>2</option>
                                     <option>3</option>
                                     <option>4</option>
                                     <option>5</option>
@@ -55,7 +55,7 @@
                         </li>
                         <li>
 
-                            <a href="#" class="add-to-cart clearfix">
+                            <a onclick="addCart('${item/id}', getQuantity())" href="javascript:void(0)" class="add-to-cart clearfix">
                                 <span class="icon ir">Giỏ</span>
                                 <span class="text">Thêm vào giỏ</span>
                             </a>
@@ -125,3 +125,9 @@
         </ul>
     </div>
 </div>
+
+<script>
+    function getQuantity(){
+        return $('#main-quantity').val();
+    }
+</script>

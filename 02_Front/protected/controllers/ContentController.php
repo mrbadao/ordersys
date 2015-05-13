@@ -32,6 +32,7 @@ class ContentController extends Controller
 	}
 
     public function actionAbout(){
+		$this->setTitle('Giới thiệu | '.Yii::app()->params['appName']);
         $this->render('about');
     }
 
@@ -40,6 +41,7 @@ class ContentController extends Controller
     }
 
     public function actionContact(){
+		$this->setTitle('Liên hệ | '.Yii::app()->params['appName']);
         var_dump('Lien he');
     }
 

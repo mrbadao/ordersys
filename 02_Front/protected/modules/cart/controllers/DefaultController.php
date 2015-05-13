@@ -6,6 +6,8 @@ class DefaultController extends Controller
 
     public function actionIndex()
     {
+        $this->setTitle('Giỏ hàng | '.Yii::app()->params['appName']);
+
         $nodata = false;
         $cart = null;
         $items = array();
@@ -103,6 +105,7 @@ class DefaultController extends Controller
     }
 
     public function actionCheckout(){
+        $this->setTitle('Thanh toán | '.Yii::app()->params['appName']);
         $this->render('checkout');
     }
 }
