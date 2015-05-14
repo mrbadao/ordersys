@@ -35,14 +35,14 @@ class DeliveryStaff extends CActiveRecord
 			array('id', 'numerical', 'integerOnly'=>true),
 			array('login_id', 'length', 'max'=>20),
 			array('login_id, email', 'unique', 'message'=> 'Login id đã tồn tại'),
-			array('pasword, address', 'length', 'max'=>128),
+			array('pasword, name, address', 'length', 'max'=>128),
 			array('phone', 'length', 'max'=>15),
 			array('email', 'length', 'max'=>60),
 			array('email', 'email', 'message'=>'Email không hợp lệ'),
-			array('created, modified', 'safe'),
+			array('name, created, modified', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, login_id, pasword, phone, email, address, created, modified', 'safe', 'on'=>'search'),
+			array('id, login_id, pasword, name, phone, email, address, created, modified', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -66,6 +66,7 @@ class DeliveryStaff extends CActiveRecord
 			'id' => 'ID',
 			'login_id' => 'Login',
 			'pasword' => 'Password',
+			'name' => 'Tên',
 			'phone' => 'Phone',
 			'email' => 'Email',
 			'address' => 'Địa chỉ',
@@ -95,6 +96,7 @@ class DeliveryStaff extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('login_id',$this->login_id,true);
 		$criteria->compare('pasword',$this->pasword,true);
+		$criteria->compare('name',$this->name,true);
 		$criteria->compare('phone',$this->phone,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('address',$this->address,true);

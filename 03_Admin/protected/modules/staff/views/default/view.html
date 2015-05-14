@@ -15,12 +15,17 @@
 
     <div class="tabBox">
         <form action="edit" method="get" name="article">
-            <input type="hidden" name="id" value="${contentCat/id}"/>
+            <input type="hidden" name="id" value="${contentStaff/id}"/>
             <div class="mBoxitem_table">
                 <table cellpadding="0" cellspacing="0" border="0" class="tableTate">
                     <tr>
                         <th>Login id</th>
                         <td tal:content="contentStaff/login_id|''" id="title"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Tên</th>
+                        <td tal:content="contentStaff/name|''"></td>
                     </tr>
 
                     <tr>
