@@ -1,6 +1,6 @@
 <footer>
     <div class="top">
-        <tal:block tal:content="structure php:this.widget('application.widgets.SnsFooterWidget', array(), true)"/>
+        <tal:block tal:content="structure php:this.widget('application.widgets.SnsFooterWidget', array('settings' => settings), true)"/>
     </div>
 
     <div class="middle">
@@ -46,19 +46,19 @@
                         <li>
                             <a href="#" class="clearfix">
                                 <span class="ir icon phone">Phone</span>
-                                <span class="phone-no">(+84) 123 456 789</span>
+                                <span class="phone-no" tal:content="settings/Phone">(+84) 123 456 789</span>
                             </a>
                         </li>
                         <li>
                             <a href="#" class="clearfix">
                                 <span class="ir icon mobile">Mobile</span>
-                                <span class="phone-no">(+84) 123 456 789</span>
+                                <span class="phone-no" tal:content="settings/Mobile">(+84) 123 456 789</span>
                             </a>
                         </li>
                         <li>
                             <a href="#" class="clearfix">
                                 <span class="ir icon mail">Mail</span>
-                                <span>support@menshop.com</span>
+                                <span tal:content="settings/Email">support@menshop.com</span>
                             </a>
                         </li>
                     </ul>

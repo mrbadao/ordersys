@@ -1,13 +1,11 @@
 <div class="container">
     <div class="row">
-
         <div class="span12 clearfix social-wrapper">
-            <ul class="social rr clearfix">
-                <li><span>Follow us</span></li>
-                <li><a href="#" class="ir icon tw">Twitter</a></li>
-                <li><a href="http://www.facebook.com/TeoThemes" class="ir icon fb">Facebook</a></li>
-                <li><a href="#" class="ir icon gp">Google plus</a></li>
-                <li><a href="#" class="ir icon rss">RSS</a></li>
+            <ul class="social rr clearfix" tal:condition="settings">
+                <li><span>Theo dõi chúng tôi</span></li>
+                <li tal:condition="settings/Twitter"><a href="https://twitter.com/${settings/Twitter|''}" class="ir icon tw">Twitter</a></li>
+                <li tal:condition="settings/Facebook"><a href="http://www.facebook.com/${settings/Facebook|''}" class="ir icon fb">Facebook</a></li>
+                <li tal:condition="settings/Gplus"><a href="https://plus.google.com/${settings/Gplus|''}" class="ir icon gp">Google plus</a></li>
             </ul>
         </div>
 
