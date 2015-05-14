@@ -42,7 +42,7 @@ class ContentController extends Controller
 
     public function actionContact(){
 		$this->setTitle('Liên hệ | '.Yii::app()->params['appName']);
-        var_dump('Lien he');
+        $this->render('contact');
     }
 
     public function actionError(){
