@@ -15,7 +15,9 @@ class FooterWidget extends CLinkPager {
         $settings = null;
 
         foreach ($settingKey as $item) {
-            $settings[] = self::getSetting($item);
+            $setting =  self::getSetting($item);
+            if($setting != null)
+            $settings[$setting->key] = $setting->value;
         }
 
         $this->render('footer-widget', compact('settings'));
