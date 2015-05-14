@@ -31,6 +31,7 @@ class ContentContact extends CActiveRecord
 		return array(
 			array('name, email, comment', 'required'),
 			array('name, email', 'length', 'max'=>128),
+			array('email', 'email','message'=>"Email không hợp lệ."),
 			array('created, modified', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -110,5 +111,7 @@ class ContentContact extends CActiveRecord
             $this->created = date("Y-m-d H:i:s");
         }
         $this->modified = date("Y-m-d H:i:s");
+
+        return true;
     }
 }

@@ -8,7 +8,7 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Thức ăn cú đêm',
-	'language' => 'en',
+	'language' => 'vi',
     'defaultController' =>'Content',
 
 	// preloading 'log' component
