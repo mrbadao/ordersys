@@ -161,10 +161,8 @@ class DefaultController extends Controller
                     $hasError['msg'] = 'Chúng tôi không thể xác định vị trí của bạn. Xin vui lòng thữ lại hoặc sữ dụng android app của chúng thôi.';
                 }
             } else {
-                if (isset($_POST['name'])) {
-                    $hasError['flg'] = true;
-                    $hasError['msg'] = 'Hãy nhập đủ thông tin.';
-                }
+                $hasError['flg'] = true;
+                $hasError['msg'] = 'Hãy nhập đủ thông tin cần thiêt.';
             }
         } else {
             $hasError['flg'] = true;
