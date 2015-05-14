@@ -22,7 +22,7 @@
     <div class="tabBox">
         <div class="mBoxitem_table">
             <table cellpadding="0" cellspacing="0" border="0" class="tableTate">
-                <tr tal:condition="settings" tal:repeat="siteSetting siteSettings">
+                <tr tal:condition="siteSettings" tal:repeat="siteSetting siteSettings">
                     <th>${siteSetting/key|''}</th>
                     <td>
                         <input type="text" name="setting[${siteSetting/key|''}]" maxlength="100" value="${siteSetting/value|''}"  class="txtbox title txt_en" style="width:120px;" id="title" />
