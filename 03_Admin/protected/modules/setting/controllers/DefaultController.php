@@ -31,8 +31,13 @@ class DefaultController extends Controller
             $setting->key = $key;
         }
 
-        $setting->value = $val;
-        $setting->save(false);
+        if($val != '') {
+            $setting->value = $val;
+        }
+
+        if ($setting->validate()) {
+            $setting->save(false);
+        }
 
         return $setting;
     }
