@@ -253,15 +253,21 @@ function submitFrmCart(){
 
 function checkoutMoveStep(curentStepId, nextStepId, nextProgressId){
     var hasError = false;
-    $(curentStepId).find('input').each(function(){
-        var value = $(this).val();
-        var key = $(this).attr('name');
-        if(value.length < 1) hasError = true;
-        else{
-            console.log('#checkout-step-3 #'+key );
-            $('#checkout-step-3 #'+key ).text(value);
+    if(curentStepId == '#checkout-step-3'){
+        if($.trim($('#checkout-step-3 #name').text()) == 'Chưa xác nhận.' && $.trim($('#checkout-step-3 #phone').text()) == 'Chưa xác nhận.' && $.trim($('#checkout-step-3 #address').text()) == 'Chưa xác nhận.'){
+            hasError = true;
         }
-    });
+    }else{
+        $(curentStepId).find('input').each(function(){
+            var value = $(this).val();
+            var key = $(this).attr('name');
+            if(value.length < 1) hasError = true;
+            else{
+                console.log('#checkout-step-3 #'+key );
+                $('#checkout-step-3 #'+key ).text(value);
+            }
+        });
+    }
 
     if(hasError){
         alert('Hãy nhập đầy đủ thông tin.')
