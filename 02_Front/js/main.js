@@ -279,6 +279,20 @@ function checkoutMoveStep(curentStepId, nextStepId, nextProgressId){
     }
 }
 
+function submitCheckout(){
+    var hasError = false;
+    $('.checkout .checkout-list').find('input').each(function(){
+        var value = $(this).val();
+        if(value.length < 1) hasError = true;
+    });
+
+    if(hasError){
+        alert('Hãy nhập đầy đủ thông tin.')
+    }else{
+        $('#formCheckout').submit();
+    }
+}
+
 
 $(document).ready(function(){
     $('.checkout .checkout-list .subProgress li').click(function(){
