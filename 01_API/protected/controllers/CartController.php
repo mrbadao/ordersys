@@ -101,10 +101,16 @@ class CartController extends Controller
             {
                 foreach($cart as $existsItem){
                     if($item['id'] == $existsItem['id']){
-                        $existsItem['qty'] += $item['qty'];
-                        $_result[] = $existsItem;
+                        if($item['qty'] == '0'){
+                            $existsItem = null;
+                        }else {
+                            $existsItem['qty'] += $item['qty'];
+                        }
                         $isNewCartItem = false;
-                    }else{
+                    }
+
+                    if($existsItem != null)
+                    {
                         $_result[] = $existsItem;
                     }
                 }

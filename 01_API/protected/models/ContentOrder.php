@@ -7,6 +7,7 @@
  * @property integer $id
  * @property string $name
  * @property string $customer_name
+ * @property string $customer_address
  * @property string $order_phone
  * @property string $email
  * @property string $coordinate_lat
@@ -34,16 +35,16 @@ class ContentOrder extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, customer_name, order_phone, email, coordinate_lat, coordinate_long', 'required'),
-//			array('status, delivery_id', 'numerical', 'integerOnly'=>true),
-			array('name', 'length', 'max'=>128),
+			array('name, customer_name, customer_address, order_phone, email, coordinate_lat, coordinate_long', 'required'),
+			array('status, delivery_id', 'numerical', 'integerOnly'=>true),
+			array('name, customer_address', 'length', 'max'=>128),
 			array('customer_name, email', 'length', 'max'=>100),
 			array('order_phone', 'length', 'max'=>14),
 			array('coordinate_lat, coordinate_long', 'length', 'max'=>50),
-			array('created, status, delivery_id', 'safe'),
+			array('created, completed', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, customer_name, order_phone, email, coordinate_lat, coordinate_long, status, delivery_id, created, completed', 'safe', 'on'=>'search'),
+			array('id, name, customer_name, customer_address, order_phone, email, coordinate_lat, coordinate_long, status, delivery_id, created, completed', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,6 +68,7 @@ class ContentOrder extends CActiveRecord
 			'id' => 'ID',
 			'name' => 'Name',
 			'customer_name' => 'Customer Name',
+			'customer_address' => 'Customer Address',
 			'order_phone' => 'Order Phone',
 			'email' => 'Email',
 			'coordinate_lat' => 'Coordinate Lat',
@@ -99,6 +101,7 @@ class ContentOrder extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('customer_name',$this->customer_name,true);
+		$criteria->compare('customer_address',$this->customer_address,true);
 		$criteria->compare('order_phone',$this->order_phone,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('coordinate_lat',$this->coordinate_lat,true);

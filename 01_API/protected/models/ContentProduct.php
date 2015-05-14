@@ -9,11 +9,15 @@
  * @property string $thumbnail
  * @property string $description
  * @property string $price
+ * @property integer $category_id
+ * @property integer $del_flg
  * @property string $created
  * @property string $modified
  */
 class ContentProduct extends CActiveRecord
 {
+	public $cat_name = '';
+    public $frendlyUrl = '';
 	/**
 	 * @return string the associated database table name
 	 */
@@ -30,14 +34,14 @@ class ContentProduct extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-            array('name, category_id', 'required'),
-            array('name', 'unique'),
+			array('name, category_id, thumbnail', 'required'),
+			array('category_id, del_flg', 'numerical', 'integerOnly'=>true),
 			array('name, thumbnail', 'length', 'max'=>128),
 			array('price', 'length', 'max'=>50),
-			array('thumbnail, description, category_id, created, modified', 'safe'),
+			array('description, del_flg, created, modified', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, thumbnail, description, price, category_id, created, modified', 'safe', 'on'=>'search'),
+			array('id, name, thumbnail, description, price, category_id, del_flg, created, modified', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,11 +63,12 @@ class ContentProduct extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Name',
+			'name' => 'Tên sản phẩm',
 			'thumbnail' => 'Thumbnail',
-			'description' => 'Description',
-            'price' => 'Price',
-            'category_id' => 'Category id',
+			'description' => 'Miêu tả',
+			'price' => 'Giá sản phẩm',
+			'category_id' => 'Category',
+			'del_flg' => 'Del Flg',
 			'created' => 'Created',
 			'modified' => 'Modified',
 		);
@@ -91,8 +96,9 @@ class ContentProduct extends CActiveRecord
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('thumbnail',$this->thumbnail,true);
 		$criteria->compare('description',$this->description,true);
-        $criteria->compare('price',$this->price,true);
-        $criteria->compare('category_id',$this->category_id,true);
+		$criteria->compare('price',$this->price,true);
+		$criteria->compare('category_id',$this->category_id);
+		$criteria->compare('del_flg',$this->del_flg);
 		$criteria->compare('created',$this->created,true);
 		$criteria->compare('modified',$this->modified,true);
 
@@ -110,5 +116,23 @@ class ContentProduct extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	public function afterSave(){
+        $category = ContentCategories::model()->findByPk($this->category_id);
+
+        if($category){
+            $this->cat_name = $category->name;
+            $this->frendlyUrl = $category->abbr_cd.'/'.$this->id.'/'.Helpers::getDomainFromName($this->name).'.html';
+        }
+	}
+
+	public function afterFind(){
+        $category = ContentCategories::model()->findByPk($this->category_id);
+
+        if($category){
+            $this->cat_name = $category->name;
+            $this->frendlyUrl = $category->abbr_cd.'/'.$this->id.'/'.Helpers::getDomainFromName($this->name).'.html';
+        }
 	}
 }
