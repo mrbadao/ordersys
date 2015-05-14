@@ -42,11 +42,28 @@ class ContentController extends Controller
 
     public function actionContact(){
 		$this->setTitle('Liên hệ | '.Yii::app()->params['appName']);
-        $this->render('contact');
+        $shopLocation = Yii::app()->params['shopLocation'];
+
+        $settings = null;
+        $settingKey = array('Email', 'Phone', 'Mobile');
+
+        foreach ($settingKey as $item) {
+            $setting =  self::getSetting($item);
+            if($setting != null)
+                $settings[$setting->key] = $setting->value;
+        }
+        $this->render('contact', compact('settings', 'shopLocation'));
     }
 
     public function actionError(){
         $this->layout = "error-layout";
         $this->render('error');
+    }
+
+    private function getSetting($key)
+    {
+        $setting = null;
+        $setting = Setting::model()->findByAttributes(array('key' => $key));
+        return $setting;
     }
 }

@@ -113,5 +113,6 @@ return array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
         'appName' => 'Owl Food Shop',
+        'shopLocation' => array('lat' => '10.8172357', 'lng' => '106.63364409999997'),
 	),
 );

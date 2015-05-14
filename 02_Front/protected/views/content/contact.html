@@ -7,19 +7,22 @@
 
 <div role="main" class="container contact">
     <div class="row">
+        <div class="span12">
+            <h5 style="text-align: center; color: #ED1C24 !important;">Không tim thây kết quả nào.</h5>
+        </div>
 
         <div class="span5">
-            <h1>Contact with us</h1>
+            <h1>Liên hệ với chúng tôi</h1>
 
-            <form action="http://teothemes.com/html/MenStyle/process.php" method="post" class="clearfix">
+            <form action="" method="post" class="clearfix" id="formContact">
                 <label>
-                    <input class="text-input" type="text" name="name" placeholder="Your Name..."/>
+                    <input class="text-input" type="text" name="name" placeholder="Tên của bạn..."/>
                 </label>
                 <label>
-                    <input class="text-input" type="text" name="email" placeholder="Your Email..."/>
+                    <input class="text-input" type="text" name="email" placeholder="Email của bạn..."/>
                 </label>
-                <textarea class="text-input" name="comment" placeholder="Your Message...">Your Message...</textarea>
-                <a href="#" class="btn"><span class="gradient"><input type="image" value="Submit" /></span></a>
+                <textarea class="text-input" name="comment" placeholder="Your Message...">nội dung...</textarea>
+                <a href="javascript:document.forms['formContact'].submit()" class="btn"><span class="gradient"><input type="image" value="Gữi" /></span></a>
             </form>
         </div>
 
@@ -29,7 +32,7 @@
             <figure class="map">
                 <div class="wrapper">
                     <div class="shadow">Shadow</div>
-                    <div style="width:480px; height:296px;">
+                    <div id="map_id" style="width:480px; height:296px;">
                         <div id="map_id"></div>
                     </div>
 
@@ -41,34 +44,37 @@
     <div class="row top-spacing">
         <div class="span5">
 
-            <h1>About our branch</h1>
+            <h1>Về chúng tôi</h1>
 
             <p>
-                Lorem ipsum dolor sit amet, con sectetur adpiscing elit. Ne Duis eu feugiat ma ed gna. Nunc quis elit erois. Integer velies lacinia leo. Sed elementum, est vitae eles em ens entum laci nia. Ne Duis eu feugiat maed gna.
+                Luận văn tốt nghiệp "Đặt hàng qua di động"<br/>
+                Nguyễn Chí Hiếu<br/>
+                Đai học CÔNG NGHỆ THÔNG TIN - DHQG TP.HỒ CHÍ MINH<br/>
+                MSSV: 10520490<br/>
             </p>
 
         </div>
 
         <div class="span6 offset1">
 
-            <h1>Contact details</h1>
+            <h1>Thông tin liên hệ</h1>
 
             <p>
-                Hanoi, Michaellee. 888 North Main Street, Losagenles, Bratin. e Duis eu feugiat maed gna. Nunc quis elit erois. Integer velies lacinia leo. Sed elementum, est vitaee les em ens entum laci nia.
+                150/75/42 Quang Trung, Phường 13, Quận Gò Vấp, TP. Hồ Chí Minh.
             </p>
 
-            <ul class="rr info clearfix">
-                <li>
-                    Phone: <span class="val">888.588.688</span>
+            <ul class="rr info clearfix" tal:condition="settings">
+                <li tal:condition="settings/Phone">
+                    Phone: <span class="val" tal:content="settings/Phone">888.588.688</span>
+                </li>
+                <li tal:condition="settings/Mobile">
+                    Mobile: <span class="val" tal:content="settings/Mobile">888.588.688</span>
+                </li>
+                <li tal:condition="settings/Email">
+                    Email: <span class="val" tal:content="settings/Email">contact@companyname.com</span>
                 </li>
                 <li>
-                    Email: <span class="val">contact@companyname.com</span>
-                </li>
-                <li>
-                    Fax: <span class="val">0123.456.789</span>
-                </li>
-                <li>
-                    Web: <span class="val">www.companyname.com</span>
+                    Web: <span class="val">www.web.order-sys.tk</span>
                 </li>
             </ul>
 
@@ -80,7 +86,7 @@
 <script type="text/javascript">
     var map;
     function initialize() {
-        var myLatlng = new google.maps.LatLng(10.8172357, 106.63364409999997);
+        var myLatlng = new google.maps.LatLng('${shopLocation/lat}', '${shopLocation/lng}');
         var myOptions = {
             zoom: 16,
             center: myLatlng,
@@ -89,7 +95,7 @@
         map = new google.maps.Map(document.getElementById("map_id"), myOptions);
         // Biến text chứa nội dung sẽ được hiển thị
         var text;
-        text= "<b>TNHH ĐIỆN TỬ VIỄN THÔNG SÀI GÒN </b>";
+        text= "<b>Owl Food Shop </b>";
         var infowindow = new google.maps.InfoWindow(
                 { content: text,
                     size: new google.maps.Size(100,50),
