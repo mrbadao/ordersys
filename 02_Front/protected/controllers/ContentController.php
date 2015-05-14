@@ -34,21 +34,23 @@ class ContentController extends Controller
     public function actionAbout()
     {
         $this->setTitle('Giới thiệu | ' . Yii::app()->params['appName']);
-        $this->render('about');
+        $page = ContentPage::model()->findByAttributes(array('key' => 'about'));
+        $this->render('about', compact('page'));
     }
 
     public function actionDeliveryInfo()
     {
-        $hasError =false;
-
+        $hasError = false;
         $order = null;
 
-        if($_POST['name']) {
+        $page = ContentPage::model()->findByAttributes(array('key' => 'deliveryinfo'));
+
+        if ($_POST['name']) {
             $order = ContentOrder::model()->findByAttributes(array('name' => $_POST['name']));
-            if($order == null) $hasError = true;
+            if ($order == null) $hasError = true;
         }
 
-        $this->render('deliveryinfo', compact('order', 'hasError'));
+        $this->render('deliveryinfo', compact('order', 'hasError', 'page'));
     }
 
     public function actionContact()
