@@ -17,7 +17,7 @@ class DefaultController extends Controller
 			$siteSettings[] = self::getSetting($item, '');
 		}
 
-		$this->render('index', compact('$siteSettings', 'msg'));
+		$this->render('index', compact('siteSettings', 'msg'));
 	}
 
 	private function getSetting($key, $val){
