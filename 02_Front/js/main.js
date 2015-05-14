@@ -271,9 +271,9 @@ function checkoutMoveStep(curentStepId, nextStepId, nextProgressId){
 
 
 $(document).ready(function(){
-    $('.checkout .progress .subProgress li').click(function(){
+    $('.checkout .checkout-list .subProgress li').click(function(){
         console.log('li click');
-        $('.checkout-list').find('.current').each(function(){$(this).removeClass('current')});
+        $('.checkout .checkout-list').find('.current').each(function(){$(this).removeClass('current')});
         $(this).addClass('current');
     });
 });
