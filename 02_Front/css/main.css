@@ -1979,6 +1979,7 @@ div[role="main"].homepage {
 
 .checkout .checkout-list > ol > li {
     counter-increment: customlistcounter;
+    cursor: pointer;
     margin-bottom: 10px;
 }
 

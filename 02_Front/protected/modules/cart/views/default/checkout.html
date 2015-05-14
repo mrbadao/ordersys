@@ -134,13 +134,3 @@
         </form>
     </div>
 </div>
-
-<script>
-    $(document).ready(function(){
-        $('.checkout .progress .subProgress li').click(function(){
-            console.log('li click');
-            $('.checkout-list').find('.current').each(function(){$(this).removeClass('current')});
-            $(this).addClass('current');
-        });
-    });
-</script>

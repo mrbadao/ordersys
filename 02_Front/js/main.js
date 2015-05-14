@@ -268,3 +268,13 @@ function checkoutMoveStep(curentStepId, nextStepId, nextProgressId){
         $(nextProgressId).addClass('active');
     }
 }
+
+
+$(document).ready(function(){
+    $('.checkout .progress .subProgress li').click(function(){
+        console.log('li click');
+        $('.checkout-list').find('.current').each(function(){$(this).removeClass('current')});
+        $(this).addClass('current');
+    });
+});
+
