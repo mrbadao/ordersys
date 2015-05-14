@@ -2,46 +2,49 @@
 
 class ContentController extends Controller
 {
-	/**
-	 * Declares class-based actions.
-	 */
-	public function actions()
-	{
-		return array(
-			// captcha action renders the CAPTCHA image displayed on the contact page
-			'captcha'=>array(
-				'class'=>'CCaptchaAction',
-				'backColor'=>0xFFFFFF,
-			),
-			// page action renders "static" pages stored under 'protected/views/site/pages'
-			// They can be accessed via: index.php?r=site/page&view=FileName
-			'page'=>array(
-				'class'=>'CViewAction',
-			),
-		);
-	}
+    /**
+     * Declares class-based actions.
+     */
+    public function actions()
+    {
+        return array(
+            // captcha action renders the CAPTCHA image displayed on the contact page
+            'captcha' => array(
+                'class' => 'CCaptchaAction',
+                'backColor' => 0xFFFFFF,
+            ),
+            // page action renders "static" pages stored under 'protected/views/site/pages'
+            // They can be accessed via: index.php?r=site/page&view=FileName
+            'page' => array(
+                'class' => 'CViewAction',
+            ),
+        );
+    }
 
 
-	/**
-	 * This is the default 'index' action that is invoked
-	 * when an action is not explicitly requested by users.
-	 */
-	public function actionIndex()
-	{
-		$this->render('index');
-	}
+    /**
+     * This is the default 'index' action that is invoked
+     * when an action is not explicitly requested by users.
+     */
+    public function actionIndex()
+    {
+        $this->render('index');
+    }
 
-    public function actionAbout(){
-		$this->setTitle('Giới thiệu | '.Yii::app()->params['appName']);
+    public function actionAbout()
+    {
+        $this->setTitle('Giới thiệu | ' . Yii::app()->params['appName']);
         $this->render('about');
     }
 
-    public function actionDeliveryInfo(){
+    public function actionDeliveryInfo()
+    {
         var_dump('thong tin giao hang');
     }
 
-    public function actionContact(){
-		$this->setTitle('Liên hệ | '.Yii::app()->params['appName']);
+    public function actionContact()
+    {
+        $this->setTitle('Liên hệ | ' . Yii::app()->params['appName']);
 
         $shopLocation = Yii::app()->params['shopLocation'];
 
@@ -49,28 +52,29 @@ class ContentController extends Controller
         $settingKey = array('Email', 'Phone', 'Mobile');
 
         foreach ($settingKey as $item) {
-            $setting =  self::getSetting($item);
-            if($setting != null)
+            $setting = self::getSetting($item);
+            if ($setting != null)
                 $settings[$setting->key] = $setting->value;
         }
 
         $msg = false;
         $contact = null;
 
-        if(isset($_POST['contact'])){
+        if (isset($_POST['contact'])) {
             $contact = new ContentContact();
             $contact->attributes = $_POST['contact'];
-            if($contact->validate()){
+            if ($contact->validate()) {
                 $contact->save(false);
                 $msg = true;
                 $contact = null;
             }
         }
-//        var_dump('ad11ad'); die;
-        $this->render('contact', compact('settings', 'shopLocation', 'contact' ,'msg'));
+
+        $this->render('contact', compact('settings', 'shopLocation', 'contact', 'msg'));
     }
 
-    public function actionError(){
+    public function actionError()
+    {
         $this->layout = "error-layout";
         $this->render('error');
     }

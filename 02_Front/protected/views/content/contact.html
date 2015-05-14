@@ -8,10 +8,14 @@
 <div role="main" class="container contact">
     <div class="row">
         <div class="span12">
-            <h5 tal:condition="contact" style="text-align: center; color: #ED1C24 !important;">Chúng tôi đã nhận được ý kiến của bạn.</h5>
-            <h5 tal:condition="contact" tal:content="structure php:CHtml::error(contact,'name')" style="text-align: center; color: #ED1C24 !important;">Chúng tôi đã nhận được ý kiến của bạn.</h5>
-            <h5 tal:condition="contact" tal:content="structure php:CHtml::error(contact,'email')" style="text-align: center; color: #ED1C24 !important;">Chúng tôi đã nhận được ý kiến của bạn.</h5>
-            <h5 tal:condition="contact" tal:content="structure php:CHtml::error(contact,'comment')" style="text-align: center; color: #ED1C24 !important;">Chúng tôi đã nhận được ý kiến của bạn.</h5>
+            <h5 tal:condition="msg" style="text-align: center; color: #ED1C24 !important;">Chúng tôi đã nhận được ý kiến
+                của bạn.</h5>
+            <h5 tal:condition="contact" tal:content="structure php:CHtml::error(contact,'name')"
+                style="text-align: center; color: #ED1C24 !important;">Chúng tôi đã nhận được ý kiến của bạn.</h5>
+            <h5 tal:condition="contact" tal:content="structure php:CHtml::error(contact,'email')"
+                style="text-align: center; color: #ED1C24 !important;">Chúng tôi đã nhận được ý kiến của bạn.</h5>
+            <h5 tal:condition="contact" tal:content="structure php:CHtml::error(contact,'comment')"
+                style="text-align: center; color: #ED1C24 !important;">Chúng tôi đã nhận được ý kiến của bạn.</h5>
         </div>
 
         <div class="span5">
@@ -19,13 +23,16 @@
 
             <form action="" method="post" class="clearfix" id="formContact">
                 <label>
-                    <input class="text-input" type="text" name="contact[name]" placeholder="Tên của bạn..." value="${contact/name|''}"/>
+                    <input class="text-input" type="text" name="contact[name]" placeholder="Tên của bạn..."
+                           value="${contact/name|''}"/>
                 </label>
                 <label>
-                    <input class="text-input" type="text" name="contact[email]" placeholder="Email của bạn..." value="${contact/email|''}"/>
+                    <input class="text-input" type="text" name="contact[email]" placeholder="Email của bạn..."
+                           value="${contact/email|''}"/>
                 </label>
                 <textarea class="text-input" name="contact[comment]" placeholder="Your Message...">${contact/comment|'nội dung...'}</textarea>
-                <a href="javascript:document.forms['formContact'].submit()" class="btn"><span class="gradient"><input type="image" value="Gữi" /></span></a>
+                <a href="javascript:document.forms['formContact'].submit()" class="btn"><span class="gradient"><input
+                        type="image" value="Gữi"/></span></a>
             </form>
         </div>
 
@@ -98,17 +105,18 @@
         map = new google.maps.Map(document.getElementById("map_id"), myOptions);
         // Biến text chứa nội dung sẽ được hiển thị
         var text;
-        text= "<b>Owl Food Shop </b>";
+        text = "<b>Owl Food Shop </b>";
         var infowindow = new google.maps.InfoWindow(
-                { content: text,
-                    size: new google.maps.Size(100,50),
+                {
+                    content: text,
+                    size: new google.maps.Size(100, 50),
                     position: myLatlng
                 });
         infowindow.open(map);
         var marker = new google.maps.Marker({
             position: myLatlng,
             map: map,
-            title:"So do duong di"
+            title: "So do duong di"
         });
     }
 </script>
