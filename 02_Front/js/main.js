@@ -254,7 +254,7 @@ function submitFrmCart(){
 function checkoutMoveStep(curentStepId, nextStepId, nextProgressId){
     var hasError = false;
     if(curentStepId == '#checkout-step-3'){
-        if($.trim($('#checkout-step-3 #name').text()) == 'Chưa xác nhận.' && $.trim($('#checkout-step-3 #phone').text()) == 'Chưa xác nhận.' && $.trim($('#checkout-step-3 #address').text()) == 'Chưa xác nhận.'){
+        if($.trim($('#checkout-step-3 #name').text()) == 'Chưa xác nhận.' || $.trim($('#checkout-step-3 #phone').text()) == 'Chưa xác nhận.' || $.trim($('#checkout-step-3 #address').text()) == 'Chưa xác nhận.'){
             hasError = true;
         }
     }else{
