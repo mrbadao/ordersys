@@ -52,7 +52,7 @@ class DefaultController extends Controller
 
 	public function actionSearch(){
 		$this->title='Manager Staff | CMS Order Sys';
-		$search['login_id'] = $search['phone'] = '';
+		$search['login_id'] = $search['phone'] = $search['name'] = '';
 
 		$session = Yii::app()->session;
 
@@ -83,9 +83,12 @@ class DefaultController extends Controller
 				}
 				switch($k)
 				{
-					case 'login_id':
-						$c->compare($k, $v, true,'AND');
-						break;
+                    case 'login_id':
+                        $c->compare($k, $v, true,'AND');
+                        break;
+                    case 'name':
+                        $c->compare($k, $v, true,'AND');
+                        break;
 					case 'phone':
 						$c->compare($k, $v, true,'AND');
 						break;

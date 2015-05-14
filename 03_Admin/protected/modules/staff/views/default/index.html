@@ -11,6 +11,12 @@
                 <td><input  value="${search/login_id|''}" name="search[login_id]" class="txtbox" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 300px;"/></td>
             </tr>
             <tr>
+                <th>Tên</th>
+                <td>
+                    <input  value="${search/name|''}" name="search[name]" class="txtbox" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 300px;"/>
+                </td>
+            </tr>
+            <tr>
                 <th>Phone</th>
                 <td>
                     <input  value="${search/phone|''}" name="search[phone]" class="txtbox" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 300px;"/>
@@ -49,6 +55,7 @@
             <thead>
                 <tr>
                     <th>Login id</th>
+                    <th class="thYokoM">Tên</th>
                     <th class="thYokoM">Email</th>
                     <th class="thYokoM">Phone</th>
                     <th class="thYokoM">Địa chỉ</th>
@@ -59,6 +66,7 @@
             </thead>
             <tr tal:repeat="item items">
                 <td tal:content="item/login_id"></td>
+                <td tal:content="item/name"></td>
                 <td tal:content="item/email"></td>
                 <td tal:content="item/phone"></td>
                 <td tal:content="item/address"></td>
