@@ -22,7 +22,7 @@ class ContentUrlRule extends CBaseUrlRule
                 }
                 return 'tim-kiem/';
 
-            case 'content/about/deliveryinfo';
+            case 'content/deliveryinfo';
                 return 'thong-tin-giao-hang.html';
 
             case 'content/contact';
@@ -49,7 +49,7 @@ class ContentUrlRule extends CBaseUrlRule
                 return 'category/default/search';
 
             case 'thong-tin-giao-hang.html';
-                return '/content/about/deliveryinfo';
+                return '/content/deliveryinfo';
 
             case 'lien-he.html';
                 return '/content/contact';

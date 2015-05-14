@@ -39,7 +39,7 @@ class ContentController extends Controller
 
     public function actionDeliveryInfo()
     {
-        var_dump('thong tin giao hang');
+        $this->render('deliveryinfo');
     }
 
     public function actionContact()
