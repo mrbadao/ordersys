@@ -7,7 +7,7 @@ class DefaultController extends Controller
 
     public function actionIndex()
     {
-        $this->setTitle('Giỏ hàng | '.Yii::app()->params['appName']);
+        $this->setTitle('Giỏ hàng | ' . Yii::app()->params['appName']);
 
         $nodata = false;
         $cart = null;
@@ -16,31 +16,31 @@ class DefaultController extends Controller
 
         $session = Yii::app()->session;
         if ($session->contains(self::SESSION_KEY)) {
-            if(isset($_POST['cart'])){
+            if (isset($_POST['cart'])) {
                 $cart = $_POST['cart'];
                 $session->remove(self::SESSION_KEY);
-                for($i=0; $i<count($cart); $i++){
-                    if($cart[$i]['qty'] < 1){
+                for ($i = 0; $i < count($cart); $i++) {
+                    if ($cart[$i]['qty'] < 1) {
                         unset($cart[$i]);
                     }
                 }
-                if(count($cart) > 0) {
+                if (count($cart) > 0) {
                     $session->add(self::SESSION_KEY, $_POST['cart']);
                 }
-            }else {
+            } else {
                 $cart = $session[self::SESSION_KEY];
             }
         }
 
-        if($cart == null){
+        if ($cart == null) {
             $nodata = true;
-        }else{
-            foreach($cart as $item){
-                $temp['id'] =$item['id'];
-                $temp['qty'] =$item['qty'];
+        } else {
+            foreach ($cart as $item) {
+                $temp['id'] = $item['id'];
+                $temp['qty'] = $item['qty'];
 
                 $product = Helpers::getProduct($item['id']);
-                if($product) {
+                if ($product) {
                     $temp['name'] = $product->name;
                     $temp['unit_total'] = number_format($item['qty'] * $product->price);
                     $total += $item['qty'] * $product->price;
@@ -72,7 +72,7 @@ class DefaultController extends Controller
             }
 
             if ($cart != null) {
-                for($i=0; $i<count($cart); $i++) {
+                for ($i = 0; $i < count($cart); $i++) {
                     if ($id == $cart[$i]['id']) {
                         $cart[$i]['qty'] += $qty;
                         $flg = true;
@@ -80,19 +80,19 @@ class DefaultController extends Controller
                 }
             }
 
-            if(!$flg) {
+            if (!$flg) {
                 $cart[] = array('id' => $id, 'qty' => $qty);
             }
 
             $_result['count'] = count($cart);
             $_result['total'] = 0;
 
-            for($i=0; $i<count($cart); $i++){
+            for ($i = 0; $i < count($cart); $i++) {
                 $product = Helpers::getProduct($cart[$i]['id']);
 
-                if($product){
+                if ($product) {
                     $_result['total'] += $product->price * $cart[$i]['qty'];
-                }else{
+                } else {
                     unset($cart[$i]);
                 }
             }
@@ -105,8 +105,9 @@ class DefaultController extends Controller
         }
     }
 
-    public function actionCheckout(){
-        $this->setTitle('Thanh toán | '.Yii::app()->params['appName']);
+    public function actionCheckout()
+    {
+        $this->setTitle('Thanh toán | ' . Yii::app()->params['appName']);
 
         $checkoutOrder = array(
             'customer_name' => isset($_POST['name']) ? $_POST['name'] : '',
@@ -120,13 +121,13 @@ class DefaultController extends Controller
         $session = Yii::app()->session;
 
         if ($session->contains(self::SESSION_KEY)) {
-            if($checkoutOrder['customer_name'] != '' && $checkoutOrder['email'] != '' && $checkoutOrder['order_phone'] != '' && $checkoutOrder['customer_address'] != ''){
+            if ($checkoutOrder['customer_name'] != '' && $checkoutOrder['email'] != '' && $checkoutOrder['order_phone'] != '' && $checkoutOrder['customer_address'] != '') {
                 $user_ip = getenv('REMOTE_ADDR');
                 $geo = unserialize(file_get_contents("http://www.geoplugin.net/php.gp?ip=$user_ip"));
-                if($geo){
+                if ($geo) {
                     $cart = $session[self::SESSION_KEY];
 
-                    $checkoutOrder['name'] = self::ORDER_NAME_PREFIX. date('HisdmY');
+                    $checkoutOrder['name'] = self::ORDER_NAME_PREFIX . date('HisdmY');
                     $checkoutOrder['coordinate_lat'] = $geo['geoplugin_latitude'];
                     $checkoutOrder['coordinate_long'] = $geo['geoplugin_longitude'];
                     $checkoutOrder['created'] = date("Y-m-d H:i:s");
@@ -135,7 +136,7 @@ class DefaultController extends Controller
                     $newOrder = new ContentOrder();
                     $newOrder->attributes = $checkoutOrder;
 
-                    if($newOrder->validate()) {
+                    if ($newOrder->validate()) {
                         $newOrder->save(false);
                         $OrderRelation = null;
                         foreach ($cart as $item) {
@@ -147,27 +148,29 @@ class DefaultController extends Controller
                             $OrderRelation->save(false);
                             $session->remove(self::SESSION_KEY);
                             $orderStatus['flg'] = true;
-                            $orderStatus['msg'] = 'Bạn đã đặt thành công đơn hàng với mã số là: '.$newOrder->name;
+                            $orderStatus['msg'] = 'Bạn đã đặt thành công đơn hàng với mã số là: ' . $newOrder->name;
                         }
                     }
 
-                    if(!$orderStatus['flg']){
+                    if (!$orderStatus['flg']) {
                         $orderStatus['msg'] = 'Đã xãy ra lỗi trong quá trình thanh toán, vui lòng thữ lại sau.';
                     }
 
-                }else{
+                } else {
                     $hasError['flg'] = true;
                     $hasError['msg'] = 'Chúng tôi không thể xác định vị trí của bạn. Xin vui lòng thữ lại hoặc sữ dụng android app của chúng thôi.';
                 }
-            }else{
-                $hasError['flg'] = true;
-                $hasError['msg'] = 'Hãy nhập đủ thông tin.';
+            } else {
+                if (isset($_POST['name'])) {
+                    $hasError['flg'] = true;
+                    $hasError['msg'] = 'Hãy nhập đủ thông tin.';
+                }
             }
-        }else{
+        } else {
             $hasError['flg'] = true;
             $hasError['msg'] = 'Bạn không có sản phẩm nào để thanh toán.';
         }
 
-        $this->render('checkout', compact('hasError', 'orderStatus' ,'checkoutOrder'));
+        $this->render('checkout', compact('hasError', 'orderStatus', 'checkoutOrder'));
     }
 }
