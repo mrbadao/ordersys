@@ -7,7 +7,7 @@ class HeaderWidget extends CLinkPager {
         $this->menu['items'] = array(
             array('label'=>'Trang chủ', 'url'=>'/site/', 'id' =>'/content/index'),
             array('label'=>'Giới thiệu', 'url'=>'/site/gioi-thieu.html', 'id' =>'/content/about'),
-            array('label'=>'Thông tin giao hàng', 'url'=> '/site/thong-tin-giao-hang.html', 'id' => '/content/about/deliveryinfo'),
+            array('label'=>'Thông tin giao hàng', 'url'=> '/site/thong-tin-giao-hang.html', 'id' => '/content/deliveryinfo'),
             array('label'=>'Liên hệ', 'url'=> '/site/lien-he.html', 'id' => '/content/contact'),
         );
 
