@@ -39,7 +39,16 @@ class ContentController extends Controller
 
     public function actionDeliveryInfo()
     {
-        $this->render('deliveryinfo');
+        $hasError =false;
+
+        $order = null;
+
+        if($_POST['name']) {
+            $order = ContentOrder::model()->findByAttributes(array('name' => $_POST['name']));
+            if($order == null) $hasError = true;
+        }
+
+        $this->render('deliveryinfo', compact('order', 'hasError'));
     }
 
     public function actionContact()
