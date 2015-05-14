@@ -252,14 +252,14 @@ function submitFrmCart(){
 }
 
 function checkoutMoveStep(curentStepId, nextStepId, nextProgressId){
-    console.log(curentStepId);
     var hasError = false;
     $(curentStepId).find('input').each(function(){
         var value = $(this).val();
-        var key = $(this).attrs('name');
+        var key = $(this).attr('name');
         if(value.length < 1) hasError = true;
         else{
-            $('#checkout-step-3 #'+key ).val(value);
+            console.log('#checkout-step-3 #'+key );
+            $('#checkout-step-3 #'+key ).text(value);
         }
     });
 
@@ -276,7 +276,6 @@ function checkoutMoveStep(curentStepId, nextStepId, nextProgressId){
 
 $(document).ready(function(){
     $('.checkout .checkout-list .subProgress li').click(function(){
-        console.log('li click');
         $('.checkout .checkout-list').find('.current').each(function(){$(this).removeClass('current')});
         $(this).addClass('current');
     });
