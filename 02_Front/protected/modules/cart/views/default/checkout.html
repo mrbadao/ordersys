@@ -28,7 +28,12 @@
         <form action="" method="post" id="formCheckout">
             <div class="span9 checkout-list">
                 <h3>Thanh toán</h3>
-                <ol class="rr subProgress">
+                <hr/>
+
+                <h5 tal:condition="hasError/flg" tal:content="hasError/msg" style="text-align: center; color: #ED1C24 !important;">Không tim thây kết quả nào.</h5>
+                <h5 tal:condition="orderStatus/flg" tal:content="orderStatus/msg" style="text-align: center; color: #ED1C24 !important;">Không tim thây kết quả nào.</h5>
+
+                <ol class="rr subProgress" tal:condition="not: hasError/flg; not: orderStatus/flg">
                     <li class="current" id="checkout-step-1">
                         <h6>Thông tin</h6>
                         <div class="row">
@@ -47,6 +52,12 @@
                                         <li>
                                             <label>
                                                 <input type="text" name="name" placeholder="Tên của bạn..."/>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label>
+                                                <input type="tel" name="email"
+                                                       placeholder="email của bạn..."/>
                                             </label>
                                         </li>
                                         <li>
@@ -117,6 +128,10 @@
                                         <li>
                                             <label style="color: #000000">Tên người nhận: </label>
                                             <label id="name">Chưa xác nhận.</label>
+                                        </li>
+                                        <li>
+                                            <label style="color: #000000">Email người nhận: </label>
+                                            <label id="email">Chưa xác nhận.</label>
                                         </li>
                                         <li>
                                             <label style="color: #000000">Số điện thoại: </label>

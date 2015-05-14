@@ -3,6 +3,7 @@
 class DefaultController extends Controller
 {
     const SESSION_KEY = '_CART';
+    const ORDER_NAME_PREFIX = "ORDER_";
 
     public function actionIndex()
     {
@@ -106,6 +107,67 @@ class DefaultController extends Controller
 
     public function actionCheckout(){
         $this->setTitle('Thanh toán | '.Yii::app()->params['appName']);
-        $this->render('checkout');
+
+        $checkoutOrder = array(
+            'customer_name' => isset($_POST['name']) ? $_POST['name'] : '',
+            'email' => isset($_POST['email']) ? $_POST['email'] : '',
+            'order_phone' => isset($_POST['phone']) ? $_POST['phone'] : '',
+            'customer_address' => isset($_POST['address']) ? $_POST['address'] : '',
+        );
+
+        $hasError = array('flg' => false, 'msg' => '');
+        $orderStatus = array('flg' => false, 'msg' => '');
+        $session = Yii::app()->session;
+
+        if ($session->contains(self::SESSION_KEY)) {
+            if($checkoutOrder['customer_name'] != '' && $checkoutOrder['email'] != '' && $checkoutOrder['order_phone'] != '' && $checkoutOrder['customer_address'] != ''){
+                $user_ip = getenv('REMOTE_ADDR');
+                $geo = unserialize(file_get_contents("http://www.geoplugin.net/php.gp?ip=$user_ip"));
+                if($geo){
+                    $cart = $session[self::SESSION_KEY];
+
+                    $checkoutOrder['name'] = self::ORDER_NAME_PREFIX. date('HisdmY');
+                    $checkoutOrder['coordinate_lat'] = $geo['geoplugin_latitude'];
+                    $checkoutOrder['coordinate_long'] = $geo['geoplugin_longitude'];
+                    $checkoutOrder['created'] = date("Y-m-d H:i:s");
+
+
+                    $newOrder = new ContentOrder();
+                    $newOrder->attributes = $checkoutOrder;
+
+                    if($newOrder->validate()) {
+                        $newOrder->save(false);
+                        $OrderRelation = null;
+                        foreach ($cart as $item) {
+                            $OrderRelation = new OrderRelation();
+                            $OrderRelation->order_id = $newOrder->id;
+                            $OrderRelation->product_id = $item['id'];
+                            $OrderRelation->qty = $item['qty'];
+                            $OrderRelation->price = Helpers::getProduct($item['id'])->price;
+                            $OrderRelation->save(false);
+                            $session->remove(self::SESSION_KEY);
+                            $orderStatus['flg'] = true;
+                            $orderStatus['msg'] = 'Bạn đã đặt thành công đơn hàng với mã số là: '.$newOrder->id;
+                        }
+                    }
+
+                    if(!$orderStatus['flg']){
+                        $orderStatus['msg'] = 'Đã xãy ra lỗi trong quá trình thanh toán, vui lòng thữ lại sau.';
+                    }
+
+                }else{
+                    $hasError['flg'] = true;
+                    $hasError['msg'] = 'Chúng tôi không thể xác định vị trí của bạn. Xin vui lòng thữ lại hoặc sữ dụng android app của chúng thôi.';
+                }
+            }else{
+                $hasError['flg'] = true;
+                $hasError['msg'] = 'Hãy nhập đủ thông tin.';
+            }
+        }else{
+            $hasError['flg'] = true;
+            $hasError['msg'] = 'Bạn không có sản phẩm nào để thanh toán.';
+        }
+
+        $this->render('checkout', compact('hasError', 'orderStatus' ,'checkoutOrder'));
     }
 }
