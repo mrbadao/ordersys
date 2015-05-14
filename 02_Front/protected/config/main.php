@@ -23,19 +23,9 @@ return array(
 	),
 
 	'modules'=>array(
-		// uncomment the following to enable the Gii tool
-
-//		'gii'=>array(
-//			'class'=>'system.gii.GiiModule',
-//			'password'=>'1',
-//			// If removed, Gii defaults to localhost only. Edit carefully to taste.
-//			'ipFilters'=>array('127.0.0.1', '118.69.13.44','::1'),
-//		),
-
 		'category',
 		'product',
 		'cart',
-
 	),
 
 	// application components
@@ -96,18 +86,11 @@ return array(
 					'class'=>'CFileLogRoute',
 					'levels'=>'error, warning',
 				),
-				// uncomment the following to show log messages on web pages
-				/*
-				array(
-					'class'=>'CWebLogRoute',
-				),
-				*/
 			),
 		),
 
 	),
 
-	// application-level parameters that can be accessed
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		// this is used in contact page

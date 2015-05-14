@@ -1,0 +1,83 @@
+<div tal:replace="structure php:CHtml::statefulForm('','post',array('id'=>'frmCategories'))"/>
+
+
+<div tal:condition="not:exists:contentCats/id">
+    <h1>Thêm người giao hàng mới</h1>
+    <article>
+        <p>
+            người giao hàng sẽ được thêm.<br/>
+            Sau khi nhập các thông tin cần thiết, bạn hãy click vào nút Save.
+        </p>
+    </article>
+</div>
+<div tal:condition="exists:contentCats/id">
+    <h1>Chỉnh sữa người giao hàng</h1>
+    <article>
+        <p>
+            người giao hàng sẽ được chỉnh sữa<br/>
+            Sau khi nhập các thông tin cần thiết, bạn hãy click vào nút Save.
+        </p>
+    </article>
+</div>
+<aside>
+    <p>※<span class="txtWarning">*</span>Hãy nhập đầy đủ thông tin.</p>
+</aside>
+
+<div class="columnContainer">
+    <div class="tabBox">
+        <input type="hidden" name="staff[id]" value="${contentStaff/id|''}"/>
+
+        <div class="mBoxitem_table">
+            <table cellpadding="0" cellspacing="0" border="0" class="tableTate">
+                <tr>
+                    <th>Login ID&nbsp;<span class="txtWarning">*</span></th>
+                    <td>
+                        <tal:block tal:content="structure php:CHtml::error(contentStaff,'login_id')"/>
+                        <input  type="text" name="staff[login_id]" maxlength="100" value="${contentStaff/login_id|''}"  class="txtbox title txt_en" style="width:300px;" id="name" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>Password&nbsp;<span class="txtWarning">*</span></th>
+                    <td>
+                        <tal:block tal:content="structure php:CHtml::error(contentStaff,'pasword')"/>
+                        <input id="domain" type="password" name="staff[pasword]" rows="4" cols="" class="txtbox title txt_en" style="width: 200px;" value="${contentStaff/pasword|''}"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="mBoxitem_table">
+            <table cellpadding="0" cellspacing="0" border="0" class="tableTate">
+                <tr>
+                    <th>Email&nbsp;<span class="txtWarning">*</span></th>
+                    <td>
+                        <tal:block tal:content="structure php:CHtml::error(contentStaff,'email')"/>
+                        <input type="text" name="staff[email]" rows="4" cols="" class="txtbox title txt_en" style="width: 200px;" value="${contentStaff/email|''}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Phone&nbsp;<span class="txtWarning">*</span></th>
+                    <td>
+                        <tal:block tal:content="structure php:CHtml::error(contentStaff,'phone')"/>
+                        <input  type="text" name="staff[phone]" maxlength="100" value="${contentStaff/phone|''}"  class="txtbox title txt_en" style="width:300px;" id="name" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>Địa chỉ&nbsp;<span class="txtWarning">*</span></th>
+                    <td>
+                        <tal:block tal:content="structure php:CHtml::error(contentStaff,'address')"/>
+                        <input type="text" name="staff[address]" rows="4" cols="" class="txtbox title txt_en" style="width: 200px;" value="${contentStaff/address|''}"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<div class="BtnArea">
+    <div class="BtnAreaitem">
+        <tal:block class="BtnAreaitem" tal:content="structure php:CHtml::submitButton('Save',array('name' => 'commit','class'=>'btnMiddle themeNormal'))"/>
+        <input class="btnMiddle themeNormal" type="button" title="Cancel" value="Cancel" onclick="location.href='/admin/staff/'"/>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+<h1>Quản lí người giao hàng</h1>
+<article>
+    <p>Để tìm người giao hàng. Nhập các tiêu chí tìm kiếm, vui lòng click vào nút Search.</p>
+</article>
+
+<form name="frmSearch" action="/admin/category/search" method="post">
+    <div class="mBoxitem_table">
+        <table class="tableTate" cellspacing="0" cellpadding="0" border="0">
+            <tr>
+                <th>Login Id</th>
+                <td><input  value="${search/login_id|''}" name="search[login_id]" class="txtbox" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 300px;"/></td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>
+                    <input  value="${search/phone|''}" name="search[phone]" class="txtbox" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 300px;"/>
+                </td>
+            </tr>
+        </table>
+        <div class="BtnArea" style="text-align: center !important;">
+            <input class="btnMiddle themeNormal" type="submit" title="Search" value="Search"/>
+        </div>
+    </div>
+</form>
+
+<form method="post" action="./" name="form">
+    <p class="centering txtWarning" tal:condition="nodata">Không tồn thông tin.</p>
+    <div class="mBoxitem_table">
+        <div class="mBoxitem_listinfo">
+            <p class="pageList_data"><strong>Số lượng tin：</strong>${count}</p>
+        </div>
+
+        <div class="mBoxitem_listinfo">
+            <div tal:replace="structure php:this.widget('PaginationWidget',array('pages'=>pages),true)"></div>
+            <ul class="pageList_link" tal:replace="">
+                <li><a href="javascript:void(0);">≪</a></li>
+                <li><a href="javascript:void(0);">&lt;</a></li>
+                <li><a href="javascript:void(0);">1</a></li>
+                <li><a href="javascript:void(0);">2</a></li>
+                <li><strong>3</strong></li>
+                <li><a href="javascript:void(0);">4</a></li>
+                <li><a href="javascript:void(0);">5</a></li>
+                <li><a href="javascript:void(0);">&gt;</a></li>
+                <li><a href="javascript:void(0);">≫</a></li>
+            </ul>
+        </div>
+
+        <table cellpadding="0" cellspacing="0" border="0" class="tableYoko">
+            <thead>
+                <tr>
+                    <th>Login id</th>
+                    <th class="thYokoM">Email</th>
+                    <th class="thYokoM">Phone</th>
+                    <th class="thYokoM">Địa chỉ</th>
+                    <th class="thYokoM">Ngày đăng</th>
+                    <th class="thYokoM">Ngày sữa</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tr tal:repeat="item items">
+                <td tal:content="item/login_id"></td>
+                <td tal:content="item/email"></td>
+                <td tal:content="item/phone"></td>
+                <td tal:content="item/address"></td>
+                <td><span tal:condition="exists:item/created" tal:content="dateformat:item/created">2012/04/13 23:00</span></td>
+                <td><span tal:condition="exists:item/modified" tal:content="dateformat:item/modified">2012/04/13 23:00</span></td>
+                <td class="tdYoko_btn_s1"><a href="/admin/staff/view?id=${item/id}" class="btnTable themeNormal">Chi tiết</a></td>
+            </tr>
+        </table>
+    </div>
+</form>
