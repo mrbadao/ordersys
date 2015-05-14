@@ -52,7 +52,20 @@ class ContentController extends Controller
             if($setting != null)
                 $settings[$setting->key] = $setting->value;
         }
-        $this->render('contact', compact('settings', 'shopLocation'));
+
+        $msg = false;
+
+        if(isset($_POST['contact'])){
+            $contact = new ContentContact();
+            $contact->attributes = $_POST['contact'];
+            if($contact->validate()){
+                $contact->save(false);
+                $msg = true;
+                $contact = null;
+            }
+        }
+
+        $this->render('contact', compact('settings', 'shopLocation', 'contact', 'msg'));
     }
 
     public function actionError(){

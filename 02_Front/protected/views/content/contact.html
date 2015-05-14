@@ -8,7 +8,10 @@
 <div role="main" class="container contact">
     <div class="row">
         <div class="span12">
-            <h5 style="text-align: center; color: #ED1C24 !important;">Không tim thây kết quả nào.</h5>
+            <h5 style="text-align: center; color: #ED1C24 !important;">Chúng tôi đã nhận được ý kiến của bạn.</h5>
+            <tal:block tal:content="structure php:CHtml::error('name')"/>
+            <tal:block tal:content="structure php:CHtml::error('email')"/>
+            <tal:block tal:content="structure php:CHtml::error('comment')"/>
         </div>
 
         <div class="span5">
@@ -16,12 +19,12 @@
 
             <form action="" method="post" class="clearfix" id="formContact">
                 <label>
-                    <input class="text-input" type="text" name="name" placeholder="Tên của bạn..."/>
+                    <input class="text-input" type="text" name="contact[name]" placeholder="Tên của bạn..." value="${contact/name|''}"/>
                 </label>
                 <label>
-                    <input class="text-input" type="text" name="email" placeholder="Email của bạn..."/>
+                    <input class="text-input" type="text" name="contact[email]" placeholder="Email của bạn..." value="${contact/email|''}"/>
                 </label>
-                <textarea class="text-input" name="comment" placeholder="Your Message...">nội dung...</textarea>
+                <textarea class="text-input" name="contact[comment]" placeholder="Your Message...">${contact/comment|'nội dung...'}</textarea>
                 <a href="javascript:document.forms['formContact'].submit()" class="btn"><span class="gradient"><input type="image" value="Gữi" /></span></a>
             </form>
         </div>
