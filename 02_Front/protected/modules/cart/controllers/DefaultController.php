@@ -147,7 +147,7 @@ class DefaultController extends Controller
                             $OrderRelation->save(false);
                             $session->remove(self::SESSION_KEY);
                             $orderStatus['flg'] = true;
-                            $orderStatus['msg'] = 'Bạn đã đặt thành công đơn hàng với mã số là: '.$newOrder->id;
+                            $orderStatus['msg'] = 'Bạn đã đặt thành công đơn hàng với mã số là: '.$newOrder->name;
                         }
                     }
 

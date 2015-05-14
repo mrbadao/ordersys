@@ -33,7 +33,7 @@
                 <h5 tal:condition="hasError/flg" tal:content="hasError/msg" style="text-align: center; color: #ED1C24 !important;">Không tim thây kết quả nào.</h5>
                 <h5 tal:condition="orderStatus/flg" tal:content="orderStatus/msg" style="text-align: center; color: #ED1C24 !important;">Không tim thây kết quả nào.</h5>
 
-                <ol class="rr subProgress" tal:condition="not: hasError/flg; not: orderStatus/flg">
+                <ol class="rr subProgress" tal:condition="php: hasError['flg']">
                     <li class="current" id="checkout-step-1">
                         <h6>Thông tin</h6>
                         <div class="row">
