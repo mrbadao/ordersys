@@ -42,6 +42,7 @@ class ContentController extends Controller
 
     public function actionContact(){
 		$this->setTitle('Liên hệ | '.Yii::app()->params['appName']);
+
         $shopLocation = Yii::app()->params['shopLocation'];
 
         $settings = null;
@@ -54,6 +55,7 @@ class ContentController extends Controller
         }
 
         $msg = false;
+        $contact = null;
 
         if(isset($_POST['contact'])){
             $contact = new ContentContact();
@@ -64,8 +66,8 @@ class ContentController extends Controller
                 $contact = null;
             }
         }
-
-        $this->render('contact', compact('settings', 'shopLocation', 'contact', 'msg'));
+//        var_dump('ad11ad'); die;
+        $this->render('contact', compact('settings', 'shopLocation', 'contact' ,'msg'));
     }
 
     public function actionError(){

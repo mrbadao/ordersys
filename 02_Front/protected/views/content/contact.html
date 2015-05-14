@@ -8,10 +8,10 @@
 <div role="main" class="container contact">
     <div class="row">
         <div class="span12">
-            <h5 style="text-align: center; color: #ED1C24 !important;">Chúng tôi đã nhận được ý kiến của bạn.</h5>
-            <tal:block tal:content="structure php:CHtml::error('name')"/>
-            <tal:block tal:content="structure php:CHtml::error('email')"/>
-            <tal:block tal:content="structure php:CHtml::error('comment')"/>
+            <h5 tal:condition="contact" style="text-align: center; color: #ED1C24 !important;">Chúng tôi đã nhận được ý kiến của bạn.</h5>
+            <h5 tal:condition="contact" tal:content="structure php:CHtml::error(contact,'name')" style="text-align: center; color: #ED1C24 !important;">Chúng tôi đã nhận được ý kiến của bạn.</h5>
+            <h5 tal:condition="contact" tal:content="structure php:CHtml::error(contact,'email')" style="text-align: center; color: #ED1C24 !important;">Chúng tôi đã nhận được ý kiến của bạn.</h5>
+            <h5 tal:condition="contact" tal:content="structure php:CHtml::error(contact,'comment')" style="text-align: center; color: #ED1C24 !important;">Chúng tôi đã nhận được ý kiến của bạn.</h5>
         </div>
 
         <div class="span5">
