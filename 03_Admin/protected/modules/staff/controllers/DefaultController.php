@@ -20,15 +20,12 @@ class DefaultController extends Controller
 		if($contentStaff == null) $contentStaff = new DeliveryStaff();
 
 		if(isset($_POST['staff'])){
-            $isChangePwd = false;
-            if(md5($_POST['staff']['pasword']) != $contentStaff->pasword){
-                $isChangePwd = true;
-            }
-
             $contentStaff->setAttributes($_POST['staff']);
-            $contentStaff->pasword = $isChangePwd ? md5($_POST['staff']['pasword']) : $contentStaff->pasword;
 
 			if($contentStaff->validate()){
+                if(isset($_POST['staff']['pasword'])){
+                    $contentStaff->pasword = md5($_POST['staff']['pasword']);
+                }
                 $contentStaff->save(false);
 				$this->redirect(array('view','id' => $contentStaff->id, 'msg' => true));
 			}

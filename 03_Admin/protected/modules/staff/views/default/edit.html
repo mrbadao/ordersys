@@ -40,7 +40,10 @@
                     <th>Password&nbsp;<span class="txtWarning">*</span></th>
                     <td>
                         <tal:block tal:content="structure php:CHtml::error(contentStaff,'pasword')"/>
-                        <input id="domain" type="password" name="staff[pasword]" rows="4" cols="" class="txtbox title txt_en" style="width: 200px;" value="${contentStaff/pasword|''}"/>
+                        <!--<input id="domain" type="password" name="staff[pasword]" rows="4" cols="" class="txtbox title txt_en" style="width: 200px;" value="${contentStaff/pasword|''}"/>-->
+                        <input tal:condition="php: contentStaff['id'] != null" disabled="disabled" type="password" name="staff[pasword]" maxlength="100" value="${contentStaff/pasword|''}"  class="txtbox title txt_en" style="width:150px;" id="pwd" />
+                        <input tal:condition="php: contentStaff['id'] == null" type="password" name="staff[pasword]" maxlength="100" value=""  class="txtbox title txt_en" style="width:150px;" id="pwd" />
+                        <a id="edit_pwd" href="javascript: void(0);" class="btn" tal:condition="php: contentStaff['id'] != null">Set password</a>
                     </td>
                 </tr>
             </table>
@@ -88,3 +91,16 @@
         <input class="btnMiddle themeNormal" type="button" title="Cancel" value="Cancel" onclick="location.href='/admin/staff/'"/>
     </div>
 </div>
+
+<script>
+    $('#edit_pwd').click(function(){
+        if($(this).text() != 'Uset password'){
+            $('#pwd').prop("disabled", false);
+            $(this).text('Uset password');
+        }
+        else{
+            $('#pwd').prop("disabled", true);
+            $(this).text('Set password');
+        }
+    });
+</script>
