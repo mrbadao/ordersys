@@ -11,21 +11,24 @@
             <h3>Quy trình thanh toán</h3>
             <ul class="rr">
                 <li>
-                    <a href="#" class="active" id="progress-1">Thông tin</a>
+                    <a href="#checkout-step-1" class="active" id="progress-1">Thông tin</a>
                 </li>
                 <li>
-                    <a href="#" id="progress-2">Xác định vị trí</a>
+                    <a href="#checkout-step-2" id="progress-2">Xác định vị trí</a>
                 </li>
                 <li>
-                    <a href="#" id="progress-3">Thanh toán</a>
+                    <a href="#checkout-step-3" id="progress-3">Thanh toán</a>
+                </li>
+                <li>
+                    <a href="#checkout-step-4" id="progress-4">Thanh toán</a>
                 </li>
             </ul>
         </div>
 
-        <form action="#" method="post" id="form-2">
+        <form action="" method="post" id="formCheckout">
             <div class="span9 checkout-list">
                 <h3>Thanh toán</h3>
-                <ol class="rr">
+                <ol class="rr subProgress">
                     <li class="current" id="checkout-step-1">
                         <h6>Thông tin</h6>
 
@@ -63,7 +66,7 @@
                             </div>
                         </div>
                     </li>
-                    <li class="current" id="checkout-step-2">
+                    <li id="checkout-step-2">
                         <h6>Xác định vị trí</h6>
 
                         <div class="row">
@@ -109,7 +112,20 @@
 
                         <div class="row">
                             <div class="span9 content-wrapper">
-                                Content
+                                <div class="left-col">
+
+                                    <h6>Gữi đơn hàng</h6>
+
+                                    <p>
+                                        Bằng việc nhấn vào nút [Hoàn thành] bạn đã hoàn thành quy trình thanh toán của chúng tôi.
+                                    </p>
+
+                                </div>
+                                <div class="right-col">
+                                    <a href="javascript:document.forms['formCheckout'].submit()" class="btn secondary">
+                                        <span class="gradient">Hoàn thành</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </li>
@@ -118,3 +134,13 @@
         </form>
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+        $('.checkout .progress .subProgress li').click(function(){
+            console.log('li click');
+            $('.checkout-list').find('.current').each(function(){$(this).removeClass('current')});
+            $(this).addClass('current');
+        });
+    });
+</script>
