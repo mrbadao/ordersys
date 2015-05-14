@@ -31,7 +31,6 @@
                 <ol class="rr subProgress">
                     <li class="current" id="checkout-step-1">
                         <h6>Thông tin</h6>
-
                         <div class="row">
                             <div class="span9 content-wrapper clearfix">
                                 <div class="left-col">
@@ -98,12 +97,48 @@
                             </div>
                         </div>
                     </li>
-                    <li class="current" id="checkout-step-3">
+                    <li id="checkout-step-3">
                         <h6>Nội dung</h6>
 
                         <div class="row">
                             <div class="span9 content-wrapper">
-                                Content
+                                <div class="left-col">
+
+                                    <h6>Thông tin đơn hàng</h6>
+
+                                    <p>
+                                        Bạn sẽ đặt hàng với các thông tin sau.<br/>
+                                        Vui lòng kiểm tra thậ kỹ trước khi gữi để tránh nhầm lẫn.
+                                    </p>
+
+                                </div>
+                                <div class="right-col">
+                                    <ul class="rr">
+                                        <li>
+                                            <label>Tên người nhận: </label>
+                                            <label id="name">
+                                                Chưa xác nhận
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label>Số điện thoại: </label>
+                                            <label id="phone">
+                                                Chưa xác nhận
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label>Địa chỉ: </label>
+                                            <label id="address">
+                                                Chưa xác nhận
+                                            </label>
+                                        </li>
+                                    </ul>
+
+                                    <a href="javascript:checkoutMoveStep('#checkout-step-3', '#checkout-step-4', '#progress-4')" class="btn secondary">
+                                        <span class="gradient">Tiếp tục</span>
+                                    </a>
+
+                                </div>
                             </div>
                         </div>
                     </li>

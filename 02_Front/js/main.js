@@ -256,7 +256,11 @@ function checkoutMoveStep(curentStepId, nextStepId, nextProgressId){
     var hasError = false;
     $(curentStepId).find('input').each(function(){
         var value = $(this).val();
+        var key = $(this).attrs('name');
         if(value.length < 1) hasError = true;
+        else{
+            $('#checkout-step-3 #'+key ).val(value);
+        }
     });
 
     if(hasError){
