@@ -1,0 +1,86 @@
+<h1>Quản lí categories</h1>
+<article>
+    <p>Để tìm categories. Nhập các tiêu chí tìm kiếm, vui lòng click vào nút Search.</p>
+</article>
+
+<form name="frmSearch" action="/admin/category/search" method="post">
+    <div class="mBoxitem_table">
+        <table class="tableTate" cellspacing="0" cellpadding="0" border="0">
+            <tr>
+                <th>Tên người liên hệ</th>
+                <td><input  value="${search/name|''}" name="search[name]" class="txtbox" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 300px;"/></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>
+                    <input  value="${search/email|''}" name="search[email]" class="txtbox" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 300px;"/>
+                </td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>
+                    <input  value="${search/created|''}" name="search[created]" class="txtbox datetime" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 300px;"/>
+                </td>
+            </tr>
+        </table>
+        <div class="BtnArea" style="text-align: center !important;">
+            <input class="btnMiddle themeNormal" type="submit" title="Search" value="Search"/>
+        </div>
+    </div>
+</form>
+
+<form method="post" action="./" name="form">
+    <p class="centering txtWarning" tal:condition="nodata">Không tồn thông tin.</p>
+    <div class="mBoxitem_table">
+        <div class="mBoxitem_listinfo">
+            <p class="pageList_data"><strong>Số lượng tin：</strong>${count}</p>
+        </div>
+
+        <div class="mBoxitem_listinfo">
+            <div tal:replace="structure php:this.widget('PaginationWidget',array('pages'=>pages),true)"></div>
+            <ul class="pageList_link" tal:replace="">
+                <li><a href="javascript:void(0);">≪</a></li>
+                <li><a href="javascript:void(0);">&lt;</a></li>
+                <li><a href="javascript:void(0);">1</a></li>
+                <li><a href="javascript:void(0);">2</a></li>
+                <li><strong>3</strong></li>
+                <li><a href="javascript:void(0);">4</a></li>
+                <li><a href="javascript:void(0);">5</a></li>
+                <li><a href="javascript:void(0);">&gt;</a></li>
+                <li><a href="javascript:void(0);">≫</a></li>
+            </ul>
+        </div>
+
+        <table cellpadding="0" cellspacing="0" border="0" class="tableYoko">
+            <thead>
+                <tr>
+                    <th>Tên người liên hệ</th>
+                    <th class="thYokoM">Email</th>
+                    <th class="thYokoM">Ngày tạo</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tr tal:repeat="item items">
+                <td tal:content="item/name"></td>
+                <td tal:content="item/email"></td>
+                <td><span tal:condition="exists:item/created" tal:content="dateformat:item/created">2012/04/13 23:00</span></td>
+                <td class="tdYoko_btn_s1"><a href="/admin/feedback/view?id=${item/id}" class="btnTable themeNormal">Chi tiết</a></td>
+            </tr>
+        </table>
+    </div>
+</form>
+
+<script>
+    $(document).ready(function(){
+        $(".datetime").datetimepicker({dateFormat: 'yyyy-mm-dd HH:MM'}).attr('readonly', 'readonly');
+        $(".datetime").on("change keyup", function () {
+            $(this).datetimepicker({dateFormat: 'yyyy-mm-dd HH:MM'}).attr('readonly', 'readonly');
+
+            var validation = validateDateTime($(this));
+            var value = $(this).val();
+            if (!validation) {
+                $(this).val(value.substr(0, value.length - 1));
+            }
+        });
+    });
+</script>

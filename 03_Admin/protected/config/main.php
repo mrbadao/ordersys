@@ -35,6 +35,7 @@ return array(
 		'product',
 		'setting',
 		'staff',
+		'feedback',
 
 	),
 
