@@ -1,3 +1,20 @@
+<script>
+    jQuery(function() {
+        $('#created').datetimepicker({dateFormat: 'yyyy-mm-dd'}).attr('readonly', 'readonly');
+        $(".datetime").on("change keyup", function () {
+            $(this).datetimepicker({dateFormat: 'yyyy-mm-dd'}).attr('readonly', 'readonly');
+
+            var validation = validateDateTime($(this));
+            var value = $(this).val();
+            if (!validation) {
+                $(this).val(value.substr(0, value.length - 1));
+            }
+        });
+    });
+</script>
+
+
+
 <h1>Quản lí categories</h1>
 <article>
     <p>Để tìm categories. Nhập các tiêu chí tìm kiếm, vui lòng click vào nút Search.</p>
@@ -19,7 +36,7 @@
             <tr>
                 <th>Ngày tạo</th>
                 <td>
-                    <input  value="${search/created|''}" name="search[created]" class="txtbox datetime created" type="text" style="width: 100px;"/>
+                    <input id="created" value="${search/created|''}" name="search[created]" class="txtbox datetime" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" type="text" style="width: 100px;"/>
                 </td>
             </tr>
         </table>
@@ -69,17 +86,3 @@
         </table>
     </div>
 </form>
-
-<script>
-    jQuery(function() {
-        $(".datetime").on("change keyup", function () {
-            $(this).datetimepicker({dateFormat: 'yyyy-mm-dd'}).attr('readonly', 'readonly');
-
-            var validation = validateDateTime($(this));
-            var value = $(this).val();
-            if (!validation) {
-                $(this).val(value.substr(0, value.length - 1));
-            }
-        });
-    });
-</script>
