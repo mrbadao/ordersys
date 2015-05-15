@@ -17,9 +17,9 @@
                 </td>
             </tr>
             <tr>
-                <th>Email</th>
+                <th>Ngày tạo</th>
                 <td>
-                    <input  value="${search/created|''}" name="search[created]" class="txtbox datetime" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 300px;"/>
+                    <input  value="${search/created|''}" name="search[created]" class="txtbox datetime created" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 300px;"/>
                 </td>
             </tr>
         </table>
@@ -72,7 +72,6 @@
 
 <script>
     $(document).ready(function(){
-        $(".datetime").datetimepicker({dateFormat: 'yyyy-mm-dd HH:MM'}).attr('readonly', 'readonly');
         $(".datetime").on("change keyup", function () {
             $(this).datetimepicker({dateFormat: 'yyyy-mm-dd HH:MM'}).attr('readonly', 'readonly');
 
