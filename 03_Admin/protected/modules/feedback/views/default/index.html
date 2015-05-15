@@ -71,7 +71,7 @@
 </form>
 
 <script>
-    $(document).ready(function(){
+    jQuery(function() {
         $(".datetime").on("change keyup", function () {
             $(this).datetimepicker({dateFormat: 'yyyy-mm-dd HH:MM'}).attr('readonly', 'readonly');
 
