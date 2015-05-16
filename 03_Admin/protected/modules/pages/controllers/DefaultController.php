@@ -86,7 +86,7 @@ class DefaultController extends Controller
 				switch($k)
 				{
 					case 'key':
-						$c->compare($k, $v, true,'AND');
+						$c->compare('t.key', $v, true,'AND');
 						break;
 				}
 			}
