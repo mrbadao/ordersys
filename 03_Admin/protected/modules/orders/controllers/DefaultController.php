@@ -3,36 +3,86 @@
 class DefaultController extends Controller
 {
 	const SESS_KEY = '_ORDERS';
+	const SESS_STATISTICAL_KEY = '_STATISTICAL_ORDERS';
 
 	public function actionIndex()
 	{
 		$this->forward('search');
 	}
 
-	public function actionEdit(){
-		$contentCats= null;
-		$id = isset($_GET['id']) ? $_GET['id'] : null;
+	public function actionStatistical(){
+		$this->widget('DatePickerWidget');
+		$this->title='Orders Statistical | CMS Order Sys';
+		$search['fromdate'] = $search['todate'] = '';
+		$total = 0;
 
-		if($id != null){
-			$contentCats = ContentCategories::model()->findByPk($id);
+		$session = Yii::app()->session;
+
+		if(isset($_POST['search']))
+		{
+
+			if($session->contains(self::SESS_STATISTICAL_KEY))
+				$session->remove(self::SESS_STATISTICAL_KEY);
+
+			$data['search'] = $_POST['search'];
+			$data['page'] = 1;
+			$session->add(self::SESS_STATISTICAL_KEY, $data);
 		}
 
-		if($contentCats == null) $contentCats = new ContentCategories();
 
-		if(isset($_POST['cat'])){
-			if($contentCats->getIsNewRecord()){
-				$contentCats->created = date("Y-m-d H:m:i");
-			}
-			$contentCats->modified = date("Y-m-d H:m:i");
-			$contentCats->setAttributes($_POST['cat']);
+		$c = new CDbCriteria();
+		$c->alias = "t";
+		$c->together = true;
 
-			if($contentCats->validate()){
-				$contentCats->save(false);
-				$this->redirect(array('view','id' => $contentCats->id, 'msg' => true));
+		if(isset($session[self::SESS_STATISTICAL_KEY]['search']))
+		{
+
+			$search = $session[self::SESS_STATISTICAL_KEY]['search'];
+			foreach($search as $k => $v)
+			{
+				if(!isset($v) || $v === '')
+				{
+					continue;
+				}
+				switch($k)
+				{
+					case 'name':
+						$c->compare($k, $v, true,'AND');
+						break;
+					case 'customer_name':
+						$c->compare($k, $v, true,'AND');
+						break;
+					case 'order_phone':
+						$c->compare($k, $v, true,'AND');
+						break;
+					case 'created':
+						$c->compare($k, $v, true,'AND');
+						break;
+				}
 			}
 		}
-		$this->title= $contentCats->id == '' ?'Add Category | CMS Sagigonet': 'Edit Order Sys | CMS Order Sys';;
-		$this->render('edit',compact('contentCats'));
+
+		$sess_data = $session[self::SESS_STATISTICAL_KEY];
+		if(isset($_GET['page']))
+			$page = $sess_data['page'] = $_GET['page'];
+
+		else
+			$page = $sess_data['page'] = 1;
+		$session->add(self::SESS_STATISTICAL_KEY,$sess_data);
+
+		$c->select = 't.*';
+		$c->group = 't.id';
+		$c->order = 't.id DESC';
+		$count = ContentOrder::model()->count($c);
+
+		$nodata = ($count)?false:true;
+		$c->limit = 10;
+		$c->offset = $c->limit * ($page-1);
+		$items = ContentOrder::model()->findAll($c);
+		$pages = new CPagination($count);
+		$pages->pageSize = $c->limit;
+		$pages->applyLimit($c);
+		$this->render('statistical',compact('items','count','pages','search','nodata', 'total'));
 	}
 
 	public function actionView(){
@@ -152,7 +202,8 @@ class DefaultController extends Controller
 	public function actionDelete(){
 		$id = isset($_GET['id']) ? $_GET['id'] : null;
 		if($id!=null){
-			ContentCategories::model()->deleteByPk($id);
+			OrderRelation::model()->deleteAllByAttributes(array('order_id' => $id));
+			ContentOrder::model()->deleteByPk($id);
 		}
 		$this->redirect(array('index'));
 	}
