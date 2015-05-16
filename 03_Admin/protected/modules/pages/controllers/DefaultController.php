@@ -19,7 +19,7 @@ class DefaultController extends Controller
 			$contentPage = ContentPage::model()->findByPk($id);
 		}
 
-		if($contentPage == null) $contentProduct = new ContentPage();
+		if($contentPage == null) $contentPage = new ContentPage();
 
 		if(isset($_POST['page'])){
 			$contentPage->setAttributes($_POST['page']);
@@ -52,10 +52,8 @@ class DefaultController extends Controller
 	}
 
 	public function actionSearch(){
-		$this->title='Manage Product | CMS Saigonet';
-		$search['name'] = $search['category_id'] = $search['del_flg'] = '';
-
-		$catItems = ContentCategories::model()->findAll();
+		$this->title='Manage Pages | CMS Order Sys';
+		$search['key'] =  '';
 
 		$session = Yii::app()->session;
 
@@ -87,15 +85,8 @@ class DefaultController extends Controller
 				}
 				switch($k)
 				{
-					case 'name':
+					case 'key':
 						$c->compare($k, $v, true,'AND');
-						break;
-					case 'category_id':
-						$c->compare($k, $v, false,'AND');
-						break;
-					case 'del_flg':
-						if($v != '')
-							$c->compare($k, $v, true,'AND');
 						break;
 				}
 			}
@@ -112,12 +103,12 @@ class DefaultController extends Controller
 		$c->select = 't.*';
 		$c->group = 't.id';
 		$c->order = 't.id DESC';
-		$count = ContentProduct::model()->count($c);
+		$count = ContentPage::model()->count($c);
 
 		$nodata = ($count)?false:true;
 		$c->limit = 10;
 		$c->offset = $c->limit * ($page-1);
-		$items = ContentProduct::model()->findAll($c);
+		$items = ContentPage::model()->findAll($c);
 		$pages = new CPagination($count);
 		$pages->pageSize = $c->limit;
 		$pages->applyLimit($c);
@@ -128,7 +119,7 @@ class DefaultController extends Controller
 	public function actionDelete(){
 		$id = isset($_GET['id']) ? $_GET['id'] : null;
 		if($id!=null){
-			ContentProduct::model()->deleteByPk($id);
+			ContentPage::model()->deleteByPk($id);
 		}
 		$this->redirect(array('index'));
 	}
