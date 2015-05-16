@@ -20,6 +20,7 @@
 class ContentOrder extends CActiveRecord
 {
 	public $deliveryMan = '';
+	public $unit_price = 0;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -133,6 +134,12 @@ class ContentOrder extends CActiveRecord
 			$staff = DeliveryStaff::model()->findByPk($this->delivery_id);
 			$this->deliveryMan = $staff != null ? $staff->login_id : '' ;
 		}
+
+		$orderRelation = OrderRelation::model()->findAllByAttributes(array('order_id' => $this->id));
+		foreach($orderRelation as $item){
+			$this->unit_price += $item->qty * $item->price;
+		}
+
 		return true;
 	}
 
@@ -141,6 +148,12 @@ class ContentOrder extends CActiveRecord
 			$staff = DeliveryStaff::model()->findByPk($this->delivery_id);
 			$this->deliveryMan = $staff != null ? $staff->login_id : '' ;
 		}
+
+		$orderRelation = OrderRelation::model()->findAllByAttributes(array('order_id' => $this->id));
+		foreach($orderRelation as $item){
+			$this->unit_price += $item->qty * $item->price;
+		}
+
 		return true;
 	}
 }

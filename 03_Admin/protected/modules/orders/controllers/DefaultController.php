@@ -15,6 +15,7 @@ class DefaultController extends Controller
 		$this->title='Orders Statistical | CMS Order Sys';
 		$search['fromdate'] = $search['todate'] = '';
 		$total = 0;
+		$nodata = true;
 
 		$session = Yii::app()->session;
 
@@ -36,29 +37,14 @@ class DefaultController extends Controller
 
 		if(isset($session[self::SESS_STATISTICAL_KEY]['search']))
 		{
-
 			$search = $session[self::SESS_STATISTICAL_KEY]['search'];
-			foreach($search as $k => $v)
-			{
-				if(!isset($v) || $v === '')
-				{
-					continue;
-				}
-				switch($k)
-				{
-					case 'name':
-						$c->compare($k, $v, true,'AND');
-						break;
-					case 'customer_name':
-						$c->compare($k, $v, true,'AND');
-						break;
-					case 'order_phone':
-						$c->compare($k, $v, true,'AND');
-						break;
-					case 'created':
-						$c->compare($k, $v, true,'AND');
-						break;
-				}
+
+			if(isset($search['fromdate']) && $search['fromdate'] != ''){
+				$c->addCondition('t.created >= "'.$search['fromdate'].'"', 'AND');
+			}
+
+			if(isset($search['todate']) && $search['todate'] != ''){
+				$c->addCondition('t.created <= "'.$search['todate'].'"', 'AND');
 			}
 		}
 
@@ -73,15 +59,25 @@ class DefaultController extends Controller
 		$c->select = 't.*';
 		$c->group = 't.id';
 		$c->order = 't.id DESC';
+		$c->addCondition('t.status = 2', 'AND');
+
 		$count = ContentOrder::model()->count($c);
 
 		$nodata = ($count)?false:true;
-		$c->limit = 10;
+
+		$c->limit = 1;
 		$c->offset = $c->limit * ($page-1);
+
 		$items = ContentOrder::model()->findAll($c);
+
+		foreach($items as $item){
+			$total += $item->unit_price;
+		}
+
 		$pages = new CPagination($count);
 		$pages->pageSize = $c->limit;
 		$pages->applyLimit($c);
+
 		$this->render('statistical',compact('items','count','pages','search','nodata', 'total'));
 	}
 
