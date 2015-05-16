@@ -41,14 +41,30 @@ class DefaultController extends Controller
 			$this->redirect(array('index'));
 		}
 
-		$contentCat = ContentCategories::model()->findByPk($id);
+		$contentOrder = ContentOrder::model()->findByPk($id);
 
-		if($contentCat == null) $this->redirect(array('index'));
+		if($contentOrder == null) $this->redirect(array('index'));
 
-		$this->title='View Category | CMS Order Sys';
+		$this->title='View Order | CMS Order Sys';
+
+		$data = array();
+		$total = 0;
+
+		$orderRelation = OrderRelation::model()->findAllByAttributes(array('order_id' => $id));
+
+		foreach($orderRelation as $item){
+			$product = ContentProduct::model()->findByPk($item->product_id);
+			$data[] = array(
+				'name' => $product->name,
+				'price' => $item->price,
+				'qty' => $item->qty,
+				'unit_price' => $item->qty * $item->price,
+			);
+			$total += $item->qty * $item->price;
+		}
 
 		$msg = isset($_GET['msg']) ? true : false;
-		$this->render('view',compact('msg','contentCat'));
+		$this->render('view',compact('msg','contentOrder', 'data', 'total'));
 	}
 
 	public function actionSearch(){

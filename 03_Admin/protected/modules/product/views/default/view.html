@@ -28,6 +28,11 @@
                     </tr>
 
                     <tr>
+                        <th>Giá</th>
+                        <td tal:content="php: number_format(contentProduct['price']) .'đ'"></td>
+                    </tr>
+
+                    <tr>
                         <th>Sản phẩm đang bán</th>
                         <td>
                             <tal:block tal:condition="php:contentProduct['del_flg'] == 0">Có</tal:block>

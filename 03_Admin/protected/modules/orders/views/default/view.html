@@ -1,7 +1,7 @@
-<h1>Chi tiết category</h1>
+<h1>Chi tiết đơn hàng</h1>
 <article>
     <p>
-        Đây là thông tin chi tiết của category. Nếu bạn muốn chỉnh sửa các nội dung, vui lòng bấm vào nút [Edit]. <br/>
+        Đây là thông tin chi tiết của đơn hàng. <br/>
         Xin bấm vào nút [Delete] nếu bạn muốn xóa.
     </p>
 </article>
@@ -15,32 +15,74 @@
 
     <div class="tabBox">
         <form action="edit" method="get" name="article">
-            <input type="hidden" name="id" value="${contentCat/id}"/>
+            <input type="hidden" name="id" value="${contentOrder/id}"/>
 
             <div class="mBoxitem_table">
                 <table cellpadding="0" cellspacing="0" border="0" class="tableTate">
                     <tr>
-                        <th>Tên</th>
-                        <td tal:content="contentCat/name|''" id="title"></td>
+                        <th>Tên đơn hàng</th>
+                        <td tal:content="contentOrder/name|''" id="title"></td>
                     </tr>
 
                     <tr>
-                        <th>Domain</th>
-                        <td tal:content="contentCat/abbr_cd|''"></td>
+                        <th>Trạng thái</th>
+                        <td tal:condition="php: contentOrder['status'] == 0"> Vừa đặt</td>
+                        <td tal:condition="php: contentOrder['status'] == 1"> Đang giao</td>
+                        <td tal:condition="php: contentOrder['status'] == 2"> Đã giao</td>
+                    </tr>
+
+                    <tr>
+                        <th>Giá đơn hàng</th>
+                        <td>${total|'0'}đ</td>
                     </tr>
                 </table>
             </div>
+
             <div class="mBoxitem_table">
                 <table cellpadding="0" cellspacing="0" border="0" class="tableTate">
-
                     <tr>
-                        <th>Ngày tạo</th>
-                        <td tal:content="contentCat/created|''"></td>
+                        <th>Tên người đặt</th>
+                        <td tal:content="contentOrder/customer_name|''"></td>
                     </tr>
 
                     <tr>
-                        <th>Ngày sữa</th>
-                        <td tal:content="contentCat/modified|''"></td>
+                        <th>Số điện thoại</th>
+                        <td tal:content="contentOrder/order_phone|''"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Địa chỉ</th>
+                        <td tal:content="contentOrder/customer_address|''"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Ngày đặt</th>
+                        <td tal:content="contentOrder/created|''"></td>
+                    </tr>
+
+                    <tr tal:condition="contentOrder/completed">
+                        <th>Ngày giao</th>
+                        <td tal:content="contentOrder/completed|''"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="mBoxitem_table" tal:condition="data">
+                <table cellpadding="0" cellspacing="0" border="0" class="tableYoko">
+                    <thead>
+                    <tr>
+                        <th>Tên sản phẩm</th>
+                        <th class="thYokoM">Số lượng</th>
+                        <th class="thYokoM">Giá sản phẩm</th>
+                        <th class="thYokoM">Thành giá</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tr tal:repeat="item data">
+                        <td tal:content="item/name"></td>
+                        <td tal:content="item/qty"></td>
+                        <td tal:content="php: number_format(item['price']) .'đ'"></td>
+                        <td tal:content="php: number_format(item['unit_price']) .'đ'"></td>
                     </tr>
                 </table>
             </div>
@@ -51,10 +93,6 @@
 <div class="BtnArea">
     <div class="BtnAreaitem">
         <input class="btnMiddle themeNormal" type="submit" title="Delete" value="Delete"
-               onclick="location.href='/admin/category/delete?id=${contentCat/id}';"/>
-    </div>
-    <div class="BtnAreaitem">
-        <input class="btnMiddle themeNormal" type="submit" title="Edit" value="Edit"
-               onclick="location.href='/admin/category/edit?id=${contentCat/id}';"/>
+               onclick="location.href='/admin/orders/delete?id=${contentCat/id}';"/>
     </div>
 </div>
