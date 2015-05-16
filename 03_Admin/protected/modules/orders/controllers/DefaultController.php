@@ -63,8 +63,15 @@ class DefaultController extends Controller
 			$total += $item->qty * $item->price;
 		}
 
-		$msg = isset($_GET['msg']) ? true : false;
-		$this->render('view',compact('msg','contentOrder', 'data', 'total'));
+		$staffs = DeliveryStaff::model()->findAll();
+		$msg = false;
+		if(isset($_POST['deliveryStaff']) && $_POST['deliveryStaff'] != null){
+			$contentOrder->delivery_id = $_POST['deliveryStaff'];
+			$contentOrder->save(false);
+			$msg = true;
+		}
+
+		$this->render('view',compact('msg','contentOrder', 'data', 'total', 'staffs'));
 	}
 
 	public function actionSearch(){

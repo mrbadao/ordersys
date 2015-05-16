@@ -1,3 +1,10 @@
+<script>
+    function chooseStaff() {
+        $('#staffList').show();
+    }
+</script>
+
+
 <h1>Chi tiết đơn hàng</h1>
 <article>
     <p>
@@ -14,7 +21,7 @@
 <div class="columnContainer">
 
     <div class="tabBox">
-        <form action="edit" method="get" name="article">
+        <form action="" method="post" name="article">
             <input type="hidden" name="id" value="${contentOrder/id}"/>
 
             <div class="mBoxitem_table">
@@ -22,6 +29,11 @@
                     <tr>
                         <th>Tên đơn hàng</th>
                         <td tal:content="contentOrder/name|''" id="title"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Giá đơn hàng</th>
+                        <td tal:content="php: number_format(total) .'đ'"></td>
                     </tr>
 
                     <tr>
@@ -37,13 +49,16 @@
                             <a href="/admin/staff/view?id=${contentOrder/delivery_id}">${contentOrder/deliveryMan|''}</a>
                         </td>
                         <td tal:condition="not:contentOrder/deliveryMan">
-                            Chưa có
+                            <div id="noStaff">Chưa có <a href="javascript:chooseStaff()">Chọn người giao</a></div>
+                            <div id="staffList" style="display: none; margin-top: 5px;">
+                                <select name="deliveryStaff" tal:condition="staffs">
+                                    <option value="">Chọn giá trị</option>
+                                    <option tal:repeat="staff staffs" value="${staff/id|''}">${staff/login_id|''}
+                                    </option>
+                                </select>
+                                <input class="btnSmall themeNormal" type="submit" title="Chọn" value="Chọn"/>
+                            </div>
                         </td>
-                    </tr>
-
-                    <tr>
-                        <th>Giá đơn hàng</th>
-                        <td tal:content="php: number_format(total) .'đ'"></td>
                     </tr>
                 </table>
             </div>
@@ -80,12 +95,12 @@
             <div class="mBoxitem_table" tal:condition="data">
                 <table cellpadding="0" cellspacing="0" border="0" class="tableYoko">
                     <thead>
-                        <tr>
-                            <th>Tên sản phẩm</th>
-                            <th class="thYokoM">Số lượng</th>
-                            <th class="thYokoM">Giá sản phẩm</th>
-                            <th class="thYokoM">Thành giá</th>
-                        </tr>
+                    <tr>
+                        <th>Tên sản phẩm</th>
+                        <th class="thYokoM">Số lượng</th>
+                        <th class="thYokoM">Giá sản phẩm</th>
+                        <th class="thYokoM">Thành giá</th>
+                    </tr>
                     </thead>
                     <tr tal:repeat="item data">
                         <td tal:content="item/name"></td>
