@@ -24,27 +24,27 @@
         <table class="tableTate" cellspacing="0" cellpadding="0" border="0">
             <tr>
                 <th>Tên đơn hàng</th>
-                <td><input  value="${search/name|''}" name="search[name]" class="txtbox" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 250px;"/></td>
+                <td><input  value="${search/name|''}" name="search[name]" class="txtbox" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 150px;"/></td>
             </tr>
 
             <tr>
                 <th>Người đặt</th>
                 <td>
-                    <input  value="${search/customer_name|''}" name="search[customer_name]" class="txtbox" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 300px;"/>
+                    <input  value="${search/customer_name|''}" name="search[customer_name]" class="txtbox" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 150px;"/>
                 </td>
             </tr>
 
             <tr>
                 <th>Số điện thoai</th>
                 <td>
-                    <input  value="${search/order_phone|''}" name="search[order_phone]" class="txtbox" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 150px;"/>
+                    <input  value="${search/order_phone|''}" name="search[order_phone]" class="txtbox" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 100px;"/>
                 </td>
             </tr>
 
             <tr>
                 <th>Ngày đặt</th>
                 <td>
-                    <input id="created" value="${search/created|''}" name="search[created]" class="txtbox datetime" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 150px;"/>
+                    <input id="created" value="${search/created|''}" name="search[created]" class="txtbox datetime" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 100px;"/>
                 </td>
             </tr>
         </table>
