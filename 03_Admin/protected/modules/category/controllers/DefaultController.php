@@ -45,7 +45,7 @@ class DefaultController extends Controller
 
 		if($contentCat == null) $this->redirect(array('index'));
 
-		$this->title='View Category | CMS Saigonet';
+		$this->title='View Category | CMS Order Sys';
 
 		$msg = isset($_GET['msg']) ? true : false;
 		$this->render('view',compact('msg','contentCat'));
