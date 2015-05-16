@@ -2,7 +2,7 @@
 
 class DefaultController extends Controller
 {
-	const SESS_KEY = '_CATEGORIES';
+	const SESS_KEY = '_ORDERS';
 
 	public function actionIndex()
 	{
@@ -31,7 +31,7 @@ class DefaultController extends Controller
 				$this->redirect(array('view','id' => $contentCats->id, 'msg' => true));
 			}
 		}
-		$this->title= $contentCats->id == '' ?'Add Category | CMS Order Sys': 'Edit Category | CMS Order Sys';
+		$this->title= $contentCats->id == '' ?'Add Category | CMS Sagigonet': 'Edit Order Sys | CMS Order Sys';;
 		$this->render('edit',compact('contentCats'));
 	}
 
@@ -45,16 +45,15 @@ class DefaultController extends Controller
 
 		if($contentCat == null) $this->redirect(array('index'));
 
-		$this->title='View Category | CMS Saigonet';
+		$this->title='View Category | CMS Order Sys';
 
 		$msg = isset($_GET['msg']) ? true : false;
 		$this->render('view',compact('msg','contentCat'));
 	}
 
 	public function actionSearch(){
-		$this->widget('DatePickerWidget');
 		$this->title='Manager Categories | CMS Order Sys';
-		$search['name'] = $search['abbr_cd'] = '';
+		$search['name'] = $search['customer_name'] = $search['order_phone'] = $search['created'] = '';
 
 		$session = Yii::app()->session;
 
@@ -89,7 +88,13 @@ class DefaultController extends Controller
 					case 'name':
 						$c->compare($k, $v, true,'AND');
 						break;
-					case 'abbr_cd':
+					case 'customer_name':
+						$c->compare($k, $v, true,'AND');
+						break;
+					case 'order_phone':
+						$c->compare($k, $v, true,'AND');
+						break;
+					case 'created':
 						$c->compare($k, $v, true,'AND');
 						break;
 				}
@@ -107,16 +112,15 @@ class DefaultController extends Controller
 		$c->select = 't.*';
 		$c->group = 't.id';
 		$c->order = 't.id DESC';
-		$count = ContentCategories::model()->count($c);
+		$count = ContentOrder::model()->count($c);
 
 		$nodata = ($count)?false:true;
 		$c->limit = 10;
 		$c->offset = $c->limit * ($page-1);
-		$items = ContentCategories::model()->findAll($c);
+		$items = ContentOrder::model()->findAll($c);
 		$pages = new CPagination($count);
 		$pages->pageSize = $c->limit;
 		$pages->applyLimit($c);
-//		var_dump($items); die;
 		$this->render('index',compact('items','count','pages','search','nodata'));
 	}
 
