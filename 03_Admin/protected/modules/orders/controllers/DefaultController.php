@@ -67,6 +67,7 @@ class DefaultController extends Controller
 		$msg = false;
 		if(isset($_POST['deliveryStaff']) && $_POST['deliveryStaff'] != null){
 			$contentOrder->delivery_id = $_POST['deliveryStaff'];
+			$contentOrder->status = 1;
 			$contentOrder->save(false);
 			$msg = true;
 		}
