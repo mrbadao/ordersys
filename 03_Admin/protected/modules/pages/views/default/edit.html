@@ -31,7 +31,7 @@
                         <th>Id trang&nbsp;<span class="txtWarning">*</span></th>
                         <td>
                             <tal:block tal:content="structure php:CHtml::error(contentPage,'key')"/>
-                            <input type="text" name="page[key]" maxlength="100" value="${contentPage/name|''}"  class="txtbox title txt_en" style="width:300px;"/>
+                            <input type="text" name="page[key]" maxlength="100" value="${contentPage/key|''}"  class="txtbox title txt_en" style="width:300px;"/>
                         </td>
                     </tr>
                 </table>
