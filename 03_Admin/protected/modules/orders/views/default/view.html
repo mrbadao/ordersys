@@ -33,10 +33,10 @@
 
                     <tr>
                         <th>Người giao</th>
-                        <td tal:condition="contentOrder/deliveryMan"">
+                        <td tal:condition="contentOrder/deliveryMan">
                             <a href="/admin/staff/view?id=${contentOrder/delivery_id}">${contentOrder/deliveryMan|''}</a>
                         </td>
-                        <td tal:condition="not:contentOrder/deliveryMan"">
+                        <td tal:condition="not:contentOrder/deliveryMan">
                             Chưa có
                         </td>
                     </tr>
