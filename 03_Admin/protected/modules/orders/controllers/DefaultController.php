@@ -52,7 +52,8 @@ class DefaultController extends Controller
 	}
 
 	public function actionSearch(){
-		$this->title='Manager Categories | CMS Order Sys';
+		$this->widget('DatePickerWidget');
+		$this->title='Manager Orders | CMS Order Sys';
 		$search['name'] = $search['customer_name'] = $search['order_phone'] = $search['created'] = '';
 
 		$session = Yii::app()->session;
