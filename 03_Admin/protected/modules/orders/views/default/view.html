@@ -32,8 +32,18 @@
                     </tr>
 
                     <tr>
+                        <th>Người giao</th>
+                        <td tal:condition="contentOrder/deliveryMan"">
+                            <a href="/admin/staff/view?id=${contentOrder/delivery_id}">${contentOrder/deliveryMan|''}</a>
+                        </td>
+                        <td tal:condition="not:contentOrder/deliveryMan"">
+                            Chưa có
+                        </td>
+                    </tr>
+
+                    <tr>
                         <th>Giá đơn hàng</th>
-                        <td>${total|'0'}đ</td>
+                        <td tal:content="php: number_format(total) .'đ'"></td>
                     </tr>
                 </table>
             </div>

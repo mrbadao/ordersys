@@ -19,6 +19,7 @@
  */
 class ContentOrder extends CActiveRecord
 {
+	public $deliveryMan = '';
 	/**
 	 * @return string the associated database table name
 	 */
@@ -125,5 +126,13 @@ class ContentOrder extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	public function afterFind(){
+		if($this->delivery_id != null){
+			$staff = DeliveryStaff::model()->findByPk($this->delivery_id);
+			$this->deliveryMan = $staff != null ? $staff->login_id : '' ;
+		}
+		return true;
 	}
 }
