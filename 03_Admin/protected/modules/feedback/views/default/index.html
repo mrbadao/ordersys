@@ -1,8 +1,8 @@
 <script>
     jQuery(function() {
-        $('#created').datetimepicker({dateFormat: 'yyyy-mm-dd'}).attr('readonly', 'readonly');
+        $('#created').datepicker({dateFormat: 'yyyy-mm-dd'});
         $(".datetime").on("change keyup", function () {
-            $(this).datetimepicker({dateFormat: 'yyyy-mm-dd'}).attr('readonly', 'readonly');
+            $(this).datetimepicker({dateFormat: 'yyyy-mm-dd'});
 
             var validation = validateDateTime($(this));
             var value = $(this).val();
