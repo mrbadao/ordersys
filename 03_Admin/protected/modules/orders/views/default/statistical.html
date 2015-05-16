@@ -84,9 +84,9 @@
                 <th>Tên đơn hàng</th>
                 <th class="thYokoM">người đặt</th>
                 <th class="thYokoM">số điện thoại</th>
-                <th class="thYokoM">Trạng thái</th>
+                <th class="thYokoM">Người giao</th>
                 <th class="thYokoM">Ngày đặt</th>
-                <th class="thYokoM">Ngày giao</th>
+                <th class="thYokoM">Trị giá</th>
                 <th></th>
             </tr>
             </thead>
@@ -94,13 +94,10 @@
                 <td tal:content="item/name"></td>
                 <td tal:content="item/customer_name"></td>
                 <td tal:content="item/order_phone"></td>
-                <td tal:condition="php: item['status'] == 0"> Vừa đặt</td>
-                <td tal:condition="php: item['status'] == 1"> Đang giao</td>
-                <td tal:condition="php: item['status'] == 2"> Đã giao</td>
+                <td tal:content="php: number_format(item['deliveryMan']) .'đ'"></td>
                 <td><span tal:condition="exists:item/created"
                           tal:content="dateformat:item/created">2012/04/13 23:00</span></td>
-                <td><span tal:condition="exists:item/completed"
-                          tal:content="dateformat:item/completed">2012/04/13 23:00</span></td>
+                <td tal:content="php: number_format(item['unit_price']) .'đ'"></td>
                 <td class="tdYoko_btn_s1"><a href="/admin/orders/view?id=${item/id}" class="btnTable themeNormal">Chi tiết</a></td>
             </tr>
         </table>

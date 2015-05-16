@@ -62,6 +62,10 @@ class DefaultController extends Controller
 		$c->addCondition('t.status = 2', 'AND');
 
 		$count = ContentOrder::model()->count($c);
+		$items = ContentOrder::model()->findAll($c);
+		foreach($items as $item){
+			$total += $item->unit_price;
+		}
 
 		$nodata = ($count)?false:true;
 
@@ -69,10 +73,6 @@ class DefaultController extends Controller
 		$c->offset = $c->limit * ($page-1);
 
 		$items = ContentOrder::model()->findAll($c);
-
-		foreach($items as $item){
-			$total += $item->unit_price;
-		}
 
 		$pages = new CPagination($count);
 		$pages->pageSize = $c->limit;
