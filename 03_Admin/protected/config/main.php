@@ -36,6 +36,7 @@ return array(
 		'setting',
 		'staff',
 		'feedback',
+		'pages',
 
 	),
 

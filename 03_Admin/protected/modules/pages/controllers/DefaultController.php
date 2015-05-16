@@ -3,7 +3,7 @@
 class DefaultController extends Controller
 {
 	const UPLOAD_PATH = 'upload/images/';
-	const SESS_KEY = '_PRODUCT';
+	const SESS_KEY = '_PAGES';
 
 	public function actionIndex()
 	{
@@ -12,49 +12,27 @@ class DefaultController extends Controller
 
 	public function actionEdit(){
 		$this->widget('CkEditor');
-		$contentProduct= null;
-		$contentCats = ContentCategories::model()->findAll();
+		$contentPage= null;
 		$id = isset($_GET['id']) ? $_GET['id'] : null;
 
 		if($id != null){
-			$contentProduct = ContentProduct::model()->findByPk($id);
+			$contentPage = ContentPage::model()->findByPk($id);
 		}
 
-		if($contentProduct == null) $contentProduct = new ContentProduct();
+		if($contentPage == null) $contentProduct = new ContentPage();
 
-		if(isset($_POST['product'])){
-			if($contentProduct->getIsNewRecord()){
-				$contentProduct->created = date("Y-m-d H:m:i");
-			}
+		if(isset($_POST['page'])){
+			$contentPage->setAttributes($_POST['page']);
 
-			$contentProduct->modified = date("Y-m-d H:m:i");
-			$contentProduct->setAttributes($_POST['product']);
+			if($contentPage->validate()){
 
-			$uploadExt =array(
-				'jpg' => 'image/jpeg',
-				'png' => 'image/png',
-				'gif' => 'image/gif',
-			);
+				$contentPage->save(false);
 
-			$uploadPath = substr(Yii::app()->request->getBaseUrl(true),0,-5).self::UPLOAD_PATH;
-
-			if(isset($_FILES['silde1']) && $_FILES['silde1']['name'] != null){
-				$silde1_name = time().'_1.'.array_search($_FILES['silde1']['type'],$uploadExt);
-				if(move_uploaded_file($_FILES['silde1']['tmp_name'],'../upload/images/'.$silde1_name)){
-					$contentProduct->thumbnail = $uploadPath.$silde1_name;
-				}
-			}
-
-
-			if($contentProduct->validate()){
-
-				$contentProduct->save(false);
-
-				$this->redirect(array('view','id' => $contentProduct->id, 'msg' => true));
+				$this->redirect(array('view','id' => $contentPage->id, 'msg' => true));
 			}
 		}
-		$this->title= $contentProduct->id == '' ?'Add Product | CMS Order Sys': 'Edit Product | CMS Order Sys';;
-		$this->render('edit',compact('contentCats', 'contentProduct', 'tags'));
+		$this->title= $contentPage->id == '' ?'Add Page | CMS Order Sys': 'Edit Page | CMS Order Sys';;
+		$this->render('edit',compact('contentPage'));
 	}
 
 	public function actionView(){
@@ -63,18 +41,18 @@ class DefaultController extends Controller
 			$this->redirect(array('index'));
 		}
 
-		$contentProduct = ContentProduct::model()->findByPk($id);
+		$contentPage = ContentPage::model()->findByPk($id);
 
-		if($contentProduct == null) $this->redirect(array('index'));
+		if($contentPage == null) $this->redirect(array('index'));
 
-		$this->title='View Product | CMS Order Sys';
+		$this->title='View Page | CMS Order Sys';
 
 		$msg = isset($_GET['msg']) ? true : false;
-		$this->render('view',compact('msg','contentProduct'));
+		$this->render('view',compact('msg','contentPage'));
 	}
 
 	public function actionSearch(){
-		$this->title='Manage Product | CMS Order Sys';
+		$this->title='Manage Product | CMS Saigonet';
 		$search['name'] = $search['category_id'] = $search['del_flg'] = '';
 
 		$catItems = ContentCategories::model()->findAll();
