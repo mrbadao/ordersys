@@ -135,4 +135,12 @@ class ContentOrder extends CActiveRecord
 		}
 		return true;
 	}
+
+	public function afterSave(){
+		if($this->delivery_id != null){
+			$staff = DeliveryStaff::model()->findByPk($this->delivery_id);
+			$this->deliveryMan = $staff != null ? $staff->login_id : '' ;
+		}
+		return true;
+	}
 }
