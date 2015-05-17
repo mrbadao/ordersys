@@ -10,7 +10,35 @@ class DefaultController extends Controller
 	}
 
 	public function actionSetOrder(){
-		$this->render('setorder');
+		$id = isset($_POST['id']) ? $_POST['id'] : null;
+		$msg = false;
+
+		if($id==null){
+			$this->redirect(array('index'));
+		}
+
+		$contentStaff = DeliveryStaff::model()->findByPk($id);
+
+		if($contentStaff == null) $this->redirect(array('index'));
+
+		$orders = ContentOrder::model()->findAllByAttributes(array('status' => 0));
+
+		if(isset($_POST['order_id'])){
+			foreach($_POST['order_id'] as $item){
+				$_Order = ContentOrder::model()->findByPk($item);
+				if($_Order){
+					$_Order->delivery_id = $item;
+					$_Order->status = 1;
+					$_Order->save(false);
+				}
+			}
+			$msg = true;
+		}
+
+		$data = ContentOrder::model()->findAllByAttributes(array('status' => 0, 'delivery_id' => $contentStaff->id));
+
+		$this->title='Set Staff Orders | CMS Order Sys';
+		$this->render('setorder', compact('msg','contentStaff', 'orders', 'data'));
 	}
 
 	public function actionEdit(){

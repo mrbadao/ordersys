@@ -13,77 +13,62 @@
             <tr>
                 <th>Chọn đơn hàng</th>
                 <td>
-                    <div class="c-team-block">
-                        <p class="team-title">Hiện có</p>
-                        <select style="display: none;" name="tsp[1000][]" id="second1" multiple="" size="8">
-                            <option selected="selected" value="3">dev_asv_01さん</option>
-                            <option selected="selected" value="4">dev_asv_02さん</option>
+                    <input type="hidden" name='id' value="${contentStaff/id|''}"/>
+                    <select name="order_id[]" id='second' multiple='multiple' size='10'>
+                        <option tal:repeat="item orders" value="${item/id|''}" orderAddress = "${item/customer_address|''}">${item/name|''}</option>
+                    </select>
+
+                    <div class="fAssist_row" tal:replace="">
+                        <p class="fTextAssist_top"><strong>Chọn</strong></p>
+                        <select name="" id='second2' multiple='multiple' size='8'>
                         </select>
-
-                        <div class="ms2side__div">
-                            <div class="ms2side__select">
-                                <select title="" name="tspms2side__sx" id="tspms2side__sx" size="8" multiple="multiple">
-
-                                </select>
-                            </div>
-                            <div style="padding-top: 38px;" class="ms2side__options">
-                                <p class="AddOne ms2side__hide" title="Add Selected">Chọn›</p>
-
-                                <p class="RemoveOne ms2side__hide" title="Remove Selected">‹Hủy</p>
-                            </div>
-                            <div class="ms2side__select">
-                                <select title="" name="tspms2side__dx" id="tspms2side__dx" size="8" multiple="multiple">
-                                    <option value="3">dev_asv_01さん</option>
-                                    <option value="4">dev_asv_02さん</option>
-                                </select>
-                            </div>
-                        </div>
-                        <br clear="all"/>
                     </div>
                 </td>
             </tr>
         </table>
     </div>
+
+    <div class="BtnArea">
+        <div class="BtnAreaitem">
+            <input class="btnMiddle themeNormal" type="submit" title="Save" value="Save"/>
+        </div>
+        <div class="BtnAreaitem">
+            <input class="btnMiddle themeNormal" type="submit" title="Cancel" value="Cancel"
+                   onclick="location.href='/admin/staff/';"/>
+        </div>
+    </div>
 </form>
 
-<div class="BtnArea">
-    <div class="BtnAreaitem">
-        <input class="btnMiddle themeNormal" type="submit" title="Save" value="Save"
-               onclick="location.href='/admin/staff/delete?id=${contentStaff/id|''}';"/>
-    </div>
-    <div class="BtnAreaitem">
-        <input class="btnMiddle themeNormal" type="submit" title="Cancel" value="Cancel"
-               onclick="location.href='/admin/staff/';"/>
-    </div>
+<div class="mBoxitem_table" tal:condition="data">
+    <table cellpadding="0" cellspacing="0" border="0" class="tableYoko">
+        <thead>
+        <tr>
+            <th>Tên đơn hàng</th>
+            <th class="thYokoM">Tên khách hàng</th>
+            <th class="thYokoM">Số điện thoại</th>
+            <th class="thYokoM">Địa chỉ</th>
+        </tr>
+        </thead>
+        <tr tal:repeat="orderdata data">
+            <td tal:content="orderdata/name"></td>
+            <td tal:content="orderdata/customer_name"></td>
+            <td tal:content="orderdata/order_phone"></td>
+            <td tal:content="orderdata/customer_address"></td>
+        </tr>
+    </table>
 </div>
 
-<link rel="stylesheet" type="text/css" href="/admin/js/jmultiselect2side/jquery.multiselect2side.css"/>
-<script type="text/javascript" src="/admin/js/jmultiselect2side/jquery.multiselect2side.js"></script>
-
-<!--<div class="c-team-block">-->
-    <!--<p class="team-title">記事管理</p>-->
-    <!--<select style="display: none;" name="tsp[1000][]" id="second1" multiple="" size="8">-->
-        <!--<option selected="selected" value="3">dev_asv_01さん</option>-->
-        <!--<option selected="selected" value="4">dev_asv_02さん</option>-->
-    <!--</select>-->
-
-    <!--<div class="ms2side__div">-->
-        <!--<div class="ms2side__select">-->
-            <!--<select title="" name="tspms2side__sx" id="tspms2side__sx" size="8" multiple="multiple">-->
-
-            <!--</select>-->
-        <!--</div>-->
-        <!--<div style="padding-top: 38px;" class="ms2side__options">-->
-            <!--<p class="AddOne ms2side__hide" title="Add Selected">追加›</p>-->
-
-            <!--<p class="RemoveOne ms2side__hide" title="Remove Selected">‹削除</p>-->
-        <!--</div>-->
-        <!--<div class="ms2side__select">-->
-            <!--<select title="" name="tspms2side__dx" id="tspms2side__dx" size="8" multiple="multiple">-->
-                <!--<option value="3">dev_asv_01さん</option>-->
-                <!--<option value="4">dev_asv_02さん</option>-->
-            <!--</select>-->
-        <!--</div>-->
-    <!--</div>-->
-
-<!--</div>-->
+<link href="/admin/js/jmultiselect2side/jquery.multiselect2side.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="/admin//js/jmultiselect2side/jquery.multiselect2side.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery('#second').multiselect2side({
+            selectedPosition: 'right',
+            moveOptions: false,
+            labelsx: '',
+            labeldx: '',
+            autoSort: true,
+            autoSortAvailable: true
+        });
+    });
+</script>
