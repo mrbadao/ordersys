@@ -69,7 +69,7 @@ class DefaultController extends Controller
 
 		$nodata = ($count)?false:true;
 
-		$c->limit = 1;
+		$c->limit = 10;
 		$c->offset = $c->limit * ($page-1);
 
 		$items = ContentOrder::model()->findAll($c);
