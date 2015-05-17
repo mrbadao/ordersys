@@ -29,13 +29,12 @@
                     <select name="order_id[]" id='second' multiple='multiple' size='10'>
                         <option tal:repeat="item orders" value="${item/id|''}" orderAddress = "${item/customer_address|''}">${item/name|''}</option>
                     </select>
-                    <div><p>Đơn hàng cần giao</p></div>
                     <div class="fAssist_row" tal:replace="">
                         <p class="fTextAssist_top"><strong>Chọn</strong></p>
                         <select name="" id='second2' multiple='multiple' size='8'>
                         </select>
                     </div>
-                    <div id="curr_adddress"><p>Đơn hàng cần giao</p></div>
+                    <div id="curr_adddress"><p></p></div>
                 </td>
             </tr>
         </table>
@@ -87,9 +86,10 @@
     });
 
     $(document).ready(function(){
-        $('#second option').click(function(){
-            var address = $(this).attr('orderAddress');
-            $('#curr_address').text(address);
+        $('#order_idms2side__sx option').bind('click', function(){;
+            var val = $(this).val();
+            var address = $('#second option[value='+val+']').attr('orderAddress');
+            $('#curr_address p').text(address);
         });
     });
 </script>
