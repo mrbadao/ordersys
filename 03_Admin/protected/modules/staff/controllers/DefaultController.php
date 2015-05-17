@@ -26,8 +26,6 @@ class DefaultController extends Controller
 
 		if($contentStaff == null) $this->redirect(array('index'));
 
-		$orders = ContentOrder::model()->findAllByAttributes(array('status' => 0));
-
 		if(isset($_POST['order_id'])){
 			foreach($_POST['order_id'] as $item){
 				$_Order = ContentOrder::model()->findByPk($item);
@@ -41,6 +39,7 @@ class DefaultController extends Controller
 		}
 
 		$data = ContentOrder::model()->findAllByAttributes(array('status' => 1, 'delivery_id' => $contentStaff->id));
+		$orders = ContentOrder::model()->findAllByAttributes(array('status' => 0));
 
 		$this->title='Set Staff Orders | CMS Order Sys';
 		$this->render('setorder', compact('msg','contentStaff', 'orders', 'data'));
