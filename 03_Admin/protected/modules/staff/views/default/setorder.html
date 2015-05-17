@@ -34,7 +34,7 @@
                         <select name="" id='second2' multiple='multiple' size='8'>
                         </select>
                     </div>
-                    <div id="curr_address"><p></p></div>
+                    <div id="curr_address" style="margin-top: 5px;"><p></p></div>
                 </td>
             </tr>
         </table>
@@ -90,7 +90,7 @@
             var val = $(this).val();
             var address = $('#second option[value='+val+']').attr('orderAddress');
             console.log(address);
-            $('#curr_address p').text(address);
+            $('#curr_address p').text('Địa chỉ: ' + address);
         });
     });
 </script>
