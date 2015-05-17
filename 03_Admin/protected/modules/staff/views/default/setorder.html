@@ -1,0 +1,86 @@
+<h1>Phân phối đơn hàng</h1>
+<article>
+    <p>Để phân phối đơn hàng. Chọn đơn hàng và click vào nút Save.</p>
+</article>
+
+<form name="frmSearch" action="/admin/staff/setorder" method="post">
+    <div class="mBoxitem_table">
+        <table class="tableTate" cellspacing="0" cellpadding="0" border="0">
+            <tr>
+                <th>Login Id</th>
+                <td>delivery_01</td>
+            </tr>
+            <tr>
+                <th>Chọn đơn hàng</th>
+                <td>
+                    <div class="c-team-block">
+                        <p class="team-title">記事管理</p>
+                        <select style="display: none;" name="tsp[1000][]" id="second1" multiple="" size="8">
+                            <option selected="selected" value="3">dev_asv_01さん</option>
+                            <option selected="selected" value="4">dev_asv_02さん</option>
+                        </select>
+
+                        <div class="ms2side__div">
+                            <div class="ms2side__select">
+                                <select title="" name="tspms2side__sx" id="tspms2side__sx" size="8" multiple="multiple">
+
+                                </select>
+                            </div>
+                            <div style="padding-top: 38px;" class="ms2side__options">
+                                <p class="AddOne ms2side__hide" title="Add Selected">追加›</p>
+
+                                <p class="RemoveOne ms2side__hide" title="Remove Selected">‹削除</p>
+                            </div>
+                            <div class="ms2side__select">
+                                <select title="" name="tspms2side__dx" id="tspms2side__dx" size="8" multiple="multiple">
+                                    <option value="3">dev_asv_01さん</option>
+                                    <option value="4">dev_asv_02さん</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br clear="all">
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
+
+<div class="BtnArea">
+    <div class="BtnAreaitem">
+        <input class="btnMiddle themeNormal" type="submit" title="Save" value="Save"
+               onclick="location.href='/admin/staff/delete?id=${contentStaff/id}';"/>
+    </div>
+    <div class="BtnAreaitem">
+        <input class="btnMiddle themeNormal" type="submit" title="Cancel" value="Cancel"
+               onclick="location.href='/admin/staff/';"/>
+    </div>
+</div>
+
+<div class="c-team-block">
+    <p class="team-title">記事管理</p>
+    <select style="display: none;" name="tsp[1000][]" id="second1" multiple="" size="8">
+        <option selected="selected" value="3">dev_asv_01さん</option>
+        <option selected="selected" value="4">dev_asv_02さん</option>
+    </select>
+
+    <div class="ms2side__div">
+        <div class="ms2side__select">
+            <select title="" name="tspms2side__sx" id="tspms2side__sx" size="8" multiple="multiple">
+
+            </select>
+        </div>
+        <div style="padding-top: 38px;" class="ms2side__options">
+            <p class="AddOne ms2side__hide" title="Add Selected">追加›</p>
+
+            <p class="RemoveOne ms2side__hide" title="Remove Selected">‹削除</p>
+        </div>
+        <div class="ms2side__select">
+            <select title="" name="tspms2side__dx" id="tspms2side__dx" size="8" multiple="multiple">
+                <option value="3">dev_asv_01さん</option>
+                <option value="4">dev_asv_02さん</option>
+            </select>
+        </div>
+    </div>
+    <br clear="all">
+</div>

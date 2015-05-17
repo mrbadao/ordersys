@@ -9,6 +9,10 @@ class DefaultController extends Controller
 		$this->forward('search');
 	}
 
+	public function actionSetOrder(){
+		$this->render('setorder');
+	}
+
 	public function actionEdit(){
         $contentStaff= null;
 		$id = isset($_GET['id']) ? $_GET['id'] : null;
