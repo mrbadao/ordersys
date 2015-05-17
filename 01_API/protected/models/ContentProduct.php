@@ -118,21 +118,21 @@ class ContentProduct extends CActiveRecord
 		return parent::model($className);
 	}
 
-	public function afterSave(){
-        $category = ContentCategories::model()->findByPk($this->category_id);
-
-        if($category){
-            $this->cat_name = $category->name;
-            $this->frendlyUrl = $category->abbr_cd.'/'.$this->id.'/'.Helpers::getDomainFromName($this->name).'.html';
-        }
-	}
-
-	public function afterFind(){
-        $category = ContentCategories::model()->findByPk($this->category_id);
-
-        if($category){
-            $this->cat_name = $category->name;
-            $this->frendlyUrl = $category->abbr_cd.'/'.$this->id.'/'.Helpers::getDomainFromName($this->name).'.html';
-        }
-	}
+//	public function afterSave(){
+//        $category = ContentCategories::model()->findByPk($this->category_id);
+//
+//        if($category){
+//            $this->cat_name = $category->name;
+//            $this->frendlyUrl = $category->abbr_cd.'/'.$this->id.'/'.Helpers::getDomainFromName($this->name).'.html';
+//        }
+//	}
+//
+//	public function afterFind(){
+//        $category = ContentCategories::model()->findByPk($this->category_id);
+//
+//        if($category){
+//            $this->cat_name = $category->name;
+//            $this->frendlyUrl = $category->abbr_cd.'/'.$this->id.'/'.Helpers::getDomainFromName($this->name).'.html';
+//        }
+//	}
 }
