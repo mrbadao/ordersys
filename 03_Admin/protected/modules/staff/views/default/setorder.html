@@ -14,12 +14,14 @@
         <table class="tableTate" cellspacing="0" cellpadding="0" border="0">
             <tr>
                 <th>Login Id</th>
-                <td tal:content="contentStaff/name|''">delivery_01</td>
-            </tr>
-            <tr>
-                <th>Login Id</th>
                 <td tal:content="contentStaff/login_id">delivery_01</td>
             </tr>
+
+            <tr>
+                <th>Tên nhân viên</th>
+                <td tal:content="contentStaff/name|''">delivery_01</td>
+            </tr>
+
             <tr>
                 <th>Chọn đơn hàng</th>
                 <td>
@@ -27,12 +29,13 @@
                     <select name="order_id[]" id='second' multiple='multiple' size='10'>
                         <option tal:repeat="item orders" value="${item/id|''}" orderAddress = "${item/customer_address|''}">${item/name|''}</option>
                     </select>
-
+                    <div><p>Đơn hàng cần giao</p></div>
                     <div class="fAssist_row" tal:replace="">
                         <p class="fTextAssist_top"><strong>Chọn</strong></p>
                         <select name="" id='second2' multiple='multiple' size='8'>
                         </select>
                     </div>
+                    <div id="curr_adddress"><p>Đơn hàng cần giao</p></div>
                 </td>
             </tr>
         </table>
@@ -70,6 +73,7 @@
 
 <link href="/admin/js/jmultiselect2side/jquery.multiselect2side.css" type="text/css" rel="stylesheet"/>
 <script type="text/javascript" src="/admin//js/jmultiselect2side/jquery.multiselect2side.js"></script>
+
 <script type="text/javascript">
     jQuery(document).ready(function () {
         jQuery('#second').multiselect2side({
@@ -79,6 +83,13 @@
             labeldx: '',
             autoSort: true,
             autoSortAvailable: true
+        });
+    });
+
+    $(document).ready(function(){
+        $('#second option').click(function(){
+            var address = $(this).attr('orderAddress');
+            $('#curr_address').text(address);
         });
     });
 </script>
