@@ -127,12 +127,8 @@ class ContentProduct extends CActiveRecord
 //        }
 //	}
 //
-//	public function afterFind(){
-//        $category = ContentCategories::model()->findByPk($this->category_id);
-//
-//        if($category){
-//            $this->cat_name = $category->name;
-//            $this->frendlyUrl = $category->abbr_cd.'/'.$this->id.'/'.Helpers::getDomainFromName($this->name).'.html';
-//        }
-//	}
+	public function afterFind(){
+        $this->description = Helpers::removeHtmlTag($this->description);
+		return true;
+	}
 }

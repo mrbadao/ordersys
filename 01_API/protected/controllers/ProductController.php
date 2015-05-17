@@ -92,7 +92,7 @@ class ProductController extends Controller
                 ))));
         }
 
-        for($i=0; $i<$_result['products']; $i++){
+        for($i=0; $i<count($_result['products']); $i++){
             $_result['products'][$i]['description'] = Helpers::removeHtmlTag($_result['products'][$i]['description']);
         }
 
