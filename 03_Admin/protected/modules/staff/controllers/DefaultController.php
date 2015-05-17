@@ -11,6 +11,11 @@ class DefaultController extends Controller
 
 	public function actionSetOrder(){
 		$id = isset($_POST['id']) ? $_POST['id'] : null;
+
+		if($id == null){
+			$id = isset($_GET['id']) ? $_GET['id'] : null;
+		}
+
 		$msg = false;
 
 		if($id==null){

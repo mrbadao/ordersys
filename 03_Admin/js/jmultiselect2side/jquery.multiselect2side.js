@@ -119,15 +119,15 @@
 							"<p class='AddAll' title='Add All'>&raquo;</p>" +
 							"<p class='RemoveOne' title='Remove Selected'>&lsaquo;</p>" +
 							"<p class='RemoveAll' title='Remove All'>&laquo;</p>")*/
-							("<p class='AddOne' title='Add Selected'>追加&rsaquo;</p>" +
-							"<p class='RemoveOne' title='Remove Selected'>&lsaquo;削除</p>")
+							("<p class='AddOne' title='Add Selected'>Thêm&rsaquo;</p>" +
+							"<p class='RemoveOne' title='Remove Selected'>&lsaquo;Xóa</p>")
 							:
 							/*("<p class='AddOne' title='Add Selected'>&lsaquo;</p>" +
 							"<p class='AddAll' title='Add All'>&laquo;</p>" +
 							"<p class='RemoveOne' title='Remove Selected'>&rsaquo;</p>" +
 							"<p class='RemoveAll' title='Remove All'>&raquo;</p>")*/
-							("<p class='AddOne' title='Add Selected'>追加&lsaquo;</p>" +
-							"<p class='RemoveOne' title='Remove Selected'>&rsaquo;削除</p>")
+							("<p class='AddOne' title='Add Selected'>Thêm&lsaquo;</p>" +
+							"<p class='RemoveOne' title='Remove Selected'>&rsaquo;Xóa</p>")
 							) +
 						"</div>" +
 						"<div class='ms2side__select'>" +
