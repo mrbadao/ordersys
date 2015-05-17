@@ -40,7 +40,7 @@ class DefaultController extends Controller
 			$msg = true;
 		}
 
-		$data = ContentOrder::model()->findAllByAttributes(array('status' => 0, 'delivery_id' => $contentStaff->id));
+		$data = ContentOrder::model()->findAllByAttributes(array('status' => 1, 'delivery_id' => $contentStaff->id));
 
 		$this->title='Set Staff Orders | CMS Order Sys';
 		$this->render('setorder', compact('msg','contentStaff', 'orders', 'data'));
