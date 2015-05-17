@@ -40,10 +40,14 @@ class CartController extends Controller
         foreach($this->_post_data['cartItems'] as $item){
             if($cart !=null){
                 foreach($cart as $existsItem){
+                    $flg = false;
                     if($item['id'] == $existsItem['id']){
-                        $existsItem['qty'] = $item['qty'];
+                        if($item['qty'] != 0)
+                            $existsItem['qty'] = $item['qty'];
+                        else $flg =true;
                     }
-                    $_result[] = $existsItem;
+                    if(!$flg)
+                        $_result[] = $existsItem;
                 }
             }
         }
@@ -90,7 +94,7 @@ class CartController extends Controller
                 'error' => array(
                     "error_code" => "1004",
                     "error_message" => "No Item to add.",
-            ))));
+                ))));
         }
 
         $_result= array();
@@ -129,7 +133,7 @@ class CartController extends Controller
             'status' => array(
                 "status_code" => "1005",
                 "status_message" => "Item is added successly to cart.",
-        ))));
+            ))));
     }
 
     public function actionGetCart(){
