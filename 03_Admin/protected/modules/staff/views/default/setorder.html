@@ -14,7 +14,7 @@
                 <th>Chọn đơn hàng</th>
                 <td>
                     <div class="c-team-block">
-                        <p class="team-title">記事管理</p>
+                        <p class="team-title">Hiện có</p>
                         <select style="display: none;" name="tsp[1000][]" id="second1" multiple="" size="8">
                             <option selected="selected" value="3">dev_asv_01さん</option>
                             <option selected="selected" value="4">dev_asv_02さん</option>
@@ -27,9 +27,9 @@
                                 </select>
                             </div>
                             <div style="padding-top: 38px;" class="ms2side__options">
-                                <p class="AddOne ms2side__hide" title="Add Selected">追加›</p>
+                                <p class="AddOne ms2side__hide" title="Add Selected">Chọn›</p>
 
-                                <p class="RemoveOne ms2side__hide" title="Remove Selected">‹削除</p>
+                                <p class="RemoveOne ms2side__hide" title="Remove Selected">‹Hủy</p>
                             </div>
                             <div class="ms2side__select">
                                 <select title="" name="tspms2side__dx" id="tspms2side__dx" size="8" multiple="multiple">
@@ -38,7 +38,7 @@
                                 </select>
                             </div>
                         </div>
-                        <br clear="all">
+                        <br clear="all"/>
                     </div>
                 </td>
             </tr>
@@ -49,7 +49,7 @@
 <div class="BtnArea">
     <div class="BtnAreaitem">
         <input class="btnMiddle themeNormal" type="submit" title="Save" value="Save"
-               onclick="location.href='/admin/staff/delete?id=${contentStaff/id}';"/>
+               onclick="location.href='/admin/staff/delete?id=${contentStaff/id|''}';"/>
     </div>
     <div class="BtnAreaitem">
         <input class="btnMiddle themeNormal" type="submit" title="Cancel" value="Cancel"
@@ -57,30 +57,33 @@
     </div>
 </div>
 
-<div class="c-team-block">
-    <p class="team-title">記事管理</p>
-    <select style="display: none;" name="tsp[1000][]" id="second1" multiple="" size="8">
-        <option selected="selected" value="3">dev_asv_01さん</option>
-        <option selected="selected" value="4">dev_asv_02さん</option>
-    </select>
+<link rel="stylesheet" type="text/css" href="/admin/js/jmultiselect2side/jquery.multiselect2side.css"/>
+<script type="text/javascript" src="/admin/js/jmultiselect2side/jquery.multiselect2side.js"></script>
 
-    <div class="ms2side__div">
-        <div class="ms2side__select">
-            <select title="" name="tspms2side__sx" id="tspms2side__sx" size="8" multiple="multiple">
+<!--<div class="c-team-block">-->
+    <!--<p class="team-title">記事管理</p>-->
+    <!--<select style="display: none;" name="tsp[1000][]" id="second1" multiple="" size="8">-->
+        <!--<option selected="selected" value="3">dev_asv_01さん</option>-->
+        <!--<option selected="selected" value="4">dev_asv_02さん</option>-->
+    <!--</select>-->
 
-            </select>
-        </div>
-        <div style="padding-top: 38px;" class="ms2side__options">
-            <p class="AddOne ms2side__hide" title="Add Selected">追加›</p>
+    <!--<div class="ms2side__div">-->
+        <!--<div class="ms2side__select">-->
+            <!--<select title="" name="tspms2side__sx" id="tspms2side__sx" size="8" multiple="multiple">-->
 
-            <p class="RemoveOne ms2side__hide" title="Remove Selected">‹削除</p>
-        </div>
-        <div class="ms2side__select">
-            <select title="" name="tspms2side__dx" id="tspms2side__dx" size="8" multiple="multiple">
-                <option value="3">dev_asv_01さん</option>
-                <option value="4">dev_asv_02さん</option>
-            </select>
-        </div>
-    </div>
-    <br clear="all">
-</div>
+            <!--</select>-->
+        <!--</div>-->
+        <!--<div style="padding-top: 38px;" class="ms2side__options">-->
+            <!--<p class="AddOne ms2side__hide" title="Add Selected">追加›</p>-->
+
+            <!--<p class="RemoveOne ms2side__hide" title="Remove Selected">‹削除</p>-->
+        <!--</div>-->
+        <!--<div class="ms2side__select">-->
+            <!--<select title="" name="tspms2side__dx" id="tspms2side__dx" size="8" multiple="multiple">-->
+                <!--<option value="3">dev_asv_01さん</option>-->
+                <!--<option value="4">dev_asv_02さん</option>-->
+            <!--</select>-->
+        <!--</div>-->
+    <!--</div>-->
+
+<!--</div>-->
