@@ -92,6 +92,10 @@ class ProductController extends Controller
                 ))));
         }
 
+        for($i=0; $i<$_result['products']; $i++){
+            $_result['products'][$i]['description'] = Helpers::removeHtmlTag($_result['products'][$i]['description']);
+        }
+
         Helpers::_sendResponse(200, json_encode($_result));
     }
 }

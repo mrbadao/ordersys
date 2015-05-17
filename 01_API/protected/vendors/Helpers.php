@@ -40,6 +40,11 @@ class Helpers{
         return $data;
     }
 
+    public static function removeHtmlTag($contentHTML){
+        $contentHTML = strip_tags($contentHTML);
+        return html_entity_decode($contentHTML);
+    }
+
     /**
      * Sends the API response
      *
