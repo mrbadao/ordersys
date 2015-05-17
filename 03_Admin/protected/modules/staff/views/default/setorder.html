@@ -3,6 +3,12 @@
     <p>Để phân phối đơn hàng. Chọn đơn hàng và click vào nút Save.</p>
 </article>
 
+<div class="messageBox">
+    <p class="txtWarning">
+        <strong tal:condition="msg">Thao tác hoàn thành</strong>
+    </p>
+</div>
+
 <form name="frmSearch" action="/admin/staff/setorder" method="post">
     <div class="mBoxitem_table">
         <table class="tableTate" cellspacing="0" cellpadding="0" border="0">
