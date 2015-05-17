@@ -42,7 +42,7 @@ class CartController extends Controller
                 foreach($cart as $existsItem){
                     $flg = false;
                     if($item['id'] == $existsItem['id']){
-                        if($item['qty'] != 0)
+                        if($item['qty'] != '0')
                             $existsItem['qty'] = $item['qty'];
                         else $flg =true;
                     }
@@ -51,6 +51,7 @@ class CartController extends Controller
                 }
             }
         }
+
         $cart = $_result;
         $session->add(self::SESSION_KEY, $cart);
 
