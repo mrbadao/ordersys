@@ -32,7 +32,7 @@ class DefaultController extends Controller
 			foreach($_POST['order_id'] as $item){
 				$_Order = ContentOrder::model()->findByPk($item);
 				if($_Order){
-					$_Order->delivery_id = $item;
+					$_Order->delivery_id = $id;
 					$_Order->status = 1;
 					$_Order->save(false);
 				}
