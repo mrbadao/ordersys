@@ -275,8 +275,8 @@ class CartController extends Controller
             $newOrder->email = $this->_post_data['email'];
             $newOrder->customer_address = $this->_post_data['address'];
             $newOrder->customer_name = $this->_post_data['name'];
-            $newOrder->coordinate_long = '-74.00594130000002';
-            $newOrder->coordinate_lat = '40.7127837';
+            $newOrder->coordinate_long = $this->_post_data['coordinate_long'];
+            $newOrder->coordinate_lat = $this->_post_data['coordinate_lat'];
             $newOrder->status = '0';
             $newOrder->created = date("Y-m-d H:i:s");
 
