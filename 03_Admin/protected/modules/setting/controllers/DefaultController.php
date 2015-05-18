@@ -7,7 +7,7 @@ class DefaultController extends Controller
         $this->title = 'Setting | CMS Order Sys';
         $msg = false;
         $siteSettings = null;
-        $settingKey = array('Email', 'Facebook', 'Twitter', 'Gplus', 'Phone', 'Mobile');
+        $settingKey = array('Email', 'Facebook', 'Twitter', 'Gplus', 'Phone', 'Mobile', 'Coordinate-lat', 'Coordinate-lng', 'Distance');
 
         foreach ($settingKey as $item) {
             if (isset($_POST['setting'])) {
