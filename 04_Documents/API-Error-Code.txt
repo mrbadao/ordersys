@@ -21,3 +21,4 @@
 1015 - Invalid Token.
 1016 - Completed Order.
 1017 - Token valid.
+1018 - Distance invalid.

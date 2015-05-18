@@ -280,6 +280,15 @@ class CartController extends Controller
             $newOrder->status = '0';
             $newOrder->created = date("Y-m-d H:i:s");
 
+            if(!Helpers::checkDeistanceBetween2Point(array('lat'=>$newOrder->coordinate_lat, 'lng' => $newOrder->coordinate_long)))
+            {
+                Helpers::_sendResponse(200, json_encode(array(
+                    'error' => array(
+                        "error_code" => "1018",
+                        "error_message" => "Distance invalid.",
+                    ))));
+            }
+
             if($newOrder->validate()){
                 $newOrder->save(false);
                 $OrderRelation = null;
@@ -315,5 +324,9 @@ class CartController extends Controller
                     "error_message" => "No items found.",
                 ))));
         }
+    }
+
+    public function actionTest(){
+        Helpers::checkDeistanceBetween2Point(array('lat'=>'10.8142', 'lng' => '106.643799'));
     }
 }

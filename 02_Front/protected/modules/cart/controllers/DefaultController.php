@@ -125,40 +125,46 @@ class DefaultController extends Controller
                 $user_ip = getenv('REMOTE_ADDR');
                 $geo = unserialize(file_get_contents("http://www.geoplugin.net/php.gp?ip=$user_ip"));
                 if ($geo) {
-                    $cart = $session[self::SESSION_KEY];
 
-                    $checkoutOrder['name'] = self::ORDER_NAME_PREFIX . date('HisdmY');
-                    $checkoutOrder['coordinate_lat'] = $geo['geoplugin_latitude'];
-                    $checkoutOrder['coordinate_long'] = $geo['geoplugin_longitude'];
-                    $checkoutOrder['created'] = date("Y-m-d H:i:s");
+                    if(Helpers::checkDeistanceBetween2Point(array('lat' => $geo['geoplugin_latitude'], 'lng' => $geo['geoplugin_longitude']))) {
+                        $cart = $session[self::SESSION_KEY];
+
+                        $checkoutOrder['name'] = self::ORDER_NAME_PREFIX . date('HisdmY');
+                        $checkoutOrder['coordinate_lat'] = $geo['geoplugin_latitude'];
+                        $checkoutOrder['coordinate_long'] = $geo['geoplugin_longitude'];
+                        $checkoutOrder['created'] = date("Y-m-d H:i:s");
 
 
-                    $newOrder = new ContentOrder();
-                    $newOrder->attributes = $checkoutOrder;
+                        $newOrder = new ContentOrder();
+                        $newOrder->attributes = $checkoutOrder;
 
-                    if ($newOrder->validate()) {
-                        $newOrder->save(false);
-                        $OrderRelation = null;
-                        foreach ($cart as $item) {
-                            $OrderRelation = new OrderRelation();
-                            $OrderRelation->order_id = $newOrder->id;
-                            $OrderRelation->product_id = $item['id'];
-                            $OrderRelation->qty = $item['qty'];
-                            $OrderRelation->price = Helpers::getProduct($item['id'])->price;
-                            $OrderRelation->save(false);
-                            $session->remove(self::SESSION_KEY);
-                            $orderStatus['flg'] = true;
-                            $orderStatus['msg'] = 'Bạn đã đặt thành công đơn hàng với mã số là: ' . $newOrder->name;
+                        if ($newOrder->validate()) {
+                            $newOrder->save(false);
+                            $OrderRelation = null;
+                            foreach ($cart as $item) {
+                                $OrderRelation = new OrderRelation();
+                                $OrderRelation->order_id = $newOrder->id;
+                                $OrderRelation->product_id = $item['id'];
+                                $OrderRelation->qty = $item['qty'];
+                                $OrderRelation->price = Helpers::getProduct($item['id'])->price;
+                                $OrderRelation->save(false);
+                                $session->remove(self::SESSION_KEY);
+                                $orderStatus['flg'] = true;
+                                $orderStatus['msg'] = 'Bạn đã đặt thành công đơn hàng với mã số là: ' . $newOrder->name;
+                            }
                         }
-                    }
 
-                    if (!$orderStatus['flg']) {
-                        $orderStatus['msg'] = 'Đã xãy ra lỗi trong quá trình thanh toán, vui lòng thữ lại sau.';
+                        if (!$orderStatus['flg']) {
+                            $orderStatus['msg'] = 'Đã xãy ra lỗi trong quá trình thanh toán, vui lòng thữ lại sau.';
+                        }
+                    }else{
+                        $hasError['flg'] = true;
+                        $hasError['msg'] = 'Vị trí của bạn quá xa chúng tôi không thể giao hàng.';
                     }
 
                 } else {
                     $hasError['flg'] = true;
-                    $hasError['msg'] = 'Chúng tôi không thể xác định vị trí của bạn. Xin vui lòng thữ lại hoặc sữ dụng android app của chúng thôi.';
+                    $hasError['msg'] = 'Chúng tôi không thể xác định vị trí của bạn. Xin vui lòng thữ lại hoặc sữ dụng android app của chúng tôi.';
                 }
             } else {
                 $hasError['flg'] = true;

@@ -82,6 +82,30 @@ class Helpers
     public static function getProduct($id){
         return ContentProduct::model()->findByPk($id);
     }
+
+    public static function checkDeistanceBetween2Point($detination){
+        $content = null;
+        $ggeo = null;
+
+        $base_lat = Setting::model()->findByAttributes(array('key' =>'Coordinate-lat'))->value;
+        $base_lng = Setting::model()->findByAttributes(array('key' =>'Coordinate-lng'))->value;
+        $base_distance = Setting::model()->findByAttributes(array('key' =>'Distance'))->value;
+
+        $origin = array('lat' => $base_lat, 'lng' => $base_lng, 'maxDistance' => $base_distance);
+
+        $url = 'http://maps.googleapis.com/maps/api/directions/json?origin='.$origin['lat'].','.$origin['lng'].'&destination='.$detination['lat'].','.$detination['lng'].'&sensor=true&mode=driving';
+
+        $content = file_get_contents($url);
+
+        if($content == null) return false;
+
+        $ggeo = json_decode($content);
+
+        if($ggeo == null) return false;
+
+        if($ggeo->routes[0]->legs['0']->distance->value > $origin['maxDistance']) return false;
+        return true;
+    }
 }
 
 ?>
