@@ -13,7 +13,8 @@
 
                     <hr/>
                     <!--Category-->
-                    <tal:block tal:content="structure php:this.widget('application.widgets.CategoryWidget',array('activeCategoryId' => category['id']),true)"/>
+                    <tal:block tal:condition="category" tal:content="structure php:this.widget('application.widgets.CategoryWidget',array('activeCategoryId' => category['id']),true)"/>
+                    <tal:block tal:condition="not:category" tal:content="structure php:this.widget('application.widgets.CategoryWidget',array(),true)"/>
                 </div>
             </div>
         </aside>

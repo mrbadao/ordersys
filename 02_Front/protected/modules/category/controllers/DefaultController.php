@@ -105,8 +105,9 @@ class DefaultController extends Controller
         $pages = new CPagination($count);
         $pages->pageSize = $c->limit;
         $pages->applyLimit($c);
+        $category = null;
 
         $title = 'Tìm kiếm "'.$search['name'].'"';
-        $this->render('index',compact('items','pages','nodata', 'title'));
+        $this->render('index',compact('items','pages','nodata', 'category', 'title'));
     }
 }
