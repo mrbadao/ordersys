@@ -25,8 +25,9 @@ class DefaultController extends Controller
 		$contentStaff = DeliveryStaff::model()->findByPk($id);
 
 		if($contentStaff == null) $this->redirect(array('index'));
-
+        var_dump($_POST);
 		if(isset($_POST['order_id'])){
+            var_dump($_POST['order_id']); die;
 			foreach($_POST['order_id'] as $item){
 				$_Order = ContentOrder::model()->findByPk($item);
 				if($_Order){
