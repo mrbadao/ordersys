@@ -170,6 +170,16 @@
         }
     });
 
+    $('form[name=frmSearch]').submit(function(e){
+        var itemArr=[];
+        eleChooseList.find('option').each(function(){
+            itemArr.push($(this).val());
+        });
+        console.log(itemArr);
+        eleChooseList.val(itemArr);
+        return true;
+    });
+
     google.maps.event.addDomListener(window, 'load', initialize);
     ]]>
 </script>
