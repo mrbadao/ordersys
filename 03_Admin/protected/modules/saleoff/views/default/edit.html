@@ -1,4 +1,19 @@
-<form id="article" method="post" action="" enctype="multipart/form-data">
+<script>
+    jQuery(function() {
+        $('#created').datetimepicker({dateFormat: 'yyyy-mm-dd'});
+        $(".datetime").on("change keyup", function () {
+            $(this).datetimepicker({dateFormat: 'yyyy-mm-dd'});
+
+            var validation = validateDateTime($(this));
+            var value = $(this).val();
+            if (!validation) {
+                $(this).val(value.substr(0, value.length - 1));
+            }
+        });
+    });
+</script>
+
+<form id="frmSaleOff" method="post" action="" enctype="multipart/form-data">
     <div tal:condition="not:exists:contentProduct/id">
         <h1>Thêm sản phẩm mới</h1>
         <article>
@@ -23,15 +38,34 @@
 
     <div class="columnContainer">
         <div class="tabBox">
-            <input type="hidden" name="product[id]" value="${contentProduct/id|''}"/>
+            <input type="hidden" name="saleoff[id]" value="${ContentSaleoff/id|''}"/>
 
             <div class="mBoxitem_table">
                 <table cellpadding="0" cellspacing="0" border="0" class="tableTate">
                     <tr>
-                        <th>Tên sảm phẩm&nbsp;<span class="txtWarning">*</span></th>
+                        <th>Tên khuyến mãi&nbsp;<span class="txtWarning">*</span></th>
                         <td>
-                            <tal:block tal:content="structure php:CHtml::error(contentProduct,'name')"/>
-                            <input type="text" name="product[name]" maxlength="100" value="${contentProduct/name|''}"  class="txtbox title txt_en" style="width:300px;"/>
+                            <tal:block tal:content="structure php:CHtml::error(ContentSaleoff,'name')"/>
+                            <input type="text" name="saleoff[name]" maxlength="100" value="${contentSaleOff/name|''}"  class="txtbox title txt_en" style="width:300px;"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="mBoxitem_table">
+                <table cellpadding="0" cellspacing="0" border="0" class="tableTate">
+                    <tr>
+                        <th>Ngày bắt đầu&nbsp;<span class="txtWarning">*</span></th>
+                        <td>
+                            <tal:block tal:content="structure php:CHtml::error(ContentSaleoff,'category_id')"/>
+                            <input id="startdate" value="${ContentSaleoff/startdate|''}" name="saleoff[startdate]" class="txtbox datetime" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 100px;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Ngày kết thúc&nbsp;<span class="txtWarning">*</span></th>
+                        <td>
+                            <tal:block tal:content="structure php:CHtml::error(ContentSaleoff,'enđate')"/>
+                            <input id="enddate" value="${ContentSaleoff/enddate|''}" name="saleoff[enddate]" class="txtbox datetime" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 100px;"/>
                         </td>
                     </tr>
                 </table>
@@ -42,55 +76,15 @@
                     <tr>
                         <th>Category&nbsp;<span class="txtWarning">*</span></th>
                         <td>
-                            <tal:block tal:content="structure php:CHtml::error(contentProduct,'category_id')"/>
-                            <select name="product[category_id]">
+                            <select>
                                 <option value="">Chọn danh mục</option>
-                                <option tal:repeat="cat contentCats" tal:attributes="selected php:cat['id'] == contentProduct['category_id'] ? 'selected' :'' " value="${cat/id}">${cat/name}</option>
+                                <option tal:repeat="cat contentCats" value="${cat/id}">${cat/name}</option>
                             </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Giá&nbsp;<span class="txtWarning">*</span></th>
-                        <td>
-                            <tal:block tal:content="structure php:CHtml::error(contentProduct,'name')"/>
-                            <input type="text" name="product[price]" maxlength="100" value="${contentProduct/price|''}"  class="txtbox title txt_en" style="width:200px;"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Tình trạng</th>
-                        <td>
-                            <select name="product[del_flg]">
-                                <option value="0" tal:attributes="selected php: contentProduct['del_flg'] == 0 ? 'selected' : ''">Đang bán</option>
-                                <option value="1" tal:attributes="selected php: contentProduct['del_flg'] == 1 ? 'selected' : ''">Ngừng bán</option>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="mBoxitem_table">
-                <table cellpadding="0" cellspacing="0" border="0" class="tableTate">
-                    <tr>
-                        <th>Thumbnail&nbsp;<span class="txtWarning">*</span></th>
-                        <td>
-                            <div>
-                                <tal:block tal:content="structure php:CHtml::error(contentProduct,'thumbnail')"/>
-                                <input type="file" name="silde1"/>
-                            </div>
-                            <div>
-                                <img src="${contentProduct/thumbnail|''}" tal:condition="php:contentProduct['thumbnail'] !=null" style="width: 400px; margin-top: 20px;"/>
-                            </div>
+                            <button class="btnMiddle themeNormal" id="btnChoose">Choose</button>
                         </td>
                     </tr>
 
-                    <tr>
-                        <th>Miêu tả</th>
-                        <td>
-                            <textarea name="product[description]" class="txt_bigbox ckeditor txt_en">
-                                ${contentProduct/description|''}
-                            </textarea>
-                        </td>
-                    </tr>
+
                 </table>
             </div>
         </div>
@@ -100,7 +94,7 @@
     <div class="BtnArea">
         <div class="BtnAreaitem">
             <tal:block class="BtnAreaitem" tal:content="structure php:CHtml::submitButton('Save',array('name' => 'commit','class'=>'btnMiddle themeNormal'))"/>
-            <input class="btnMiddle themeNormal" type="button" title="Cancel" value="Cancel" onclick="window.location.href='/admin/product/';"/>
+            <input class="btnMiddle themeNormal" type="button" title="Cancel" value="Cancel" onclick="window.location.href='/admin/saleoff/';"/>
         </div>
     </div>
 </form>
