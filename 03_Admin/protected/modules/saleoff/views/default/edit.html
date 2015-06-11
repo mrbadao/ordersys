@@ -12,6 +12,24 @@
             }
         });
     });
+
+    $('#selectProduct').click(function() {
+        var catId = $(this).val();
+        if (!isNaN(catId)) {
+            $.ajax({
+                type: 'POST',
+                cache: false,
+                url: "/admin/getcats",
+                dataType: "json",
+                success: function(data) {
+                    if(data !=null){
+
+                    }
+                }
+            });
+        }
+    });
+
 </script>
 
 <form id="frmSaleOff" method="post" action="" enctype="multipart/form-data">
@@ -81,7 +99,14 @@
                                 <option value="">Chọn danh mục</option>
                                 <option tal:repeat="cat contentCats" value="${cat/id}">${cat/name}</option>
                             </select>
-                            <button type="button" class="btnSmall themeNormal" id="btnChoose" style="margin-left: 5px;">Choose</button>
+                            <button type="button" class="btnSmall themeNormal" id="btnChooseCategory" style="margin-left: 5px;">Choose</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <td>
+                            <select id="selectProduct" multiple="multiple" size="10">
+                            </select>
                         </td>
                     </tr>
                 </table>
