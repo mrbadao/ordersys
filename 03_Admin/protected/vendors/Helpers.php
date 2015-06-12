@@ -54,6 +54,10 @@ class Helpers {
         return (implode($worldList) != '') ? implode(' ',$worldList).' ...' : '';
     }
 
+    public static function getProduct($id){
+        return ContentProduct::model()->findByPk($id);
+    }
+
     public static function getTagDomain($str){
         $str = trim($str,'/');
         $str = trim($str);

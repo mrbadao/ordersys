@@ -107,7 +107,7 @@
 
                             <div style="width:350px; float: left;">
                                 <select name="productid[]" id="listProduct" multiple="multiple" size="12" style="width: 200px;">
-                                    <option tal:repeat="item itemList" value="${item/id|''}" catid="${item/category_id|''}">${item/name|''}</option>
+                                    <option tal:repeat="item itemList" tal:define="product php:Helpers::getProduct(item['id'])" value="${item/id|''}" catid="${item/category_id|''}">${product/name|''}</option>
                                 </select>
                             </div>
                         </td>
