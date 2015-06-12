@@ -64,7 +64,7 @@ class DefaultController extends Controller
         if(!$contendSaleoff) $this->redirect('/admin/saleoff');
 
         $itemList = SaleoffRelation::model()->findAllByAttributes(array('saleoff_id' => $id));
-
+        $this->setTitle("CMS Order Sys | saleoff detail");
         return $this->render('view', compact('contendSaleoff','itemList', 'msg'));
 
     }
