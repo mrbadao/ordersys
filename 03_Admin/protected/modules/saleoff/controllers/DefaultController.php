@@ -11,7 +11,7 @@ class DefaultController extends Controller
         $this->widget('DatePickerWidget');
         $this->setTitle("CMS Order Sys | add saleoff");
         $ContentSaleoff = null;
-        $id = isset($_POST['id']) ? $_POST['id'] : null;
+        $id = isset($_GET['id']) ? $_GET['id'] : null;
         $proMsg = false;
         $itemList = null;
         $contentCats = ContentCategories::model()->findAll();
