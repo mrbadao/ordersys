@@ -49,7 +49,6 @@ class DefaultController extends Controller
                 }
             }
         }
-        var_dump($itemList);
         return $this->render('edit', compact('ContentSaleoff','contentCats', 'itemList', 'proMsg'));
     }
 
