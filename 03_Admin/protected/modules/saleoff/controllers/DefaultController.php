@@ -74,6 +74,7 @@ class DefaultController extends Controller
     public function actionSearch(){
         $this->title='CMS Order Sys | Manage Saleoff';
         $search['name'] = '';
+        $nodata = false;
 
 
         $session = Yii::app()->session;
@@ -109,13 +110,6 @@ class DefaultController extends Controller
                     case 'name':
                         $c->compare($k, $v, true,'AND');
                         break;
-//                    case 'category_id':
-//                        $c->compare($k, $v, false,'AND');
-//                        break;
-//                    case 'del_flg':
-//                        if($v != '')
-//                            $c->compare($k, $v, true,'AND');
-//                        break;
                 }
             }
         }
