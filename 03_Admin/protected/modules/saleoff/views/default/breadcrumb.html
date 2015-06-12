@@ -1,27 +1,27 @@
 <nav id="topicPath" metal:define-macro="search">
     <ul>
         <li class="top"><a href="/admin/">Home</a></li>
-        <li>Quản lí sản phẩm</li>
+        <li>Danh sách khuyến mãi</li>
     </ul>
 </nav>
 <nav id="topicPath" metal:define-macro="index">
     <ul>
         <li class="top"><a href="/admin/">Home</a></li>
-        <li ><a href="/admin/product/">Danh sách tin</a></li>
+        <li ><a href="/admin/saleoff/">Danh sách khuyến mãi</a></li>
         <li>Tìm kiếm</li>
     </ul>
 </nav>
 <nav id="topicPath" metal:define-macro="view">
   <ul>
       <li class="top"><a href="/admin/">Home</a></li>
-      <li ><a href="/admin/product/">Danh sách tin</a></li>
+      <li ><a href="/admin/saleoff/">Danh sách khuyến mãi</a></li>
       <li >Chi tiết</li>
   </ul>
  </nav>
 <nav id="topicPath" metal:define-macro="edit">
     <ul>
         <li class="top"><a href="/admin/">Home</a></li>
-        <li ><a href="/admin/saleoff/">Danh sách khuyễn mãi</a></li>
+        <li ><a href="/admin/saleoff/">Danh sách khuyến mãi</a></li>
         <li tal:condition="exists:ContentSaleoff/id"><a  href="/admin/saleoff/view?id=${ContentSaleoff/id}">Chi tiết</a></li>
         <li tal:condition="exists:ContentSaleoff/id">Chỉnh sữa</li>
         <li tal:condition="not: exists:ContentSaleoff/id">Thêm mới</li>

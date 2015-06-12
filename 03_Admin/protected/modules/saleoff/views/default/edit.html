@@ -3,10 +3,10 @@
 
 
     jQuery(function() {
-        $('#startdate').datetimepicker({dateFormat: 'yyyy-mm-dd'});
-        $('#enddate').datetimepicker({dateFormat: 'yyyy-mm-dd'});
+        $('#startdate').datetimepicker({dateFormat: 'yyyy-mm-dd HH:MM'});
+        $('#enddate').datetimepicker({dateFormat: 'yyyy-mm-dd HH:MM'});
         $(".datetime").on("change keyup", function () {
-            $(this).datetimepicker({dateFormat: 'yyyy-mm-dd'});
+            $(this).datetimepicker({dateFormat: 'yyyy-mm-dd HH:MM'});
 
 //            var validation = validateDateTime($(this));
 //            var value = $(this).val();
@@ -93,7 +93,7 @@
                             <div style="width: 300px; float: left;">
                                 <div style="width: 100%; float: left;">
                                     <select id="categories" style="width: 200px;">
-                                        <option value="">Chọn danh mục</option>
+                                        <option value="" catid="">Chọn danh mục</option>
                                         <option tal:repeat="cat contentCats" value="${cat/id}">${cat/name}</option>
                                     </select>
                                     <button type="button" class="btnSmall themeNormal" id="btnChooseCategory" style="margin-left: 5px;">Chọn</button>

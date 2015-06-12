@@ -44,12 +44,29 @@ class DefaultController extends Controller
                         $relation->save();
                         $itemList[] = ContentProduct::model()->findByPk($item);
                     }
+                    $this->redirect(array('view','id' => $ContentSaleoff->id, 'msg' => true));
                 }else{
                     $proMsg = true;
                 }
             }
         }
         return $this->render('edit', compact('ContentSaleoff','contentCats', 'itemList', 'proMsg'));
+    }
+
+    public function actionView(){
+        $id=isset($_GET['id']) ? $_GET['id'] : null;
+        $msg=isset($_GET['msg']) ? $_GET['msg'] : null;
+
+        if(!$id) $this->redirect('/admin/saleoff');
+
+        $contendSaleoff = ContentSaleoff::model()->findByPk($id);
+
+        if(!$contendSaleoff) $this->redirect('/admin/saleoff');
+
+        $itemList = SaleoffRelation::model()->findAllByAttributes(array('saleoff_id' => $id));
+
+        return $this->render('view', compact('contendSaleoff','itemList', 'msg'));
+
     }
 
     public function actionGetPros(){
