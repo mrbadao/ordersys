@@ -18,6 +18,7 @@ class DefaultController extends Controller
 
         if($id){
             $ContentSaleoff = ContentSaleoff::model()->findByPk($id);
+            $itemList = SaleoffRelation::model()->findAllByAttributes(array('saleoff_id' => $id));
             $this->setTitle("CMS Order Sys | edit saleoff");
         }
 
@@ -27,6 +28,7 @@ class DefaultController extends Controller
             $ContentSaleoff->attributes = $_POST['saleoff'];
 
             if($id) SaleoffRelation::model()->deleteAllByAttributes(array('saleoff_id' => $id));
+            $itemList=null;
 
             if($ContentSaleoff->validate()){
                 if(isset($_POST['productid'])){
@@ -47,7 +49,7 @@ class DefaultController extends Controller
                 }
             }
         }
-
+        var_dump($itemList);
         return $this->render('edit', compact('ContentSaleoff','contentCats', 'itemList', 'proMsg'));
     }
 
