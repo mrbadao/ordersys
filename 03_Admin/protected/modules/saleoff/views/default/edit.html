@@ -1,16 +1,18 @@
 <script>
     <![CDATA[
+
+
     jQuery(function() {
         $('#startdate').datetimepicker({dateFormat: 'yyyy-mm-dd'});
         $('#enddate').datetimepicker({dateFormat: 'yyyy-mm-dd'});
         $(".datetime").on("change keyup", function () {
             $(this).datetimepicker({dateFormat: 'yyyy-mm-dd'});
 
-            var validation = validateDateTime($(this));
-            var value = $(this).val();
-            if (!validation) {
-                $(this).val(value.substr(0, value.length - 1));
-            }
+//            var validation = validateDateTime($(this));
+//            var value = $(this).val();
+//            if (!validation) {
+//                $(this).val(value.substr(0, value.length - 1));
+//            }
         });
     });
 
@@ -42,7 +44,7 @@
 
     <div class="columnContainer">
         <div class="tabBox">
-            <input type="hidden" name="saleoff[id]" value="${ContentSaleoff/id|''}"/>
+            <input type="hidden" name="id" value="${ContentSaleoff/id|''}"/>
 
             <div class="mBoxitem_table">
                 <table cellpadding="0" cellspacing="0" border="0" class="tableTate">
@@ -80,6 +82,7 @@
                     <tr>
                         <th>Chọn sản phẩm&nbsp;</th>
                         <td>
+                            <p tal:condition="proMsg" class="txtWarning">Danh sách khuyến mĩa không đượng trống.</p>
                             <div style="width: 300px; float: left;">
                                 <div style="width: 100%; float: left;">
                                     <select id="categories" style="width: 200px;">
@@ -97,6 +100,7 @@
 
                             <div style="width:350px; float: left;">
                                 <select name="productid[]" id="listProduct" multiple="multiple" size="12" style="width: 200px;">
+                                    <option tal:repeat="item itemList" value="${item/id|''}" catid="${item/category_id|''}">${item/name|''}</option>
                                 </select>
                             </div>
                         </td>
