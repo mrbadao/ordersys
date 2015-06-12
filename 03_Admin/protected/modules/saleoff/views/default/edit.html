@@ -1,4 +1,5 @@
 <script>
+    <![CDATA[
     jQuery(function() {
         $('#startdate').datetimepicker({dateFormat: 'yyyy-mm-dd'});
         $('#enddate').datetimepicker({dateFormat: 'yyyy-mm-dd'});
@@ -13,40 +14,24 @@
         });
     });
 
-    $('#selectProduct').click(function() {
-        var catId = $(this).val();
-        if (!isNaN(catId)) {
-            $.ajax({
-                type: 'POST',
-                cache: false,
-                url: "/admin/getcats",
-                dataType: "json",
-                success: function(data) {
-                    if(data !=null){
-
-                    }
-                }
-            });
-        }
-    });
-
+]]>
 </script>
 
 <form id="frmSaleOff" method="post" action="" enctype="multipart/form-data">
     <div tal:condition="not:exists:contentProduct/id">
-        <h1>Thêm sản phẩm mới</h1>
+        <h1>Thêm khuyễn mãi</h1>
         <article>
             <p>
-                Sản phẩm mới sẽ được thêm.<br/>
+                Khuyễn mãi sẽ được thêm.<br/>
                 Sau khi nhập các thông tin cần thiết, bạn hãy click vào nút Save.
             </p>
         </article>
     </div>
     <div tal:condition="exists:contentProduct/id">
-        <h1>Chỉnh sữa sản phẩm</h1>
+        <h1>Chỉnh sữa khuyễn mãi</h1>
         <article>
             <p>
-                Sản phẩm sẽ được chỉnh sữa<br/>
+                Khuyễn mãi sẽ được chỉnh sữa<br/>
                 Sau khi nhập các thông tin cần thiết, bạn hãy click vào nút Save.
             </p>
         </article>
@@ -93,20 +78,27 @@
             <div class="mBoxitem_table">
                 <table cellpadding="0" cellspacing="0" border="0" class="tableTate">
                     <tr>
-                        <th>Category&nbsp;</th>
+                        <th>Chọn sản phẩm&nbsp;</th>
                         <td>
-                            <select>
-                                <option value="">Chọn danh mục</option>
-                                <option tal:repeat="cat contentCats" value="${cat/id}">${cat/name}</option>
-                            </select>
-                            <button type="button" class="btnSmall themeNormal" id="btnChooseCategory" style="margin-left: 5px;">Choose</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Sản phẩm</th>
-                        <td>
-                            <select id="selectProduct" multiple="multiple" size="10">
-                            </select>
+                            <div style="width: 300px; float: left;">
+                                <div style="width: 100%; float: left;">
+                                    <select id="categories" style="width: 200px;">
+                                        <option value="">Chọn danh mục</option>
+                                        <option tal:repeat="cat contentCats" value="${cat/id}">${cat/name}</option>
+                                    </select>
+                                    <button type="button" class="btnSmall themeNormal" id="btnChooseCategory" style="margin-left: 5px;">Chọn</button>
+                                </div>
+                                <div style="width: 100%; float: left;">
+                                    <select id="selectProduct" multiple="multiple" size="10" style="width: 200px;"></select>
+                                    <button type="button" class="btnSmall themeNormal" id="btnAdd" style="margin-left: 8px; margin-top: 10px; position: absolute;">Thêm</button>
+                                    <button type="button" class="btnSmall themeNormal" id="btnDel" style="margin-left: 8px; margin-top: 50px; position: absolute;">Xóa</button>
+                                </div>
+                            </div>
+
+                            <div style="width:350px; float: left;">
+                                <select name="productid[]" id="listProduct" multiple="multiple" size="12" style="width: 200px;">
+                                </select>
+                            </div>
                         </td>
                     </tr>
                 </table>
@@ -122,3 +114,66 @@
         </div>
     </div>
 </form>
+
+<script>
+    <![CDATA[
+    $(document).ready(function(){
+        var eleProducts = $('#selectProduct');
+        var eleList = $('#listProduct');
+
+        eleProducts.addOption = function(val, text, cateId){
+            $(this).append("<option value='"+val+"' catid='"+cateId+"'>"+text+"</option>");
+        };
+
+        $('#btnChooseCategory').bind('click', function() {
+            var catId = $("#categories").val();
+
+            if (!isNaN(catId)) {
+                $.ajax({
+                    type: 'POST',
+                    cache: false,
+                    url: "/admin/saleoff/getpros",
+                    dataType: "json",
+                    data: {"id":catId},
+                    success: function(data) {
+                        console.log(data);
+                        if(data !=null){
+                            eleProducts.find('option').remove();
+                            for(var i=0; i< data.length; i++){
+                                console.log(data[i]);
+                                eleProducts.addOption(data[i].id, data[i].name, catId);
+                            }
+                        }
+                    }
+                });
+            }
+        });
+
+        $('#btnAdd').bind('click', function(){
+            eleProducts.find('option:selected').each(function(){
+                if( eleList.find('option[value="'+ $(this).val() +'"]').length < 1) eleList.append($(this));
+            });
+        });
+
+        $('#btnDel').bind('click', function(){
+            eleList.find('option:selected').each(function(){
+                if($(this).attr('catid') == $("#categories").val()) {
+                    if (eleProducts.find('option[value="' + $(this).val() + '"]').length < 1) eleProducts.append($(this));
+                }else
+                    $(this).remove();
+            });
+        });
+
+        $('#frmSaleOff').submit(function(){
+            var listItem = [];
+            eleList.find('option').each(function(){
+                listItem.push($(this).val());
+            });
+            eleList.val(listItem);
+        });
+    });
+
+
+
+    ]]>
+</script>
