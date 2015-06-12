@@ -6,7 +6,7 @@ class DefaultController extends Controller
 
 	public function actionIndex()
 	{
-		$this->render('index');
+		$this->forward('search');
 	}
 
     public  function actionEdit(){
