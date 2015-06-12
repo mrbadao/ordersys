@@ -52,7 +52,14 @@
                         <th>Tên khuyến mãi&nbsp;<span class="txtWarning">*</span></th>
                         <td>
                             <tal:block tal:content="structure php:CHtml::error(ContentSaleoff,'name')"/>
-                            <input type="text" name="saleoff[name]" maxlength="100" value="${contentSaleOff/name|''}"  class="txtbox title txt_en" style="width:200px;"/>
+                            <input type="text" name="saleoff[name]" maxlength="100" value="${ContentSaleoff/name|''}"  class="txtbox title txt_en" style="width:200px;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Phần trăm khuyễn mãi&nbsp;<span class="txtWarning">*</span></th>
+                        <td>
+                            <tal:block tal:content="structure php:CHtml::error(ContentSaleoff,'percent')"/>
+                            <input type="text" name="saleoff[percent]" maxlength="100" value="${ContentSaleoff/percent|''}"  class="txtbox title txt_en" style="width:200px;"/>
                         </td>
                     </tr>
                 </table>
@@ -63,14 +70,14 @@
                     <tr>
                         <th>Ngày bắt đầu&nbsp;<span class="txtWarning">*</span></th>
                         <td>
-                            <tal:block tal:content="structure php:CHtml::error(ContentSaleoff,'category_id')"/>
+                            <tal:block tal:content="structure php:CHtml::error(ContentSaleoff,'startdate')"/>
                             <input id="startdate" value="${ContentSaleoff/startdate|''}" name="saleoff[startdate]" class="txtbox datetime" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 100px;"/>
                         </td>
                     </tr>
                     <tr>
                         <th>Ngày kết thúc&nbsp;<span class="txtWarning">*</span></th>
                         <td>
-                            <tal:block tal:content="structure php:CHtml::error(ContentSaleoff,'enđate')"/>
+                            <tal:block tal:content="structure php:CHtml::error(ContentSaleoff,'enddate')"/>
                             <input id="enddate" value="${ContentSaleoff/enddate|''}" name="saleoff[enddate]" class="txtbox datetime" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 100px;"/>
                         </td>
                     </tr>

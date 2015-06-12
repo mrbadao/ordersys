@@ -81,10 +81,10 @@ class ContentSaleoff extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('name',$this->name,true);
+		$criteria->compare('Tên khuyến mãi',$this->name,true);
 		$criteria->compare('percent',$this->percent);
-		$criteria->compare('startdate',$this->startdate,true);
-		$criteria->compare('enddate',$this->enddate,true);
+		$criteria->compare('Ngày bắt đầu',$this->startdate,true);
+		$criteria->compare('Ngày kết thúc',$this->enddate,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
