@@ -51,7 +51,7 @@
             </thead>
             <tr tal:repeat="item items">
                 <td tal:content="item/name"></td>
-                <td tal:content="item/perceent"></td>
+                <td tal:content="item/percent"></td>
                 <td><span tal:condition="exists:item/startdate" tal:content="dateformat:item/created">2012/04/13 23:00</span></td>
                 <td><span tal:condition="exists:item/enddate" tal:content="dateformat:item/modified">2012/04/13 23:00</span></td>
                 <td class="tdYoko_btn_s1"><a href="/admin/saleoff/view?id=${item/id}" class="btnTable themeNormal">Chi tiết</a></td>
