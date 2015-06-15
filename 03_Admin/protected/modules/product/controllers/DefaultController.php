@@ -65,6 +65,7 @@ class DefaultController extends Controller
 
             if ($contentProduct->validate() && !$comboError) {
                 $contentProduct->save(false);
+                ComboRelation::model()->deleteAllByAttributes(array('combo_id' => $contentProduct->id));
                 for ($i = 0; $i < count($comboItems); $i++) {
                     $comboRelation->combo_id = $contentProduct->id;
                     $comboItems[$i]->save(false);
