@@ -20,7 +20,11 @@
                 <div class="span6 product">
                     <h1>${item/name}</h1>
                   <span class="price">
-                      <span class="value">Giá: <tal:block tal:content="php: number_format(item['price'])"/></span><span class="currency">đ</span>
+                      Giá:
+                      <tal:block tal:define="global priceClass php: item['saleoff_price'] != '' ? 'old' : ''">
+                        <span class="value ${priceClass}"><tal:block tal:content="php: number_format(item['price'])"/></span><span class="currency">đ</span>
+                        <span tal:condition="php: item['saleoff_price'] != ''" class="value"> - <tal:block tal:content="php: number_format(item['saleoff_price'])"/></span><span class="currency">đ</span>
+                      </tal:block>
                     </span>
 
                     <hr/>
