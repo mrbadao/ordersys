@@ -68,7 +68,7 @@ class DefaultController extends Controller
                 ComboRelation::model()->deleteAllByAttributes(array('combo_id' => $contentProduct->id));
 
                 for ($i = 0; $i < count($comboItems); $i++) {
-                    $comboRelation[$i]->combo_id = $contentProduct->id;
+                    $comboItems[$i]->combo_id = $contentProduct->id;
                     $comboItems[$i]->save();
                 }
 
