@@ -122,10 +122,10 @@
               <span class="info">
                 <span class="title">${relatedItem/name|''}</span>
                 <span class="price">
-                    <span tal:attributes="class php:item['saleoff_price'] != '' ? 'old' : 'actual'">
-                        <span><tal:block tal:content="php: number_format(relatedItem['price'])"/></span><span style="text-transform: lowercase;">đ</span> -
+                    <span tal:attributes="class php:relatedItem['saleoff_price'] != '' ? 'old' : 'actual'">
+                        <span><tal:block tal:content="php: number_format(relatedItem['price'])"/></span><span style="text-transform: lowercase;">đ</span>
                     </span>
-                  <span class="actual" tal:condition="php:item['saleoff_price'] != ''"><span><tal:block tal:content="php: number_format(relatedItem['saleoff_price'])"/></span><span style="text-transform: lowercase;">đ</span></span>
+                  <span class="actual" tal:condition="php:relatedItem['saleoff_price'] != ''"> - <span><tal:block tal:content="php: number_format(relatedItem['saleoff_price'])"/></span><span style="text-transform: lowercase;">đ</span></span>
                 </span>
               </span>
             </li>
