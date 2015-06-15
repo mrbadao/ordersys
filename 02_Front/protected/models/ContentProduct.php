@@ -127,7 +127,11 @@ class ContentProduct extends CActiveRecord
             $this->frendlyUrl = $category->abbr_cd.'/'.$this->id.'/'.Helpers::getDomainFromName($this->name).'.html';
         }
 
-        $SaleoffRelation = SaleoffRelation::model()->findAllByAttributes(array('product_id' => $this->id));
+        $c = new CDbCriteria();
+        $c->addCondition('product_id = '.$this->id, 'AND');
+        $c->order='modified DESC';
+
+        $SaleoffRelation = SaleoffRelation::model()->find($c);
 
         if($SaleoffRelation){
             $ContentSaleOff = ContentSaleoff::model()->findByPk($SaleoffRelation->saleoff_id);
@@ -144,7 +148,11 @@ class ContentProduct extends CActiveRecord
             $this->frendlyUrl = $category->abbr_cd.'/'.$this->id.'/'.Helpers::getDomainFromName($this->name).'.html';
         }
 
-        $SaleoffRelation = SaleoffRelation::model()->findAllByAttributes(array('product_id' => $this->id));
+        $c = new CDbCriteria();
+        $c->addCondition('product_id = '.$this->id, 'AND');
+        $c->order='modified DESC';
+
+        $SaleoffRelation = SaleoffRelation::model()->find($c);
 
         if($SaleoffRelation){
             $ContentSaleOff = ContentSaleoff::model()->findByPk($SaleoffRelation->saleoff_id);

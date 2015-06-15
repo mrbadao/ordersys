@@ -15,8 +15,8 @@
                 </p>
                 <hr/>
                 <div class="row price-wrapper">
-                    <div tal:condition="php: item['saleoff_price'] != ''" class="span2 clearfix" style="width: 100%;">
-                        <span class="price old">
+                    <div class="span2 clearfix" style="width: 100%;">
+                        <span tal:condition="php: item['saleoff_price'] != ''" class="price old">
                             <span class="value" tal:content="php: number_format(item['saleoff_price'])">50.000</span><span class="currency">đ</span> -
                         </span>
 

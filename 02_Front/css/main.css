@@ -1267,12 +1267,9 @@ div[role="main"].homepage {
     color: #c2c2c2;
 }
 
-.old {
-    color: #c2c2c2;
-}
-
 .old span{
     text-decoration: line-through;
+    color: #c2c2c2;
 }
 
 .other-products .info .old span {

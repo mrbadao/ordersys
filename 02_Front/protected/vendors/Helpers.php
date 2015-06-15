@@ -26,8 +26,8 @@ class Helpers
     public static function getNumChars($contentHTML, $num)
     {
         $contentHTML = strip_tags($contentHTML);
-        $worldList = array_slice(explode(' ', $contentHTML), 0, $num - 1);
-        return (implode($worldList) != '') ? implode(' ', $worldList) . ' ...' : '';
+        $worldList = explode(' ', $contentHTML);
+        return (implode($worldList) != '') ? (count($worldList) <= $num ? implode(' ', $worldList) : implode(' ', array_slice($worldList, 0, $num - 1)). ' ...') : '';
     }
 
     public static function getDomainFromName($str)
