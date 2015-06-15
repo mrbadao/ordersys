@@ -54,8 +54,10 @@ class DefaultController extends Controller
 			}
 		}
         $listProduct = ContentProduct::model()->findAllByAttributes(array('is_combo'=>0));
-		$this->title= $contentProduct->id == '' ?'Add Product | CMS Order Sys': 'Edit Product | CMS Order Sys';;
-		$this->render('edit',compact('contentCats', 'contentProduct', 'tags', 'listProduct'));
+
+        $comboItems = $contentProduct->id ? ComboRelation::model()->findAllByAttributes(array('combo_id' => $contentProduct->id)) : null;
+		$this->title= $contentProduct->id == '' ?'Add Product | CMS Order Sys': 'Edit Product | CMS Order Sys';
+		$this->render('edit',compact('contentCats', 'contentProduct', 'tags', 'listProduct', 'comboItems'));
 	}
 
 	public function actionView(){

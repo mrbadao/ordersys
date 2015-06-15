@@ -12,6 +12,7 @@
  */
 class ComboRelation extends CActiveRecord
 {
+    public $product_name ='';
 	/**
 	 * @return string the associated database table name
 	 */
@@ -101,4 +102,12 @@ class ComboRelation extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    public function afterSave(){
+        $this->product_name = ContentProduct::model()->findByPk($this->rid)->name;
+    }
+
+    public function afterFind(){
+        $this->product_name = ContentProduct::model()->findByPk($this->rid)->name;
+    }
 }
