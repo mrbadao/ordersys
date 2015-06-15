@@ -33,14 +33,14 @@ class ContentProduct extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, category_id, thumbnail', 'required'),
+			array('name, category_id, thumbnail, is_combo', 'required'),
 			array('category_id, del_flg', 'numerical', 'integerOnly'=>true),
 			array('name, thumbnail', 'length', 'max'=>128),
 			array('price', 'length', 'max'=>50),
-			array('description, del_flg, created, modified', 'safe'),
+			array('is_combo, description, del_flg, created, modified', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, thumbnail, description, price, category_id, del_flg, created, modified', 'safe', 'on'=>'search'),
+			array('id, name, thumbnail, description, price, category_id, is_combo, del_flg, created, modified', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,6 +67,7 @@ class ContentProduct extends CActiveRecord
 			'description' => 'Miêu tả',
 			'price' => 'Giá sản phẩm',
 			'category_id' => 'Category',
+			'is_combo' => 'is_combo',
 			'del_flg' => 'Del Flg',
 			'created' => 'Created',
 			'modified' => 'Modified',
@@ -97,6 +98,7 @@ class ContentProduct extends CActiveRecord
 		$criteria->compare('description',$this->description,true);
 		$criteria->compare('price',$this->price,true);
 		$criteria->compare('category_id',$this->category_id);
+		$criteria->compare('is_combo',$this->is_combo);
 		$criteria->compare('del_flg',$this->del_flg);
 		$criteria->compare('created',$this->created,true);
 		$criteria->compare('modified',$this->modified,true);

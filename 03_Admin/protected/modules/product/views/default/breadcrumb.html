@@ -23,7 +23,7 @@
         <li class="top"><a href="/admin/">Home</a></li>
         <li ><a href="/admin/product/">Danh sách sản phẩm</a></li>
         <li tal:condition="exists:contentProduct/id"><a  href="/admin/product/view?id=${contentProduct/id}">Chi tiết</a></li>
-        <li tal:condition="exists:contentProduct/id">Chỉnh sữa</li>
+        <li tal:condition="exists:contentProduct/id">Chỉnh sửa</li>
         <li tal:condition="not: exists:contentProduct/id">Thêm mới</li>
     </ul>
 </nav>

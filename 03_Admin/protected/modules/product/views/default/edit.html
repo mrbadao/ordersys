@@ -1,4 +1,4 @@
-<form id="article" method="post" action="" enctype="multipart/form-data">
+<form id="frmProduct" method="post" action="" enctype="multipart/form-data">
     <div tal:condition="not:exists:contentProduct/id">
         <h1>Thêm sản phẩm mới</h1>
         <article>
@@ -9,10 +9,10 @@
         </article>
     </div>
     <div tal:condition="exists:contentProduct/id">
-        <h1>Chỉnh sữa sản phẩm</h1>
+        <h1>Chỉnh sửa sản phẩm</h1>
         <article>
             <p>
-                Sản phẩm sẽ được chỉnh sữa<br/>
+                Sản phẩm sẽ được chỉnh sửa<br/>
                 Sau khi nhập các thông tin cần thiết, bạn hãy click vào nút Save.
             </p>
         </article>
@@ -71,6 +71,26 @@
             <div class="mBoxitem_table">
                 <table cellpadding="0" cellspacing="0" border="0" class="tableTate">
                     <tr>
+                        <th>Là combo ?</th>
+                        <td>
+                            <input type="checkbox" name="product[is_combo]" value="contentProduct/is_combo|0" tal:attributes="selected php: contentProduct['is_combo'] == 1 ? 'selected' : ''"/>
+                        </td>
+                    </tr>
+                    <tr id="combo_content" tal:attributes="style php:contentProduct['is_combo'] == 0 ? 'display:none">
+                        <th>Chọn sản phẩm</th>
+                        <td>
+                            <select>
+                                <option value="">Chọn sản phẩm</option>
+                                <option tal:repeat="item listProduct" value="item/id|''">${item/name}</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="mBoxitem_table">
+                    <table cellpadding="0" cellspacing="0" border="0" class="tableTate">
+                    <tr>
                         <th>Thumbnail&nbsp;<span class="txtWarning">*</span></th>
                         <td>
                             <div>
@@ -104,3 +124,14 @@
         </div>
     </div>
 </form>
+
+<script>
+    $("input[name='product[is_combo]']").change(function() {
+        if(this.checked) {
+            $('#combo_content').show();
+        }else
+        {
+            $('#combo_content').hide();
+        }
+    });
+</script>

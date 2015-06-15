@@ -53,8 +53,9 @@ class DefaultController extends Controller
 				$this->redirect(array('view','id' => $contentProduct->id, 'msg' => true));
 			}
 		}
+        $listProduct = ContentProduct::model()->findAllByAttributes(array('is_combo'=>0));
 		$this->title= $contentProduct->id == '' ?'Add Product | CMS Order Sys': 'Edit Product | CMS Order Sys';;
-		$this->render('edit',compact('contentCats', 'contentProduct', 'tags'));
+		$this->render('edit',compact('contentCats', 'contentProduct', 'tags', 'listProduct'));
 	}
 
 	public function actionView(){
