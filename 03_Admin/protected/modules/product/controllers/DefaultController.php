@@ -55,7 +55,6 @@ class DefaultController extends Controller
                 $comboItems = null;
                 foreach ($_POST['combo_items'] as $item) {
                     $comboRelation = new ComboRelation();
-                    $comboRelation->combo_id = $contentProduct->id;
                     $comboRelation->rid = $item;
                     $comboRelation->created = date("Y-m-d H:m:i");
                     $comboRelation->modified = date("Y-m-d H:m:i");
@@ -67,6 +66,7 @@ class DefaultController extends Controller
             if ($contentProduct->validate() && !$comboError) {
                 $contentProduct->save(false);
                 for ($i = 0; $i < count($comboItems); $i++) {
+                    $comboRelation->combo_id = $contentProduct->id;
                     $comboItems[$i]->save(false);
                 }
                 $this->redirect(array('view', 'id' => $contentProduct->id, 'msg' => true));
