@@ -46,7 +46,7 @@
                         <td>
                             <div tal:repeat="item itemList">
                                 ${repeat/item/number}.
-                                <tal:block tal:define="product php:Helpers::getProduct(item['id'])" tal:content="product/name"/>
+                                <tal:block tal:define="product php:Helpers::getProduct(item['product_id'])" tal:content="product/name"/>
                             </div>
                         </td>
                     </tr>
