@@ -15,16 +15,21 @@
                 </p>
                 <hr/>
                 <div class="row price-wrapper">
-                    <div class="span2 clearfix">
+                    <div tal:condition="php: item['saleoff_price'] != ''" class="span2 clearfix" style="width: 100%;">
+                        <span class="price old">
+                            <span class="value" tal:content="php: number_format(item['saleoff_price'])">50.000</span><span class="currency">đ</span> -
+                        </span>
+
+                        <span class="price">
+                          <span class="value" tal:content="php: number_format(item['price'])">50.000</span><span class="currency">đ</span>
+                        </span>
+                    </div>
+
+                    <div class="span2">
                         <a onclick="addCart('${item/id}',1)" href="javascript:void(0)" class="add-to-cart">
                             <span class="icon ir">giỏ</span>
                             <span class="text">Thêm vào giỏ</span>
                         </a>
-                    </div>
-                    <div class="span2">
-                        <span class="price">
-                          <span class="value" tal:content="php: number_format(item['price'])">50.000</span><span class="currency">đ</span>
-                        </span>
                     </div>
                 </div>
 
