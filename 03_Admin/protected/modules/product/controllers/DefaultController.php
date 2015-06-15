@@ -51,7 +51,6 @@ class DefaultController extends Controller
             }
 
             if (isset($_POST['combo_items'])) {
-                $comboError = true;
                 $comboItems = null;
                 foreach ($_POST['combo_items'] as $item) {
                     $comboRelation = new ComboRelation();
@@ -63,17 +62,20 @@ class DefaultController extends Controller
                 }
             }
 
-            if ($contentProduct->validate() && !$comboError) {
+            if ($contentProduct->validate()) {
                 $contentProduct->save(false);
+
                 ComboRelation::model()->deleteAllByAttributes(array('combo_id' => $contentProduct->id));
+
                 for ($i = 0; $i < count($comboItems); $i++) {
                     $comboRelation->combo_id = $contentProduct->id;
-                    $comboItems[$i]->save(false);
+                    $comboItems[$i]->save();
                 }
+
                 $this->redirect(array('view', 'id' => $contentProduct->id, 'msg' => true));
             }
         }
-
+        $comboError = $contentProduct && $contentProduct->is_combo == 1 && $comboItems == null ? true : $comboError;
         $listProduct = ContentProduct::model()->findAllByAttributes(array('is_combo' => 0));
 
         $this->title = $contentProduct->id == '' ? 'Add Product | CMS Order Sys' : 'Edit Product | CMS Order Sys';

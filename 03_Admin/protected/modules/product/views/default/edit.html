@@ -79,6 +79,7 @@
                     <tr id="combo_content" tal:attributes="style php:contentProduct['is_combo'] == 0 ? 'display:none' : ''">
                         <th>Chọn sản phẩm</th>
                         <td>
+                            <p tal:condition="comboError" class="txtWarning">Hãy chọn sản phẩm</p>
                             <select>
                                 <option value="">Chọn sản phẩm</option>
                                 <option tal:repeat="item listProduct" value="${item/id|''}">${item/name}</option>
@@ -174,7 +175,7 @@
             if(eleComboList.find('div input[value='+val+']').length < 1)
                 eleComboList.append(
                         "<div style='width:100%; margin-top: 3px;  margin-bottom: 2px;'>" +
-                        "<input type='hidden' name='combo_items[]' value='"+val+"' class='txtbox title txt_en'' />" +
+                        "<input type='hidden' name='combo_items[]' value='"+val+"' class='txtbox title txt_en'/>" +
                         "<p style='width:150px; float: left'>"+text+"</p>" +
                         "<button type='button' style='margin-left: 5px;' onclick='delItem(this)'>Xóa</button>" +
                         "</div>"
