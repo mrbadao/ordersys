@@ -1272,6 +1272,10 @@ div[role="main"].homepage {
     color: #c2c2c2;
 }
 
+.photo-wrapper img{
+    background: #fff;
+}
+
 .other-products .info .old span {
     text-decoration: line-through;
 }
