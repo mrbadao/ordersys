@@ -57,7 +57,7 @@ class DefaultController extends Controller
                     $comboRelation->rid = $item;
                     $comboRelation->created = date("Y-m-d H:m:i");
                     $comboRelation->modified = date("Y-m-d H:m:i");
-                    $comboRelation->product_name = Helpers::getProduct($item)->name();
+                    $comboRelation->product_name = Helpers::getProduct($item)->name;
                     $comboItems[] = $comboRelation;
                 }
             }
