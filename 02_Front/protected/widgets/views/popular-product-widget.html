@@ -16,13 +16,16 @@
                 <hr/>
                 <div class="row price-wrapper">
                     <div class="span2 clearfix" style="width: 100%;">
-                        <span tal:condition="php: item['saleoff_price'] != ''" class="price old">
-                            <span class="value" tal:content="php: number_format(item['saleoff_price'])">50.000</span><span class="currency">đ</span> -
-                        </span>
+                        <tal:block tal:define="global priceClass php: item['saleoff_price'] != '' ? 'old' : ''">
+                            <span class="price ${priceClass}">
+                                <span class="value" tal:content="php: number_format(item['price'])">50.000</span><span class="currency">đ</span>
+                                <tal:block tal:condition="php: item['saleoff_price'] != ''" > - </tal:block>
+                            </span>
 
-                        <span class="price">
-                          <span class="value" tal:content="php: number_format(item['price'])">50.000</span><span class="currency">đ</span>
-                        </span>
+                            <span tal:condition="php: item['saleoff_price'] != ''" class="price">
+                                <span class="value" tal:content="php: number_format(item['saleoff_price'])">50.000</span><span class="currency">đ</span>
+                            </span>
+                        </tal:block>
                     </div>
 
                     <div class="span2">
