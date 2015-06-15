@@ -22,7 +22,7 @@
                   <span class="price">
                       Giá:
                       <tal:block tal:define="global priceClass php: item['saleoff_price'] != '' ? 'old' : ''">
-                        <span class="value ${priceClass}"><tal:block tal:content="php: number_format(item['price'])"/></span><span class="currency">đ</span>
+                        <span class="value ${priceClass}"><tal:block tal:content="php: number_format(item['price'])"/></span><span class="currency ${priceClass}">đ</span>
                         <span tal:condition="php: item['saleoff_price'] != ''" class="value"> - <tal:block tal:content="php: number_format(item['saleoff_price'])"/></span><span class="currency">đ</span>
                       </tal:block>
                     </span>
@@ -122,7 +122,10 @@
               <span class="info">
                 <span class="title">${relatedItem/name|''}</span>
                 <span class="price">
-                  <span class="actual"><span><tal:block tal:content="php: number_format(relatedItem['price'])"/></span><span style="text-transform: lowercase;">đ</span></span>
+                    <span tal:attributes:="class php:item['saleoff_price'] != '' ? 'old' : 'actual'">
+                        <span><tal:block tal:content="php: number_format(relatedItem['price'])"/></span><span style="text-transform: lowercase;">đ</span> -
+                    </span>
+                  <span class="actual" tal:condition="php:item['saleoff_price'] != ''"><span><tal:block tal:content="php: number_format(relatedItem['saleoff_price'])"/></span><span style="text-transform: lowercase;">đ</span></span>
                 </span>
               </span>
             </li>
