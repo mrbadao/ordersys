@@ -20,6 +20,10 @@ class DefaultController extends Controller
 			$contentProduct = ContentProduct::model()->findByPk($id);
 		}
 
+        var_dump($_POST);
+
+        $comboItems = $contentProduct ? ComboRelation::model()->findAllByAttributes(array('combo_id' => $contentProduct->id)) : null;
+
 		if($contentProduct == null) $contentProduct = new ContentProduct();
 
 		if(isset($_POST['product'])){
@@ -47,15 +51,27 @@ class DefaultController extends Controller
 
 
 			if($contentProduct->validate()){
+                if(isset($_POST['combo_items'])) {
+                    $contentProduct->save(false);
+                    ComboRelation::model()->deleteAllByAttributes(array('combo_id' => $contentProduct->id));
 
-				$contentProduct->save(false);
+                    foreach($_POST['combo_items'] as $item){
+                        $comboRelation = new ComboRelation();
+                        $comboRelation->combo_id = $contentProduct->id;
+                        $comboRelation->rid = $item;
+                        $comboRelation->created = date("Y-m-d H:m:i");
+                        $comboRelation->modified = date("Y-m-d H:m:i");
+                        $comboRelation->save(false);
+                    }
 
+                    $comboItems = $contentProduct ? ComboRelation::model()->findAllByAttributes(array('combo_id' => $contentProduct->id)) : null;
+                }
 				$this->redirect(array('view','id' => $contentProduct->id, 'msg' => true));
 			}
 		}
+
         $listProduct = ContentProduct::model()->findAllByAttributes(array('is_combo'=>0));
 
-        $comboItems = $contentProduct->id ? ComboRelation::model()->findAllByAttributes(array('combo_id' => $contentProduct->id)) : null;
 		$this->title= $contentProduct->id == '' ?'Add Product | CMS Order Sys': 'Edit Product | CMS Order Sys';
 		$this->render('edit',compact('contentCats', 'contentProduct', 'tags', 'listProduct', 'comboItems'));
 	}

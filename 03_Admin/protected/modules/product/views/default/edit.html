@@ -52,7 +52,7 @@
                     <tr>
                         <th>Giá&nbsp;<span class="txtWarning">*</span></th>
                         <td>
-                            <tal:block tal:content="structure php:CHtml::error(contentProduct,'name')"/>
+                            <tal:block tal:content="structure php:CHtml::error(contentProduct,'price')"/>
                             <input type="text" name="product[price]" maxlength="100" value="${contentProduct/price|''}"  class="txtbox title txt_en" style="width:200px;"/>
                         </td>
                     </tr>
@@ -73,7 +73,7 @@
                     <tr>
                         <th>Là combo ?</th>
                         <td>
-                            <input type="checkbox" name="product[is_combo]" value="contentProduct/is_combo|0" tal:attributes="selected php: contentProduct['is_combo'] == 1 ? 'selected' : ''"/>
+                            <input type="checkbox" name="product[is_combo]" value="${contentProduct/is_combo|0}" tal:attributes="selected php: contentProduct['is_combo'] == 1 ? 'selected' : ''"/>
                         </td>
                     </tr>
                     <tr id="combo_content" tal:attributes="style php:contentProduct['is_combo'] == 0 ? 'display:none' : ''">
@@ -81,10 +81,19 @@
                         <td>
                             <select>
                                 <option value="">Chọn sản phẩm</option>
-                                <option tal:repeat="item listProduct" value="item/id|''">${item/name}</option>
+                                <option tal:repeat="item listProduct" value="${item/id|''}">${item/name}</option>
                             </select>
                             <button type="button" id="combo_add">Thêm</button>
-                            <select id="combo_product" multiple="multiple"></select>
+                        </td>
+                    </tr>
+
+                    <tr tal:attributes="style php: comboItems != null ? 'display:block' : 'display:none' " id="combo_list">
+                        <th>Combo item</th>
+                        <td>
+                            <div tal:condition="comboItems" tal:repeat="comboItem comboItems" style="width: 100%; margin-top: 3px; margin-bottom: 2px;">
+                                <input readonly="readonly" name="combo_items[]" rid="${comboItem/rid|''}" value="${comboItem/product_name|''}" class="txtbox title txt_en" style="width:150px;"/>
+                                <button type="button" style="margin-left: 5px;" onclick="delItem(this)">Xóa</button>
+                            </div>
                         </td>
                     </tr>
                 </table>
@@ -92,36 +101,29 @@
 
             <div class="mBoxitem_table">
                     <table cellpadding="0" cellspacing="0" border="0" class="tableTate">
-                    <tr>
-                        <th>Thumbnail&nbsp;<span class="txtWarning">*</span></th>
-                        <td>
-                            <div>
-                                <tal:block tal:content="structure php:CHtml::error(contentProduct,'thumbnail')"/>
-                                <input type="file" name="silde1"/>
-                            </div>
-                            <div>
-                                <img src="${contentProduct/thumbnail|''}" tal:condition="php:contentProduct['thumbnail'] !=null" style="width: 400px; margin-top: 20px;"/>
-                            </div>
-                        </td>
-                    </tr>
-
-                        <tr tal:condition="comboItems" id="combo_list">
-                            <th>Combo item</th>
+                        <tr>
+                            <th>Thumbnail&nbsp;<span class="txtWarning">*</span></th>
                             <td>
-                                <div tal:repeat="comboItem comboItems" style="width: 100%">
-                                    <input name="combo_item[repeat/item/index]" rid="comboItem/rid|''" value="comboItem/product_name|''"/>
+                                <div>
+                                    <tal:block tal:content="structure php:CHtml::error(contentProduct,'thumbnail')"/>
+                                    <input type="file" name="silde1"/>
+                                </div>
+                                <div>
+                                    <img src="${contentProduct/thumbnail|''}" tal:condition="php:contentProduct['thumbnail'] !=null" style="width: 400px; margin-top: 20px;"/>
                                 </div>
                             </td>
                         </tr>
 
-                    <tr>
-                        <th>Miêu tả</th>
-                        <td>
-                            <textarea name="product[description]" class="txt_bigbox ckeditor txt_en">
-                                ${contentProduct/description|''}
-                            </textarea>
-                        </td>
-                    </tr>
+
+
+                        <tr>
+                            <th>Miêu tả</th>
+                            <td>
+                                <textarea name="product[description]" class="txt_bigbox ckeditor txt_en">
+                                    ${contentProduct/description|''}
+                                </textarea>
+                            </td>
+                        </tr>
                 </table>
             </div>
         </div>
@@ -137,9 +139,16 @@
 </form>
 
 <script>
+    <![CDATA[
     var eleComboProducts = $('#combo_content select');
     var frmProduct= $('#frmProduct');
-    var eleComboList= $('#combo_list');
+    var eleComboList= $('#combo_list td');
+
+    frmProduct.submit(function(){
+        eleComboList.find('div input').each(function(){
+            $(this).attr("value",$(this).attr('rid'));
+        });
+    });
 
     $("input[name='product[is_combo]']").change(function() {
         if(this.checked) {
@@ -151,11 +160,28 @@
     });
 
     $('#combo_add').click(function(){
+
         var val=eleComboProducts.val();
-        var text=eleComboProducts.text();
-        if(!isNaN(val)){
-            eleComboList.append('<input/>')
-                        .attribute({'value':text, 'rid':val});
+        var text=eleComboProducts.find('option:selected').text();
+        console.log(text);
+        if(val != ''){
+            eleComboList.parent().show();
+            if(eleComboList.find('div input[rid='+val+']').length < 1)
+                eleComboList.append(
+                        "<div style='width:100%; margin-top: 3px;  margin-bottom: 2px;'>" +
+                        "<input name='combo_item[]' rid='" + val + "' readonly='readonly' value='"+text+"' class='txtbox title txt_en'' style='width:150px;'/>" +
+                        "<button type='button' style='margin-left: 5px;' onclick='delItem(this)'>Xóa</button>" +
+                        "</div>"
+                );
         }
     });
+
+    function delItem(ele){
+        $(ele).parent().remove();
+        if(eleComboList.find('div').length < 1){
+            eleComboList.parent().hide();
+        }
+    }
+
+    ]]>
 </script>
