@@ -49,22 +49,25 @@ class DefaultController extends Controller
 				}
 			}
 
+            if(isset($_POST['combo_items'])) {
+                $comboItems = null;
+                foreach($_POST['combo_items'] as $item){
+                    $comboRelation = new ComboRelation();
+                    $comboRelation->combo_id = $contentProduct->id;
+                    $comboRelation->rid = $item;
+                    $comboRelation->created = date("Y-m-d H:m:i");
+                    $comboRelation->modified = date("Y-m-d H:m:i");
+                    $comboRelation->product_name = Helpers::getProduct($item)->name();
+                    $comboItems[] = $comboRelation;
+                }
+            }
 
 			if($contentProduct->validate()){
                 if(isset($_POST['combo_items'])) {
                     $contentProduct->save(false);
-                    ComboRelation::model()->deleteAllByAttributes(array('combo_id' => $contentProduct->id));
-
-                    foreach($_POST['combo_items'] as $item){
-                        $comboRelation = new ComboRelation();
-                        $comboRelation->combo_id = $contentProduct->id;
-                        $comboRelation->rid = $item;
-                        $comboRelation->created = date("Y-m-d H:m:i");
-                        $comboRelation->modified = date("Y-m-d H:m:i");
-                        $comboRelation->save(false);
+                    for($i=0; $i<count($comboItems); $i++){
+                        $comboItems[$i]->save(false);
                     }
-
-                    $comboItems = $contentProduct ? ComboRelation::model()->findAllByAttributes(array('combo_id' => $contentProduct->id)) : null;
                 }
 				$this->redirect(array('view','id' => $contentProduct->id, 'msg' => true));
 			}

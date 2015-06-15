@@ -73,7 +73,7 @@
                     <tr>
                         <th>Là combo ?</th>
                         <td>
-                            <input type="checkbox" name="product[is_combo]" value="${contentProduct/is_combo|0}" tal:attributes="selected php: contentProduct['is_combo'] == 1 ? 'selected' : ''"/>
+                            <input type="checkbox" name="product[is_combo]" value="${contentProduct/is_combo|'0'}" tal:attributes="checked php: contentProduct['is_combo'] == 1 ? 'checked' : ''"/>
                         </td>
                     </tr>
                     <tr id="combo_content" tal:attributes="style php:contentProduct['is_combo'] == 0 ? 'display:none' : ''">
@@ -87,11 +87,12 @@
                         </td>
                     </tr>
 
-                    <tr tal:attributes="style php: comboItems != null ? 'display:block' : 'display:none' " id="combo_list">
+                    <tr tal:attributes="style php: comboItems != null ? '' : 'display:none' " id="combo_list">
                         <th>Combo item</th>
                         <td>
                             <div tal:condition="comboItems" tal:repeat="comboItem comboItems" style="width: 100%; margin-top: 3px; margin-bottom: 2px;">
-                                <input readonly="readonly" name="combo_items[]" rid="${comboItem/rid|''}" value="${comboItem/product_name|''}" class="txtbox title txt_en" style="width:150px;"/>
+                                <input type="hidden" name="combo_items[]" value="${comboItem/rid|''}" class="txtbox title txt_en" style="width:150px;"/>
+                                <p style="width:150px; float: left">${comboItem/product_name|''}</p>
                                 <button type="button" style="margin-left: 5px;" onclick="delItem(this)">Xóa</button>
                             </div>
                         </td>
@@ -148,6 +149,12 @@
         eleComboList.find('div input').each(function(){
             $(this).attr("value",$(this).attr('rid'));
         });
+
+        var isCombo = $("input[name='product[is_combo]']").is(":checked") ? '1' : '0';
+        console.log($("input[name='product[is_combo]']").is(":checked"));
+
+        $("input[name='product[is_combo]']").val(isCombo);
+        return true;
     });
 
     $("input[name='product[is_combo]']").change(function() {
@@ -160,16 +167,15 @@
     });
 
     $('#combo_add').click(function(){
-
         var val=eleComboProducts.val();
         var text=eleComboProducts.find('option:selected').text();
-        console.log(text);
         if(val != ''){
             eleComboList.parent().show();
-            if(eleComboList.find('div input[rid='+val+']').length < 1)
+            if(eleComboList.find('div input[value='+val+']').length < 1)
                 eleComboList.append(
                         "<div style='width:100%; margin-top: 3px;  margin-bottom: 2px;'>" +
-                        "<input name='combo_item[]' rid='" + val + "' readonly='readonly' value='"+text+"' class='txtbox title txt_en'' style='width:150px;'/>" +
+                        "<input type='hidden' name='combo_items[]' value='"+val+"' class='txtbox title txt_en'' />" +
+                        "<p style='width:150px; float: left'>"+text+"</p>" +
                         "<button type='button' style='margin-left: 5px;' onclick='delItem(this)'>Xóa</button>" +
                         "</div>"
                 );
