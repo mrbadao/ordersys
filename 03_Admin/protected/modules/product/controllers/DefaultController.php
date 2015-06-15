@@ -23,7 +23,7 @@ class DefaultController extends Controller
 
         $comboError = false;
 
-        $comboItems = $contentProduct ? ComboRelation::model()->findAllByAttributes(array('combo_id' => $contentProduct->id)) : null;
+        $comboItems = $contentProduct ? ComboRelation::model()->findAllByAttributes(array('combo_id' => $contentProduct->id)) : array();
 
         if ($contentProduct == null) $contentProduct = new ContentProduct();
 
@@ -68,7 +68,7 @@ class DefaultController extends Controller
                 ComboRelation::model()->deleteAllByAttributes(array('combo_id' => $contentProduct->id));
 
                 for ($i = 0; $i < count($comboItems); $i++) {
-                    $comboRelation->combo_id = $contentProduct->id;
+                    $comboRelation[$i]->combo_id = $contentProduct->id;
                     $comboItems[$i]->save();
                 }
 
