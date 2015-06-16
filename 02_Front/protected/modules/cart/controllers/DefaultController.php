@@ -13,28 +13,31 @@ class DefaultController extends Controller
         $cart = null;
         $items = array();
         $total = 0;
+        $tempCart = array();
 
         $session = Yii::app()->session;
+
         if ($session->contains(self::SESSION_KEY)) {
-            if (isset($_POST['cart'])) {
-                $cart = $_POST['cart'];
-                $session->remove(self::SESSION_KEY);
-                for ($i = 0; $i < count($cart); $i++) {
-                    if ($cart[$i]['qty'] < 1) {
-                        unset($cart[$i]);
-                    }
-                }
-                if (count($cart) > 0) {
-                    $session->add(self::SESSION_KEY, $_POST['cart']);
-                }
-            } else {
-                $cart = $session[self::SESSION_KEY];
-            }
+            $cart = $session[self::SESSION_KEY];
+            $session->remove(self::SESSION_KEY);
         }
 
-        if ($cart == null) {
-            $nodata = true;
-        } else {
+        if (isset($_POST['cart'])) {
+            $cart = $_POST['cart'];
+
+            for($i=0;$i<count($cart); $i++){
+                if ($cart[$i]['qty'] > 0) {
+                    $tempCart[] = $cart[$i];
+                }
+            }
+
+            $cart = $tempCart;
+        }
+
+        $nodata = count($cart) < 1 ? true : $nodata;
+
+        if (!$nodata) {
+            $session->add(self::SESSION_KEY, $cart);
             foreach ($cart as $item) {
                 $temp['id'] = $item['id'];
                 $temp['qty'] = $item['qty'];
@@ -42,14 +45,13 @@ class DefaultController extends Controller
                 $product = Helpers::getProduct($item['id']);
                 if ($product) {
                     $temp['name'] = $product->name;
-                    $temp['unit_total'] = number_format($item['qty'] * $product->price);
-                    $total += $item['qty'] * $product->price;
+                    $temp['unit_total'] = $product->saleoff_price != '' ? number_format($item['qty'] * $product->saleoff_price) : number_format($item['qty'] * $product->price);
+                    $total += $product->saleoff_price != '' ? $item['qty'] * $product->saleoff_price : $item['qty'] * $product->price;
                 }
                 $items[] = $temp;
             }
             $total = number_format($total);
         }
-
 
         $this->render('index', compact('nodata', 'items', 'total'));
     }
@@ -91,7 +93,7 @@ class DefaultController extends Controller
                 $product = Helpers::getProduct($cart[$i]['id']);
 
                 if ($product) {
-                    $_result['total'] += $product->price * $cart[$i]['qty'];
+                    $_result['total'] += $product->saleoff_price !='' ? $product->saleoff_price * $cart[$i]['qty'] : $product->price * $cart[$i]['qty'];
                 } else {
                     unset($cart[$i]);
                 }

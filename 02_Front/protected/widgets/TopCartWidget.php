@@ -31,7 +31,7 @@ class TopCartWidget extends CLinkPager
                 $product = Helpers::getProduct($cart[$i]['id']);
 
                 if ($product) {
-                    $total += $product->price * $cart[$i]['qty'];
+                    $total += $product->saleoff_price !='' ? $product->saleoff_price * $cart[$i]['qty'] : $product->price * $cart[$i]['qty'];
                 }
             }
             $total = number_format($total);
