@@ -93,6 +93,7 @@
                         <td>
                             <div tal:condition="comboItems" tal:repeat="comboItem comboItems" style="width: 100%; margin-top: 3px; margin-bottom: 2px;">
                                 <input type="hidden" name="combo_items[]" value="${comboItem/rid|''}" class="txtbox title txt_en" style="width:150px;"/>
+                                <input type="number" name="combo_items_quantity[]" value="${comboItem/quantity|''}" class="txtbox title txt_en" style="width:50px;"/>
                                 <p style="width:150px; float: left">${comboItem/product_name|''}</p>
                                 <button type="button" style="margin-left: 5px;" onclick="delItem(this)">Xóa</button>
                             </div>

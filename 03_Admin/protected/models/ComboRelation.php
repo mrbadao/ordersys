@@ -29,12 +29,12 @@ class ComboRelation extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('combo_id, rid', 'required'),
-			array('combo_id, rid', 'numerical', 'integerOnly'=>true),
+			array('combo_id, rid, quantity', 'required'),
+			array('combo_id, rid, quantity', 'numerical', 'integerOnly'=>true),
 			array('created, modified', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, combo_id, rid, created, modified', 'safe', 'on'=>'search'),
+			array('id, combo_id, rid, quantity, created, modified', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,6 +60,7 @@ class ComboRelation extends CActiveRecord
 			'rid' => 'Rid',
 			'created' => 'Created',
 			'modified' => 'Modified',
+			'quantity' => 'quantity',
 		);
 	}
 
@@ -84,6 +85,7 @@ class ComboRelation extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('combo_id',$this->combo_id);
 		$criteria->compare('rid',$this->rid);
+		$criteria->compare('quantity',$this->quantity);
 		$criteria->compare('created',$this->created,true);
 		$criteria->compare('modified',$this->modified,true);
 
