@@ -23,6 +23,12 @@ return array(
 	),
 
 	'modules'=>array(
+        'gii'=>array(
+            'class'=>'system.gii.GiiModule',
+            'password'=>'1',
+            // If removed, Gii defaults to localhost only. Edit carefully to taste.
+            'ipFilters'=>array('127.0.0.1', '1.53.5.32', '113.161.74.112', '115.79.48.137', '::1'),
+        ),
 		'category',
 		'product',
 		'cart',
@@ -53,6 +59,11 @@ return array(
 			'urlFormat'=>'path',
 			'showScriptName'=>false,
 			'rules'=>array(
+                'gii'=>'gii',
+                'gii/<controller:\w+>'=>'gii/<controller>',
+                'gii/<controller:\w+>/<action:\w+>'=>'gii/<controller>/<action>',
+                'gii/<action:\w+>'=> 'gii/<action>',
+
 				'content/<action:\w+>'=> 'content/<action>',
 
                 array(

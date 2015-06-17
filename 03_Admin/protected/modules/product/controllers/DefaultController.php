@@ -52,12 +52,13 @@ class DefaultController extends Controller
 
             if (isset($_POST['combo_items'])) {
                 $comboItems = null;
-                foreach ($_POST['combo_items'] as $item) {
+                for($i=0; $i< count($_POST['combo_items']);$i++) {
                     $comboRelation = new ComboRelation();
-                    $comboRelation->rid = $item;
+                    $comboRelation->rid = $_POST['combo_items'][$i];
+                    $comboRelation->qty = is_numeric($_POST['combo_items_qty'][$i]) ? $_POST['combo_items_qty'][$i] : '1';
                     $comboRelation->created = date("Y-m-d H:m:i");
                     $comboRelation->modified = date("Y-m-d H:m:i");
-                    $comboRelation->product_name = Helpers::getProduct($item)->name;
+                    $comboRelation->product_name = Helpers::getProduct($_POST['combo_items'][$i])->name;
                     $comboItems[] = $comboRelation;
                 }
             }
@@ -77,7 +78,8 @@ class DefaultController extends Controller
         }
         $comboError = $contentProduct && $contentProduct->is_combo == 1 && $comboItems == null ? true : $comboError;
         $listProduct = ContentProduct::model()->findAllByAttributes(array('is_combo' => 0));
-
+//        var_dump($comboItems);
+//        var_dump($comboItems[0]->quantity);die;
         $this->title = $contentProduct->id == '' ? 'Add Product | CMS Order Sys' : 'Edit Product | CMS Order Sys';
         $this->render('edit', compact('contentCats', 'contentProduct', 'tags', 'listProduct', 'comboItems', 'comboError'));
     }

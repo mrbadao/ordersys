@@ -118,6 +118,8 @@ class DefaultController extends Controller
             'customer_address' => isset($_POST['address']) ? $_POST['address'] : '',
         );
 
+        $recommend = null;
+
         $hasError = array('flg' => false, 'msg' => '');
         $orderStatus = array('flg' => false, 'msg' => '');
         $session = Yii::app()->session;
@@ -153,6 +155,14 @@ class DefaultController extends Controller
                                 $session->remove(self::SESSION_KEY);
                                 $orderStatus['flg'] = true;
                                 $orderStatus['msg'] = 'Bạn đã đặt thành công đơn hàng với mã số là: ' . $newOrder->name;
+
+                                $comboRelation = ComboRelation::model()->findAllByAttributes(array('rid' => $item['id']));
+
+                                if($comboRelation){
+                                    foreach($comboRelation as $relation){
+                                        array_push($recommend[$relation->combo_id], $relation->rid);
+                                    }
+                                }
                             }
                         }
 
@@ -176,7 +186,7 @@ class DefaultController extends Controller
             $hasError['flg'] = true;
             $hasError['msg'] = 'Bạn không có sản phẩm nào để thanh toán.';
         }
-
+        var_dump($recommend);
         $this->render('checkout', compact('hasError', 'orderStatus', 'checkoutOrder'));
     }
 }
