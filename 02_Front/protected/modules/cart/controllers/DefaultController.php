@@ -3,6 +3,7 @@
 class DefaultController extends Controller
 {
     const SESSION_KEY = '_CART';
+    const SESSION_SUB_KEY = '_CART_RECOMMEND';
     const ORDER_NAME_PREFIX = "ORDER_";
 
     public function actionIndex()
@@ -118,13 +119,25 @@ class DefaultController extends Controller
             'customer_address' => isset($_POST['address']) ? $_POST['address'] : '',
         );
 
-        $recommend = null;
-
+        $recommend = array();
         $hasError = array('flg' => false, 'msg' => '');
         $orderStatus = array('flg' => false, 'msg' => '');
-        $session = Yii::app()->session;
 
+        $session = Yii::app()->session;
         if ($session->contains(self::SESSION_KEY)) {
+
+            $cart = $session[self::SESSION_KEY];
+
+            $tempCart = $cart;
+            do{
+                $findResult = self::getRecommend($tempCart);
+                if($findResult){
+                    $tempCart = $findResult['new_cart'];
+                    $recommend[] = $findResult['combo_id'];
+
+                }
+            }while($findResult !=null);
+
             if ($checkoutOrder['customer_name'] != '' && $checkoutOrder['email'] != '' && $checkoutOrder['order_phone'] != '' && $checkoutOrder['customer_address'] != '') {
                 $user_ip = getenv('REMOTE_ADDR');
                 $geo = unserialize(file_get_contents("http://www.geoplugin.net/php.gp?ip=$user_ip"));
@@ -155,14 +168,6 @@ class DefaultController extends Controller
                                 $session->remove(self::SESSION_KEY);
                                 $orderStatus['flg'] = true;
                                 $orderStatus['msg'] = 'Bạn đã đặt thành công đơn hàng với mã số là: ' . $newOrder->name;
-
-                                $comboRelation = ComboRelation::model()->findAllByAttributes(array('rid' => $item['id']));
-
-                                if($comboRelation){
-                                    foreach($comboRelation as $relation){
-                                        array_push($recommend[$relation->combo_id], $relation->rid);
-                                    }
-                                }
                             }
                         }
 
@@ -186,7 +191,51 @@ class DefaultController extends Controller
             $hasError['flg'] = true;
             $hasError['msg'] = 'Bạn không có sản phẩm nào để thanh toán.';
         }
-        var_dump($recommend);
-        $this->render('checkout', compact('hasError', 'orderStatus', 'checkoutOrder'));
+
+        $this->render('checkout', compact('hasError', 'orderStatus', 'checkoutOrder', 'recommend'));
+    }
+
+    function getRecommend($cart){
+        $recommend = array();
+        $chooseId =null;
+        $max = -1;
+
+        foreach ($cart as $item) {
+            $comboRelation = ComboRelation::model()->findAllByAttributes(array('rid' => $item['id']));
+            if($comboRelation){
+                foreach($comboRelation as $relation){
+                    if(is_array($recommend[$relation->combo_id])){
+                        array_push($recommend[$relation->combo_id], $relation->rid);
+                    }else{
+                        $recommend[$relation->combo_id] = array($relation->rid);
+                    }
+                }
+            }
+        }
+
+        if(count($recommend)<1) return null;
+
+        foreach($recommend as $key => $item){
+            if(count($item) > $max){
+                $chooseId = $key;
+                $max = count($item);
+            }
+        }
+
+        $chooseId;
+
+        $i=0;
+        $_loop = count($cart);
+
+        $new_cart = array();
+
+        while($i< $_loop){
+            if(!(in_array($cart[$i]['id'], $recommend[$chooseId]))){
+                $new_cart[] = array('id'=>$cart[$i]['id'], 'qty' => $cart[$i]['qty']);
+            }
+            $i++;
+        }
+
+        return array('combo_id' => Helpers::getProduct($chooseId), 'new_cart' => $new_cart);
     }
 }
