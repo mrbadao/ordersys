@@ -17,8 +17,8 @@
 
                 <div class="span6 product">
                     <h1>${item/name}</h1>
-                    <span class="price" tal:condition="php: item['saleoff_percent']" style="color: #ff0000; width: 100%;">Giảm: -${item/saleoff_percent}% </span>
-                  <span class="price">
+                    <span class="price" tal:condition="php: item['saleoff_percent']" style="color: #ff0000;">Giảm: -${item/saleoff_percent}% </span>
+                  <span class="price clearfix">
                       Giá:
                       <tal:block tal:define="global priceClass php: item['saleoff_price'] != '' ? 'old' : ''">
                         <span class="value ${priceClass}"><tal:block tal:content="php: number_format(item['price'])"/></span><span class="currency ${priceClass}">đ</span>
