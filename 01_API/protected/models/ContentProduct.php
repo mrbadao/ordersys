@@ -133,6 +133,8 @@ class ContentProduct extends CActiveRecord
 	}
 
 	public function afterFind(){
+        $this->description = Helpers::removeHtmlTag($this->description);
+    		
         $c = new CDbCriteria();
         $c->addCondition('product_id = '.$this->id, 'AND');
         $c->order='modified DESC';
@@ -143,6 +145,7 @@ class ContentProduct extends CActiveRecord
             $ContentSaleOff = ContentSaleoff::model()->findByPk($SaleoffRelation->saleoff_id);
             $this->saleoff_price = $ContentSaleOff ? $this->price/100 * $ContentSaleOff->percent : '';
         }
+        return true;
 	}
 
     public function getAttributes($names = true){
