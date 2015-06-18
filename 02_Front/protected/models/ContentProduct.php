@@ -19,6 +19,7 @@ class ContentProduct extends CActiveRecord
 	public $cat_name = '';
     public $frendlyUrl = '';
     public $saleoff_price = '';
+    public $saleoff_percent = '';
 	/**
 	 * @return string the associated database table name
 	 */
@@ -136,6 +137,7 @@ class ContentProduct extends CActiveRecord
         if($SaleoffRelation){
             $ContentSaleOff = ContentSaleoff::model()->findByPk($SaleoffRelation->saleoff_id);
             $this->saleoff_price = $ContentSaleOff ? $this->price/100 * $ContentSaleOff->percent : '';
+            $this->saleoff_percent = $ContentSaleOff ? $ContentSaleOff->percent : '';
         }
 
 	}
@@ -157,6 +159,7 @@ class ContentProduct extends CActiveRecord
         if($SaleoffRelation){
             $ContentSaleOff = ContentSaleoff::model()->findByPk($SaleoffRelation->saleoff_id);
             $this->saleoff_price = $ContentSaleOff ? $this->price/100 * $ContentSaleOff->percent : '';
+            $this->saleoff_percent = $ContentSaleOff ? $ContentSaleOff->percent : '';
         }
 	}
 }
