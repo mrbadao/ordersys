@@ -124,7 +124,6 @@ class DefaultController extends Controller
         $orderStatus = array('flg' => false, 'msg' => '');
 
         $session = Yii::app()->session;
-        die('sadsa');
         if ($session->contains(self::SESSION_KEY)) {
 
             $cart = $session[self::SESSION_KEY];
@@ -138,7 +137,6 @@ class DefaultController extends Controller
 
                 }
             }while($findResult !=null);
-            var_dump($recommend);die;
 
             if ($checkoutOrder['customer_name'] != '' && $checkoutOrder['email'] != '' && $checkoutOrder['order_phone'] != '' && $checkoutOrder['customer_address'] != '') {
                 $user_ip = getenv('REMOTE_ADDR');
@@ -193,7 +191,7 @@ class DefaultController extends Controller
             $hasError['flg'] = true;
             $hasError['msg'] = 'Bạn không có sản phẩm nào để thanh toán.';
         }
-        var_dump($recommend);
+
         $this->render('checkout', compact('hasError', 'orderStatus', 'checkoutOrder', 'recommend'));
     }
 
