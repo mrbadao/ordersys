@@ -177,4 +177,33 @@
             </div>
         </form>
     </div>
+
+    <div class="row top-spacing" tal:condition="recommend">
+        <div class="span12 main-heading">
+            <div class="span12" style="position: relative; margin-left: 0;">
+                <h1 style="text-align: left;">Sản phẩm khác</h1>
+                <hr/>
+            </div>
+        </div>
+    </div>
+
+    <div id="other-prod-slider" tal:condition="recommend">
+        <ul class="row-fluid clearfix rr other-products">
+            <li class="span3 alpha25" tal:repeat="relatedItem recommend">
+                <a href="/site/danh-muc-san-pham/${relatedItem/frendlyUrl}">
+                    <img src="${relatedItem/thumbnail|''}" alt="${relatedItem/name|''}"/>
+                </a>
+              <span class="info">
+                <span class="title">${relatedItem/name|''}</span>
+                <span class="price">
+                    <span tal:attributes="class php:relatedItem['saleoff_price'] != '' ? 'old' : 'actual'">
+                        <span><tal:block tal:content="php: number_format(relatedItem['price'])"/></span><span style="text-transform: lowercase;">đ</span>
+                    </span>
+                  <span class="actual" tal:condition="php:relatedItem['saleoff_price'] != ''"> - <span><tal:block tal:content="php: number_format(relatedItem['saleoff_price'])"/></span><span style="text-transform: lowercase;">đ</span></span>
+                </span>
+              </span>
+            </li>
+        </ul>
+    </div>
+
 </div>
