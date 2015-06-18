@@ -11,14 +11,13 @@
             <div class="row">
                 <div class="span6 gallery" style="margin-bottom: 10px;">
                     <div class="gallery-sub-wrap clearfix">
-                        <span class="saleoff-ico" tal:condition="php: item['saleoff_percent']"> -${item/saleoff_percent}%</span>
                         <img src="${item/thumbnail}" alt="${item/name}" style="width: 100%; background: #fff;"/>
-
                     </div>
                 </div>
 
                 <div class="span6 product">
                     <h1>${item/name}</h1>
+                    <span class="price" tal:condition="php: item['saleoff_percent']" style="color: #ff0000; width: 100%;">Giảm: -${item/saleoff_percent}% </span>
                   <span class="price">
                       Giá:
                       <tal:block tal:define="global priceClass php: item['saleoff_price'] != '' ? 'old' : ''">
