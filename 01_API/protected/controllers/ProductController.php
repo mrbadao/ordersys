@@ -94,6 +94,17 @@ class ProductController extends Controller
 
         for($i=0; $i<count($_result['products']); $i++){
             $_result['products'][$i]['description'] = Helpers::removeHtmlTag($_result['products'][$i]['description']);
+            $_result['products'][$i]['saleoff_price'] ='';
+            $c = new CDbCriteria();
+            $c->addCondition('product_id = '.$_result['products'][$i]['id'], 'AND');
+            $c->order='modified DESC';
+
+            $SaleoffRelation = SaleoffRelation::model()->find($c);
+
+            if($SaleoffRelation){
+                $ContentSaleOff = ContentSaleoff::model()->findByPk($SaleoffRelation->saleoff_id);
+                $_result['products'][$i]['saleoff_price'] = $ContentSaleOff ? $_result['products'][$i]['price']/100 * $ContentSaleOff->percent : '';
+            }
         }
 
         Helpers::_sendResponse(200, json_encode($_result));
