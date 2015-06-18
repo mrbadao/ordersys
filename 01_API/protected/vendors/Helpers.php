@@ -171,7 +171,7 @@ class Helpers{
         $_arr_data = array();
 
         foreach($data as $item){
-            $_arr_data[$arr_name][]=$item->attributes;
+            $_arr_data[$arr_name][]=$item->getAttributes();
         }
         return $_arr_data[$arr_name];
     }

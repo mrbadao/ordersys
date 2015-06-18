@@ -16,7 +16,6 @@
  */
 class ContentProduct extends CActiveRecord
 {
-	public $cat_name = '';
     public $frendlyUrl = '';
     public $saleoff_price = '';
 	/**
@@ -120,13 +119,6 @@ class ContentProduct extends CActiveRecord
 	}
 
 	public function afterSave(){
-        $category = ContentCategories::model()->findByPk($this->category_id);
-
-        if($category){
-            $this->cat_name = $category->name;
-            $this->frendlyUrl = $category->abbr_cd.'/'.$this->id.'/'.Helpers::getDomainFromName($this->name).'.html';
-        }
-
         $c = new CDbCriteria();
         $c->addCondition('product_id = '.$this->id, 'AND');
         $c->order='modified DESC';
@@ -141,13 +133,6 @@ class ContentProduct extends CActiveRecord
 	}
 
 	public function afterFind(){
-        $category = ContentCategories::model()->findByPk($this->category_id);
-
-        if($category){
-            $this->cat_name = $category->name;
-            $this->frendlyUrl = $category->abbr_cd.'/'.$this->id.'/'.Helpers::getDomainFromName($this->name).'.html';
-        }
-
         $c = new CDbCriteria();
         $c->addCondition('product_id = '.$this->id, 'AND');
         $c->order='modified DESC';
@@ -159,4 +144,8 @@ class ContentProduct extends CActiveRecord
             $this->saleoff_price = $ContentSaleOff ? $this->price/100 * $ContentSaleOff->percent : '';
         }
 	}
+
+    public function getAttributes($names = true){
+        return array_merge(array('saleoff_price' => $this->saleoff_price), parent::getAttributes());
+    }
 }
