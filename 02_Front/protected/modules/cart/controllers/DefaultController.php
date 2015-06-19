@@ -159,13 +159,17 @@ class DefaultController extends Controller
                             $newOrder->save(false);
                             $OrderRelation = null;
                             foreach ($cart as $item) {
+                                $OrderProduct = Helpers::getProduct($item['id']);
+
                                 $OrderRelation = new OrderRelation();
                                 $OrderRelation->order_id = $newOrder->id;
                                 $OrderRelation->product_id = $item['id'];
                                 $OrderRelation->qty = $item['qty'];
-                                $OrderRelation->price = Helpers::getProduct($item['id'])->price;
+                                $OrderRelation->price = $OrderProduct->saleoff_id != null ? $OrderProduct->saleoff_price : $OrderProduct->price;
+                                $OrderRelation->saleoff_id = $OrderProduct->saleoff_id;
                                 $OrderRelation->save(false);
                                 $session->remove(self::SESSION_KEY);
+
                                 $orderStatus['flg'] = true;
                                 $orderStatus['msg'] = 'Bạn đã đặt thành công đơn hàng với mã số là: ' . $newOrder->name;
                             }
@@ -174,6 +178,7 @@ class DefaultController extends Controller
                         if (!$orderStatus['flg']) {
                             $orderStatus['msg'] = 'Đã xãy ra lỗi trong quá trình thanh toán, vui lòng thữ lại sau.';
                         }
+
                     }else{
                         $hasError['flg'] = true;
                         $hasError['msg'] = 'Vị trí của bạn quá xa chúng tôi không thể giao hàng.';
@@ -183,10 +188,12 @@ class DefaultController extends Controller
                     $hasError['flg'] = true;
                     $hasError['msg'] = 'Chúng tôi không thể xác định vị trí của bạn. Xin vui lòng thữ lại hoặc sữ dụng android app của chúng tôi.';
                 }
+
             } else {
                 $hasError['flg'] = true;
                 $hasError['msg'] = 'Hãy nhập đủ thông tin cần thiêt.';
             }
+
         } else {
             $hasError['flg'] = true;
             $hasError['msg'] = 'Bạn không có sản phẩm nào để thanh toán.';
