@@ -58,9 +58,9 @@
                             <div class="row price-wrapper">
                                 <div class="span2 clearfix" style="width: 100%;">
                                     <tal:block tal:define="global priceClass php: item['saleoff_price'] != '' ? 'old' : ''">
-                                        <span class="price ${priceClass}">
-                                            <span class="value" tal:content="php: number_format(item['price'])">50.000</span><span
-                                                class="currency">đ</span>
+                                        <span class="price">
+                                            <span class="value ${priceClass}" tal:content="php: number_format(item['price'])">50.000</span><span
+                                                class="currency ${priceClass}">đ</span>
                                             <tal:block tal:condition="php: item['saleoff_price'] != ''"> -</tal:block>
                                         </span>
 
