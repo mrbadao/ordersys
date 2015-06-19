@@ -29,23 +29,46 @@ class DefaultController extends Controller
         if(isset($_POST['saleoff'])){
             $ContentSaleoff->attributes = $_POST['saleoff'];
 
-            if($id) SaleoffRelation::model()->deleteAllByAttributes(array('saleoff_id' => $id));
+            if($id) {
+                SaleoffRelation::model()->deleteAllByAttributes(array('saleoff_id' => $id));
+            }
+
             $itemList=null;
+            $itemError = false;
 
             if($ContentSaleoff->validate()){
                 if(isset($_POST['productid'])){
-                    $ContentSaleoff->save(false);
                     $items=$_POST['productid'];
+                    $ContentSaleoff->save(false);
 
                     foreach($items as $item){
+                        $date = date("Y-m-d H:m:i");
                         $relation = new SaleoffRelation();
                         $relation->saleoff_id = $ContentSaleoff->id;
                         $relation->product_id = $item;
-                        $relation->created = date("Y-m-d H:m:i");
-                        $relation->modified = date("Y-m-d H:m:i");
-                        $relation->save();
-                        $itemList[] = ContentProduct::model()->findByPk($item);
+                        $relation->created = $date;
+                        $relation->modified = $date;
+                        $itemList[] = $relation;
+
+                        $c = new CDbCriteria();
+                        $c->alias = 's';
+                        $c->join = 'JOIN content_saleoff cs s.saleoff_id = cs.id';
+                        $c->addCondition('s.product_id = '.$item, 'AND');
+                        $c->addCondition('cs.enddate >= '.$date, 'AND');
+
+                        $contentRelationSaleOff = SaleoffRelation::model()->find($c);
+
+                        if($contentRelationSaleOff) {
+                            $errPro = Helpers::getProduct($relation->product_id);
+                            $relation->addError('product_id', 'Sản phẩm "' . $errPro->name .'" hiện đang có khuyến mãi.');
+                            $itemError = true;
+                        }
+
+                        if(!$itemError) $relation->save();
+
+                        $itemList[] = $relation;
                     }
+
                     $this->redirect(array('view','id' => $ContentSaleoff->id, 'msg' => true));
                 }else{
                     $proMsg = true;

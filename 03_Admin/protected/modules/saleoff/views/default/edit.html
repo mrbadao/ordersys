@@ -106,6 +106,10 @@
                             </div>
 
                             <div style="width:350px; float: left;">
+                                <tal:block tal:repeat="item itemList">
+                                    <tal:block tal:content="structure php:CHtml::error(item,'product_id')"/>
+                                </tal:block>
+
                                 <select name="productid[]" id="listProduct" multiple="multiple" size="12" style="width: 200px;">
                                     <option tal:repeat="item itemList" value="${item/product_id|''}" catid="${item/category_id|''}">
                                         <tal:block tal:define="product php:Helpers::getProduct(item['product_id'])" tal:content="product/name|''"/>
