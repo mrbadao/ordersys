@@ -160,13 +160,16 @@ class DefaultController extends Controller
                             foreach ($cart as $item) {
                                 $OrderProduct = Helpers::getProduct($item['id']);
 
-                                $OrderRelation = new OrderRelation();
-                                $OrderRelation->order_id = $newOrder->id;
-                                $OrderRelation->product_id = $item['id'];
-                                $OrderRelation->qty = $item['qty'];
-                                $OrderRelation->price = $OrderProduct->saleoff_id != null ? $OrderProduct->saleoff_price : $OrderProduct->price;
-                                $OrderRelation->saleoff_id = $OrderProduct->saleoff_id;
-                                $OrderRelation->save(false);
+                                if($OrderProduct) {
+                                    $OrderRelation = new OrderRelation();
+                                    $OrderRelation->order_id = $newOrder->id;
+                                    $OrderRelation->product_id = $item['id'];
+                                    $OrderRelation->qty = $item['qty'];
+                                    $OrderRelation->price = $OrderProduct->saleoff_id != null ? $OrderProduct->saleoff_price : $OrderProduct->price;
+                                    $OrderRelation->saleoff_id = $OrderProduct->saleoff_id;
+                                    $OrderRelation->save(false);
+                                }
+
                                 $session->remove(self::SESSION_KEY);
 
                                 $orderStatus['flg'] = true;

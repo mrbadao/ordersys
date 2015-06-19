@@ -291,14 +291,20 @@ class CartController extends Controller
 
             if($newOrder->validate()){
                 $newOrder->save(false);
+
                 $OrderRelation = null;
                 foreach($cart as $item){
-                    $OrderRelation = new OrderRelation();
-                    $OrderRelation->order_id = $newOrder->id;
-                    $OrderRelation->product_id = $item['id'];
-                    $OrderRelation->qty = $item['qty'];
-                    $OrderRelation->price = Helpers::getProduct($item['id'])->price;
-                    $OrderRelation->save(false);
+                    $OrderProduct = Helpers::getProduct($item['id']);
+
+                    if($OrderProduct) {
+                        $OrderRelation = new OrderRelation();
+                        $OrderRelation->order_id = $newOrder->id;
+                        $OrderRelation->product_id = $item['id'];
+                        $OrderRelation->qty = $item['qty'];
+                        $OrderRelation->price = $OrderProduct->saleoff_id != null ? $OrderProduct->saleoff_price : $OrderProduct->price;
+                        $OrderRelation->saleoff_id = $OrderProduct->saleoff_id;
+                        $OrderRelation->save(false);
+                    }
                 }
 
                 $session->remove(self::SESSION_KEY);
