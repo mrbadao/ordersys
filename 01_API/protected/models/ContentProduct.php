@@ -120,32 +120,42 @@ class ContentProduct extends CActiveRecord
 	}
 
 	public function afterSave(){
+        $date = date("Y-m-d H:m:i");
         $c = new CDbCriteria();
-        $c->addCondition('product_id = '.$this->id, 'AND');
-        $c->order='modified DESC';
+        $c->alias = 's';
+        $c->join = 'JOIN content_saleoff cs ON s.saleoff_id = cs.id';
+        $c->addCondition('s.product_id = '.$this->id, 'AND');
+        $c->addCondition('cs.enddate >= "'.$date.'"', 'AND');
+        $c->addCondition('cs.startdate <= "'.$date.'"', 'AND');
+        $c->order='s.modified DESC';
 
         $SaleoffRelation = SaleoffRelation::model()->find($c);
 
         if($SaleoffRelation){
             $ContentSaleOff = ContentSaleoff::model()->findByPk($SaleoffRelation->saleoff_id);
-            $this->saleoff_price = $ContentSaleOff ? $this->price/100 * $ContentSaleOff->percent : '';
+            $this->saleoff_price = $ContentSaleOff ? $this->price - ($this->price/100 * $ContentSaleOff->percent) : '';
             $this->saleoff_percent = $ContentSaleOff ? $ContentSaleOff->percent : '';
         }
 
 	}
 
 	public function afterFind(){
+        $date = date("Y-m-d H:m:i");
         $this->description = Helpers::removeHtmlTag($this->description);
-    		
+
         $c = new CDbCriteria();
-        $c->addCondition('product_id = '.$this->id, 'AND');
-        $c->order='modified DESC';
+        $c->alias = 's';
+        $c->join = 'JOIN content_saleoff cs ON s.saleoff_id = cs.id';
+        $c->addCondition('s.product_id = '.$this->id, 'AND');
+        $c->addCondition('cs.enddate >= "'.$date.'"', 'AND');
+        $c->addCondition('cs.startdate <= "'.$date.'"', 'AND');
+        $c->order='s.modified DESC';
 
         $SaleoffRelation = SaleoffRelation::model()->find($c);
 
         if($SaleoffRelation){
             $ContentSaleOff = ContentSaleoff::model()->findByPk($SaleoffRelation->saleoff_id);
-            $this->saleoff_price = $ContentSaleOff ? $this->price/100 * $ContentSaleOff->percent : '';
+            $this->saleoff_price = $ContentSaleOff ? $this->price - ($this->price/100 * $ContentSaleOff->percent) : '';
             $this->saleoff_percent = $ContentSaleOff ? $ContentSaleOff->percent : '';
         }
         return true;
