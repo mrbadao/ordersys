@@ -142,7 +142,6 @@ class DefaultController extends Controller
                 $user_ip = getenv('REMOTE_ADDR');
                 $geo = unserialize(file_get_contents("http://www.geoplugin.net/php.gp?ip=$user_ip"));
                 if ($geo) {
-
                     if(Helpers::checkDeistanceBetween2Point(array('lat' => $geo['geoplugin_latitude'], 'lng' => $geo['geoplugin_longitude']))) {
                         $cart = $session[self::SESSION_KEY];
 

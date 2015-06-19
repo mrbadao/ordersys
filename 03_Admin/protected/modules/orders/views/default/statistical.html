@@ -1,9 +1,9 @@
 <script>
     jQuery(function () {
-        $('#fromdate').datetimepicker({dateFormat: 'yyyy-mm-dd'});
-        $('#todate').datetimepicker({dateFormat: 'yyyy-mm-dd'});
+        $('#fromdate').datetimepicker({dateFormat: 'yyyy-mm-dd HH:MM'});
+        $('#todate').datetimepicker({dateFormat: 'yyyy-mm-dd HH:MM'});
         $(".datetime").on("change keyup", function () {
-            $(this).datetimepicker({dateFormat: 'yyyy-mm-dd'});
+            $(this).datetimepicker({dateFormat: 'yyyy-mm-dd HH:MM'});
 
             var validation = validateDateTime($(this));
             var value = $(this).val();
