@@ -1,19 +1,18 @@
 <script>
+    var isEdit = true;
+    var saleoffID = "${ContentSaleoff/id|-1}";
+    if(saleoffID == "-1") isEdit = false;
     <![CDATA[
 
 
     jQuery(function() {
-        $('#startdate').datetimepicker({dateFormat: 'yyyy-mm-dd HH:MM'});
-        $('#enddate').datetimepicker({dateFormat: 'yyyy-mm-dd HH:MM'});
-        $(".datetime").on("change keyup", function () {
-            $(this).datetimepicker({dateFormat: 'yyyy-mm-dd HH:MM'});
-
-//            var validation = validateDateTime($(this));
-//            var value = $(this).val();
-//            if (!validation) {
-//                $(this).val(value.substr(0, value.length - 1));
-//            }
-        });
+        if(isEdit) {
+            $('#startdate').datetimepicker({dateFormat: 'yyyy-mm-dd HH:MM'});
+            $('#enddate').datetimepicker({dateFormat: 'yyyy-mm-dd HH:MM'});
+            $(".datetime").on("change keyup", function () {
+                $(this).datetimepicker({dateFormat: 'yyyy-mm-dd HH:MM'});
+            });
+        }
     });
 
 ]]>
@@ -59,7 +58,7 @@
                         <th>Phần trăm khuyễn mãi&nbsp;<span class="txtWarning">*</span></th>
                         <td>
                             <tal:block tal:content="structure php:CHtml::error(ContentSaleoff,'percent')"/>
-                            <input type="text" name="saleoff[percent]" maxlength="100" value="${ContentSaleoff/percent|''}"  class="txtbox title txt_en" style="width:50px;"/>
+                            <input tal:attributes="readonly php:ContentSaleoff['id'] ? 'readonly' : '' " type="text" name="saleoff[percent]" maxlength="100" value="${ContentSaleoff/percent|''}"  class="txtbox title txt_en" style="width:50px;"/>
                         </td>
                     </tr>
                 </table>
@@ -71,7 +70,7 @@
                         <th>Ngày bắt đầu&nbsp;<span class="txtWarning">*</span></th>
                         <td>
                             <tal:block tal:content="structure php:CHtml::error(ContentSaleoff,'startdate')"/>
-                            <input id="startdate" value="${ContentSaleoff/startdate|''}" name="saleoff[startdate]" class="txtbox datetime" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 100px;"/>
+                            <input tal:attributes="readonly php:ContentSaleoff['id'] ? 'readonly' : '' "  id="startdate" value="${ContentSaleoff/startdate|''}" name="saleoff[startdate]" class="txtbox datetime" type="text" onKeyDown="ignoreESC(this,event.keyCode)" onFocus="toggleColor(this)" onBlur="toggleColor(this)" style="width: 100px;"/>
                         </td>
                     </tr>
                     <tr>
