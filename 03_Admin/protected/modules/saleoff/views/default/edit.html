@@ -1,14 +1,14 @@
 <script>
     var isEdit = true;
-    var saleoffID = "${ContentSaleoff/id|-1}";
-    if(saleoffID == "-1") isEdit = false;
+    var saleoffID = "${ContentSaleoff/id|''}";
+    if(saleoffID != '' ) isEdit = false;
     <![CDATA[
 
 
     jQuery(function() {
+        $('#enddate').datetimepicker({dateFormat: 'yyyy-mm-dd HH:MM'});
         if(isEdit) {
             $('#startdate').datetimepicker({dateFormat: 'yyyy-mm-dd HH:MM'});
-            $('#enddate').datetimepicker({dateFormat: 'yyyy-mm-dd HH:MM'});
             $(".datetime").on("change keyup", function () {
                 $(this).datetimepicker({dateFormat: 'yyyy-mm-dd HH:MM'});
             });
