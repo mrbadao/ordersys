@@ -39,7 +39,6 @@ class DefaultController extends Controller
             if($ContentSaleoff->validate()){
                 if(isset($_POST['productid'])){
                     $items=$_POST['productid'];
-                    $ContentSaleoff->save(false);
 
                     foreach($items as $item){
                         $date = date("Y-m-d H:m:i");
@@ -48,13 +47,13 @@ class DefaultController extends Controller
                         $relation->product_id = $item;
                         $relation->created = $date;
                         $relation->modified = $date;
-                        $itemList[] = $relation;
 
                         $c = new CDbCriteria();
                         $c->alias = 's';
-                        $c->join = 'JOIN content_saleoff cs s.saleoff_id = cs.id';
+                        $c->join = 'JOIN content_saleoff cs ON s.saleoff_id = cs.id';
                         $c->addCondition('s.product_id = '.$item, 'AND');
-                        $c->addCondition('cs.enddate >= '.$date, 'AND');
+                        $c->addCondition('cs.enddate >= "'.$date.'"', 'AND');
+                        $c->addCondition('cs.startdate <= "'.$date.'"', 'AND');
 
                         $contentRelationSaleOff = SaleoffRelation::model()->find($c);
 
@@ -64,12 +63,20 @@ class DefaultController extends Controller
                             $itemError = true;
                         }
 
-                        if(!$itemError) $relation->save();
-
                         $itemList[] = $relation;
                     }
 
-                    $this->redirect(array('view','id' => $ContentSaleoff->id, 'msg' => true));
+                    if(!$itemError) {
+                        $ContentSaleoff->save(false);
+
+                        foreach($itemList as $relate){
+                            $relate->saleoff_id = $ContentSaleoff->id;
+                            $relate->save();
+                        }
+
+                        $this->redirect(array('view','id' => $ContentSaleoff->id, 'msg' => true));
+                    }
+
                 }else{
                     $proMsg = true;
                 }
