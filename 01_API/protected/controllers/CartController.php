@@ -148,7 +148,7 @@ class CartController extends Controller
                 $product = Helpers::getProduct($item['id']);
                 if($product){
                     $item['name'] = $product->name;
-                    $item['price'] = $product->price;
+                    $item['price'] = $product->saleoff_price ? $product->saleoff_price : $product->price;
                 }
                 $_result[] = $item;
             }

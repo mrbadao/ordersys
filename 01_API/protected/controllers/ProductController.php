@@ -104,7 +104,7 @@ class ProductController extends Controller
 
             if($SaleoffRelation){
                 $ContentSaleOff = ContentSaleoff::model()->findByPk($SaleoffRelation->saleoff_id);
-                $_result['products'][$i]['saleoff_price'] = $ContentSaleOff ? $_result['products'][$i]['price']/100 * $ContentSaleOff->percent : '';
+                $_result['products'][$i]['saleoff_price'] = $ContentSaleOff ? $_result['products'][$i]['price'] - ($_result['products'][$i]['price']/100 * $ContentSaleOff->percent) : '';
                 $_result['products'][$i]['saleoff_percent'] = $ContentSaleOff ? $ContentSaleOff->percent : '';
             }
         }
