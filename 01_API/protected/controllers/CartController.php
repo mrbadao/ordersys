@@ -265,6 +265,19 @@ class CartController extends Controller
     public function actionCheckout(){
         $this->_post_data = Helpers::getJsonData();
         $session = Yii::app()->session;
+        $tempCart = null;
+
+        if(isset($this->_post_data['cart'])){
+            $checkoutCart = $this->_post_data['cart'];
+            if($session->contains(self::SESSION_KEY)){
+                foreach($checkoutCart as $item){
+                    if($item['qty'] > 0){
+                        $tempCart[] = $item;
+                    }
+                }
+                $session->add(self::SESSION_KEY, $tempCart);
+            }
+        }
 
         if($session->contains(self::SESSION_KEY)){
             $cart = $session[self::SESSION_KEY];
