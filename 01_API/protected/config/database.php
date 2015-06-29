@@ -10,4 +10,5 @@ return array(
     'username' => 'u102979894_admin',
     'password' => 'FVWVtCBDKkXeft8Dyv',
     'charset' => 'utf8',
+    'initSQLs' => array("SET time_zone = '+07:00';"),
 );
