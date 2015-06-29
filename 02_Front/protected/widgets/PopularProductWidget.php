@@ -23,6 +23,11 @@ class PopularProductWidget extends CLinkPager {
 
         for($i = 0; $i < count($items); $i++){
             $items[$i]['frendlyUrl'] = '';
+            $product = Helpers::getProduct($items[$i]['id']);
+
+            if($product){
+                $items[$i]['saleoff_price'] = $product->saleoff_price;
+            }
 
             $category = ContentCategories::model()->findByPk($items[$i]['category_id']);
 
