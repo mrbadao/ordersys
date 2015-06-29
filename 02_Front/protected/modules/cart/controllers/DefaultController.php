@@ -183,7 +183,7 @@ class DefaultController extends Controller
 
                     }else{
                         $hasError['flg'] = true;
-                        $hasError['msg'] = 'Vị trí của bạn quá xa chúng tôi không thể giao hàng.';
+                        $hasError['msg'] = 'Vị trí của bạn quá xa chúng tôi không thể giao hàng. Hoặc định vị không chính xác, bạn vui lòng sữ dụng android app của chúng tôi.';
                     }
 
                 } else {
