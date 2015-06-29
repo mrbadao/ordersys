@@ -4,11 +4,11 @@
         $(".datetime").on("change keyup", function () {
             $(this).datetimepicker({dateFormat: 'yyyy-mm-dd'});
 
-            var validation = validateDateTime($(this));
-            var value = $(this).val();
-            if (!validation) {
-                $(this).val(value.substr(0, value.length - 1));
-            }
+//            var validation = validateDateTime($(this));
+//            var value = $(this).val();
+//            if (!validation) {
+//                $(this).val(value.substr(0, value.length - 1));
+//            }
         });
     });
 </script>
